@@ -63,9 +63,10 @@ export const FRANCHISES: FranchiseVault[] = [
       "Kenner Vehicles",
       "Kenner Playsets",
       "Vintage Collection",
-      "Modern 3.75-inch",
+      "Retro Collection",
+      "POTF2",
     ],
-    scopeNote: "Kenner / Hasbro 3.75-inch first seed",
+    scopeNote: "291 Kenner / Hasbro 3.75-inch listings",
   },
   {
     id: "gi-joe",
