@@ -1,19 +1,11 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Layers } from "lucide-react";
 import {
-  FRANCHISES,
   VAULT_PICKER_PATH,
   getLiveFranchises,
   rememberSessionVault,
   type FranchiseVaultPath,
 } from "@/lib/franchises";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 const PICKER_VALUE = "all-vaults";
 
@@ -24,9 +16,6 @@ export function VaultSwitcher({
 }) {
   const navigate = useNavigate();
   const live = getLiveFranchises();
-  const current =
-    live.find((f) => f.path === currentPath) ??
-    FRANCHISES.find((f) => f.path === currentPath);
 
   function onChange(value: string) {
     if (value === PICKER_VALUE) {
@@ -39,28 +28,32 @@ export function VaultSwitcher({
 
   return (
     <div className="flex min-w-0 items-center gap-2">
-      <Layers className="hidden h-4 w-4 shrink-0 text-primary sm:block" />
-      <Select value={currentPath} onValueChange={onChange}>
-        <SelectTrigger
-          className="h-9 w-[10.5rem] sm:w-[13.5rem]"
-          aria-label="Switch vault"
-        >
-          <SelectValue placeholder={current?.shortLabel ?? "Switch vault"} />
-        </SelectTrigger>
-        <SelectContent align="start">
-          {live.map((f) =>
-            f.path ? (
-              <SelectItem key={f.id} value={f.path}>
-                {f.shortLabel}
-              </SelectItem>
-            ) : null,
-          )}
-          <SelectItem value={PICKER_VALUE}>All vaults</SelectItem>
-        </SelectContent>
-      </Select>
+      <label
+        htmlFor="vault-switcher"
+        className="hidden items-center gap-1.5 text-xs font-medium text-muted sm:inline-flex"
+      >
+        <Layers className="h-4 w-4 shrink-0 text-primary" />
+        Switch vault
+      </label>
+      <select
+        id="vault-switcher"
+        aria-label="Switch vault"
+        value={currentPath}
+        onChange={(e) => onChange(e.target.value)}
+        className="h-9 max-w-[13.5rem] rounded-[var(--radius-sm)] border border-border bg-surface px-2.5 text-sm font-medium text-fg focus:outline-none focus:ring-2 focus:ring-ring"
+      >
+        {live.map((f) =>
+          f.path ? (
+            <option key={f.id} value={f.path}>
+              {f.shortLabel}
+            </option>
+          ) : null,
+        )}
+        <option value={PICKER_VALUE}>All vaults</option>
+      </select>
       <Link
         to={VAULT_PICKER_PATH}
-        className="hidden text-xs font-medium text-muted hover:text-fg sm:inline"
+        className="text-xs font-medium text-muted hover:text-fg"
       >
         All vaults
       </Link>
