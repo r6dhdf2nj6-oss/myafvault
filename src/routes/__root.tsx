@@ -19,12 +19,12 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1, viewport-fit=cover",
       },
       {
-        title: "MyAFVault — DC McFarlane action figure vault",
+        title: "MyAFVault — collector vaults for DC, Star Wars, GI Joe, and more",
       },
       {
         name: "description",
         content:
-          "MyAFVault catalogues and tracks your DC McFarlane Multiverse collection.",
+          "MyAFVault catalogues and tracks action figure collections across DC McFarlane, Star Wars, GI Joe, and more franchises coming soon.",
       },
       { name: "theme-color", content: "#0a0b0e" },
       { name: "color-scheme", content: "dark light" },

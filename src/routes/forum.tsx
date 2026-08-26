@@ -56,11 +56,11 @@ function ForumPage() {
       <header className="sticky top-0 z-40 border-b border-border/80 bg-bg/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-2xl items-center justify-between gap-3 px-4 py-3">
           <Link
-            to="/vault/dc-mcfarlane"
+            to="/vaults"
             className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-fg"
           >
             <ArrowLeft className="h-4 w-4" />
-            Vault
+            Vaults
           </Link>
           <div className="flex items-center gap-3">
             <InstallLink />

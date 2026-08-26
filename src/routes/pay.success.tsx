@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Check, Loader2, Package } from "lucide-react";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { confirmCheckoutSession, getAccessStatus } from "@/lib/billing";
-import { PRIMARY_VAULT_PATH } from "@/lib/franchises";
+import { VAULT_PICKER_PATH } from "@/lib/franchises";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/pay/success")({
@@ -49,7 +49,7 @@ function PaySuccessPage() {
   }, [isPending, signedIn]);
 
   if (ready) {
-    return <Navigate to={PRIMARY_VAULT_PATH} />;
+    return <Navigate to={VAULT_PICKER_PATH} />;
   }
 
   return (

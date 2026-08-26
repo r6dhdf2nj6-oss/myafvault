@@ -1,5 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute, Link, Navigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 
 import {
   ArrowRight,
@@ -24,8 +24,11 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import {
   FRANCHISES,
-  PRIMARY_VAULT_PATH,
   VAULT_ACCESS,
+  VAULT_PICKER_PATH,
+  getLiveFranchises,
+  getSessionVaultPath,
+  type FranchiseVaultPath,
 } from "@/lib/franchises";
 import { catalogStats } from "@/data/catalog";
 import { cn } from "@/lib/utils";
@@ -40,12 +43,12 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "MyAFVault — Collect. Index. Display. Your figures, one vault.",
+        title: "MyAFVault — Collect. Index. Display. Every line, one home.",
       },
       {
         name: "description",
         content:
-          "MyAFVault is the DC McFarlane collector vault — 1,000+ official listings, In My Vault tracking, wishlist, photos, collections, sharing, and a collector board. Lifetime access $3.99.",
+          "MyAFVault is the collector vault for DC McFarlane, Star Wars 3.75-inch Kenner/Hasbro, GI Joe, and more franchises coming soon — catalogues, In My Vault, wishlist, photos, collections, and a collector board. Lifetime access $3.99.",
 
       },
     ],
@@ -55,8 +58,8 @@ export const Route = createFileRoute("/")({
 const FEATURES = [
   {
     icon: Search,
-    title: "The full McFarlane DC list",
-    body: "1,000+ official 7\" figures, Megafigs, statues, multipacks, vehicles, Super Powers, Super Friends, and chase variants — with pack shots and every accessory called out.",
+    title: "Live vaults for every line",
+    body: "DC McFarlane, Star Wars 3.75-inch Kenner/Hasbro, and GI Joe are live — official listings, pack shots, and accessories. Marvel, Fallout, and more franchises are coming soon.",
   },
   {
     icon: Package,
@@ -82,7 +85,7 @@ const FEATURES = [
   {
     icon: Layers,
     title: "Displays & collections",
-    body: "Group Justice League, Teen Titans, or The Dark Knight shelf. Custom listings stay private unless you share them.",
+    body: "Group a Justice League shelf, a Kenner vintage run, or a Joe Classified display. Custom listings stay private unless you share them.",
   },
   {
     icon: Share2,
@@ -92,7 +95,7 @@ const FEATURES = [
   {
     icon: MessagesSquare,
     title: "Collector board",
-    body: "Opt in to post photos, ask questions, like other collectors’ shots, and talk McFarlane without mixing it into your private vault.",
+    body: "Opt in to post photos, ask questions, like other collectors’ shots, and talk figures without mixing it into your private vault.",
   },
   {
     icon: Smartphone,
@@ -115,7 +118,7 @@ const PREVIEW_STEPS = [
   {
     step: "01",
     title: "Browse the master list",
-    body: "Filter by 7\", Megafig, statue, multipack, or vehicle. Search character, line, SKU, or Platinum chase.",
+    body: "Open a vault, then filter by category, line, or scale. Search character, SKU, or chase variant.",
   },
   {
     step: "02",
@@ -135,7 +138,7 @@ const PREVIEW_STEPS = [
 ] as const;
 
 const WHY = [
-  "Stop guessing which McFarlane DC figures exist — the catalogue is already built.",
+  "Stop guessing which figures exist — DC McFarlane, Star Wars, and GI Joe catalogues are already built, with more lines coming.",
   "Know what you own vs. what you still need without mixing the two.",
   "Keep pack art and your own photos, including custom listings only you see.",
   "Show the shelf to friends without handing them your login.",
@@ -146,6 +149,10 @@ function LandingPage() {
   const { user, isPending } = useCurrentUserState();
   const signedIn = !isPending && !!user && !user.isDevFallback;
   const stats = catalogStats();
+  const liveVaultCount = getLiveFranchises().length;
+  const [signedInDest, setSignedInDest] = useState<
+    typeof VAULT_PICKER_PATH | FranchiseVaultPath | null
+  >(null);
 
   useEffect(() => {
     const err = new URLSearchParams(window.location.search).get("error");
@@ -153,6 +160,18 @@ function LandingPage() {
       window.location.replace(`/login?error=${encodeURIComponent(err)}`);
     }
   }, []);
+
+  useEffect(() => {
+    if (!signedIn) {
+      setSignedInDest(null);
+      return;
+    }
+    setSignedInDest(getSessionVaultPath() ?? VAULT_PICKER_PATH);
+  }, [signedIn]);
+
+  if (signedIn && signedInDest) {
+    return <Navigate to={signedInDest} />;
+  }
 
   return (
     <div className="min-h-dvh bg-bg text-fg">
@@ -187,8 +206,8 @@ function LandingPage() {
             </Button>
             {signedIn ? (
               <Button asChild size="sm">
-                <Link to={PRIMARY_VAULT_PATH}>
-                  Open vault
+                <Link to={VAULT_PICKER_PATH}>
+                  Choose a vault
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
@@ -225,17 +244,17 @@ function LandingPage() {
             <div className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)] lg:items-center">
               <div className="space-y-6">
                 <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-semibold tracking-tight leading-[1.12] text-balance">
-                  The vault for the DC McFarlane figures you collect.
+                  One home for every line you collect.
                   <span className="block text-muted font-medium mt-2 text-2xl sm:text-3xl lg:text-[2rem]">
-                    Track your collection. Build your shelf. Share the hunt.
+                    DC McFarlane. Star Wars. GI Joe. More coming.
 
                   </span>
                 </h1>
                 <p className="text-base sm:text-lg text-muted max-w-xl leading-relaxed text-pretty">
-                  A living catalogue of McFarlane’s DC figures — official
-                  figure pics, accessories list, Platinum chases — add your
-                  figures to In My Vault, create a wishlist, add your own
-                  photos, create your collections, and join the collector's forum.
+                  Live vaults for DC McFarlane, Star Wars 3.75-inch
+                  Kenner/Hasbro, and GI Joe — official figure pics, accessory
+                  lists, In My Vault, wishlist, your photos, collections, and
+                  a collector board. More franchises are on the way.
 
                 </p>
 
@@ -243,8 +262,8 @@ function LandingPage() {
                 <div className="flex flex-col sm:flex-row flex-wrap gap-3">
                   {signedIn ? (
                     <Button asChild size="lg" className="h-11 px-5">
-                      <Link to={PRIMARY_VAULT_PATH}>
-                        Open DC McFarlane vault
+                      <Link to={VAULT_PICKER_PATH}>
+                        Choose a vault
                         <ArrowRight className="h-4 w-4" />
                       </Link>
                     </Button>
@@ -289,7 +308,9 @@ function LandingPage() {
                     <dt className="text-[11px] uppercase tracking-wide text-subtle">
                       Live vaults
                     </dt>
-                    <dd className="text-lg font-semibold tabular-nums">3</dd>
+                      <dd className="text-lg font-semibold tabular-nums">
+                        {liveVaultCount}
+                      </dd>
                   </div>
                   <div className="rounded-[var(--radius-md)] border border-border bg-surface p-3">
                     <dt className="text-[11px] uppercase tracking-wide text-subtle">
@@ -394,21 +415,21 @@ function LandingPage() {
           </div>
         </section>
 
-        {/* DC McFarlane vault */}
+        {/* Franchise vaults */}
         <section className="border-b border-border" id="vaults">
           <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
               <div className="max-w-2xl">
                 <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-primary mb-2">
-                  The vault
+                  The vaults
                 </p>
                 <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
-                  DC, Star Wars, and GI Joe
+                  DC, Star Wars, GI Joe — more coming
                 </h2>
                 <p className="text-muted mt-2 text-sm sm:text-base">
-                  Three live vaults on a shared catalog — official listings,
+                  Three live vaults on a shared toolkit — official listings,
                   In My Vault tracking, wishlist, photos, and a board for
-                  other collectors.
+                  other collectors. Coming-soon lines stay listed, not fake.
 
                 </p>
               </div>
@@ -582,18 +603,18 @@ function LandingPage() {
                 <p className="text-sm text-muted leading-relaxed mb-5">
                   Create an account to enter the{" "}
                   <strong className="text-fg font-medium">
-                    DC McFarlane
+                    DC McFarlane, Star Wars, and GI Joe
                   </strong>{" "}
-                  database. After sign-up, pay {VAULT_ACCESS.priceLabel} once
-                  to unlock the catalogue, your vault, the collector board, and
-                  install-as-app.
+                  vaults — with more franchises coming soon. After sign-up, pay{" "}
+                  {VAULT_ACCESS.priceLabel} once to unlock the catalogues, your
+                  vaults, the collector board, and install-as-app.
 
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2">
                   {signedIn ? (
                     <Button asChild size="lg" className="h-11">
-                      <Link to={PRIMARY_VAULT_PATH}>
-                        Continue to DC McFarlane
+                      <Link to={VAULT_PICKER_PATH}>
+                        Continue to your vaults
                         <ArrowRight className="h-4 w-4" />
                       </Link>
                     </Button>
@@ -625,7 +646,7 @@ function LandingPage() {
         <section className="border-b border-border">
           <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 text-center">
             <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-balance">
-            Ready to put the McFarlane shelf in one place?
+            Ready to put every shelf in one place?
 
             </h2>
             <p className="text-muted mt-2 max-w-lg mx-auto text-sm sm:text-base">
@@ -635,8 +656,8 @@ function LandingPage() {
             <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
               {signedIn ? (
                 <Button asChild size="lg" className="h-11 px-6">
-                  <Link to={PRIMARY_VAULT_PATH}>
-                    Open DC McFarlane vault
+                  <Link to={VAULT_PICKER_PATH}>
+                    Choose a vault
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </Button>
@@ -665,14 +686,14 @@ function LandingPage() {
           <div>
             <p className="text-sm font-semibold">MyAFVault</p>
             <p className="text-xs text-subtle mt-0.5">
-              DC McFarlane Multiverse catalogue, collector vault, and board.
+              DC McFarlane, Star Wars, GI Joe, and more vaults coming soon.
 
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3 text-xs text-muted">
             {signedIn ? (
-              <Link to={PRIMARY_VAULT_PATH} className="hover:text-fg">
-                DC vault
+              <Link to={VAULT_PICKER_PATH} className="hover:text-fg">
+                Your vaults
               </Link>
             ) : (
               <a href="/login?mode=signup&next=/pay" className="hover:text-fg">

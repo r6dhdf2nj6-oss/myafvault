@@ -21,7 +21,12 @@ import {
   LINES_BY_FRANCHISE,
 } from "@/lib/types";
 import { catalogForFranchise, catalogStats } from "@/data/catalog";
-import { getVaultByCatalogId } from "@/lib/franchises";
+import {
+  VAULT_PICKER_PATH,
+  getVaultByCatalogId,
+  rememberSessionVault,
+} from "@/lib/franchises";
+import { VaultSwitcher } from "@/components/figures/vault-switcher";
 
 
 import { resolveProduct, releaseSortValue } from "@/lib/product";
@@ -149,6 +154,10 @@ export function FranchiseCatalogue({
   const [isAdmin, setIsAdmin] = useState(false);
 
   const importEntries = useCatalogue((s) => s.importEntries);
+
+  useEffect(() => {
+    rememberSessionVault(vaultPath);
+  }, [vaultPath]);
 
   useEffect(() => {
     if (authEnabled && authPending) return;
@@ -486,18 +495,17 @@ export function FranchiseCatalogue({
     <div className="min-h-dvh">
       <header className="sticky top-0 z-40 border-b border-border/80 bg-bg/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-6 sm:py-4">
-          <div className="min-w-0">
+          <div className="min-w-0 space-y-1.5">
             <Link
-              to="/"
+              to={VAULT_PICKER_PATH}
               className="text-[10px] font-medium uppercase tracking-[0.14em] text-primary hover:underline sm:text-[11px]"
             >
-              <span className="sm:hidden">MyAFVault</span>
-              <span className="hidden sm:inline">MyAFVault · {shortLabel}</span>
+              MyAFVault
             </Link>
-            <h1 className="text-base font-semibold tracking-tight sm:text-xl">
-              <span className="sm:hidden">{shortLabel}</span>
-              <span className="hidden sm:inline">Figure Catalogue</span>
-            </h1>
+            <div className="flex flex-wrap items-center gap-2">
+              <h1 className="sr-only">{shortLabel} catalogue</h1>
+              <VaultSwitcher currentPath={vaultPath} />
+            </div>
           </div>
           <AuthSyncBar />
         </div>

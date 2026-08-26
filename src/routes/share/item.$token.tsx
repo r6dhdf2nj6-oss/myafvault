@@ -17,7 +17,7 @@ import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { hydrateCatalogue, useCatalogue } from "@/lib/store";
 
 import { listingFromSharedItem } from "@/lib/import-shared-listing";
-import { PRIMARY_VAULT_PATH } from "@/lib/franchises";
+import { VAULT_PICKER_PATH } from "@/lib/franchises";
 
 export const Route = createFileRoute("/share/item/$token")({
   component: PublicItemSharePage,
@@ -100,7 +100,7 @@ function PublicItemSharePage() {
             <ThemeToggle />
             {signedIn ? (
               <Button size="sm" variant="outline" asChild>
-                <Link to={PRIMARY_VAULT_PATH}>Open vault</Link>
+                <Link to={VAULT_PICKER_PATH}>Open vault</Link>
               </Button>
             ) : (
               <Button size="sm" variant="outline" asChild>
@@ -192,7 +192,7 @@ function PublicItemSharePage() {
                   )}
                   {canImport && signedIn && imported && (
                     <Button size="sm" asChild>
-                      <Link to={PRIMARY_VAULT_PATH}>Open in my vault</Link>
+                      <Link to={VAULT_PICKER_PATH}>Open in my vault</Link>
                     </Button>
                   )}
                   {canImport && !signedIn && (

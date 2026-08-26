@@ -30,6 +30,33 @@ export type FranchiseVault = {
 export const PRIMARY_VAULT_ID = "dc-mcfarlane" as const;
 export const PRIMARY_VAULT_PATH = "/vault/dc-mcfarlane" as const;
 
+/** Authenticated vault picker — default destination after login/signup. */
+export const VAULT_PICKER_PATH = "/vaults" as const;
+
+const SESSION_VAULT_KEY = "myafvault:session-vault";
+
+export function isLiveVaultPath(path: string): path is FranchiseVaultPath {
+  return FRANCHISES.some((f) => f.status === "live" && f.path === path);
+}
+
+/** Remember the vault opened in this browser session. */
+export function rememberSessionVault(path: string): void {
+  if (typeof window === "undefined") return;
+  if (!isLiveVaultPath(path)) return;
+  sessionStorage.setItem(SESSION_VAULT_KEY, path);
+}
+
+export function getSessionVaultPath(): FranchiseVaultPath | null {
+  if (typeof window === "undefined") return null;
+  const raw = sessionStorage.getItem(SESSION_VAULT_KEY);
+  return raw && isLiveVaultPath(raw) ? raw : null;
+}
+
+/** Signed-in users land here unless a `next` param says otherwise. */
+export function postAuthPath(): typeof VAULT_PICKER_PATH {
+  return VAULT_PICKER_PATH;
+}
+
 export const FRANCHISES: FranchiseVault[] = [
   {
     id: "dc-mcfarlane",
