@@ -20,6 +20,8 @@ import { Route as AccountSecurityRouteImport } from './routes/account/security'
 import { Route as LoginTwoFactorRouteImport } from './routes/login/two-factor'
 import { Route as PaySuccessRouteImport } from './routes/pay.success'
 import { Route as VaultDcMcfarlaneRouteImport } from './routes/vault/dc-mcfarlane'
+import { Route as VaultStarWarsRouteImport } from './routes/vault/star-wars'
+import { Route as VaultGiJoeRouteImport } from './routes/vault/gi-joe'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as ApiStripeWebhookRouteImport } from './routes/api/stripe/webhook'
 import { Route as ShareCollectionTokenRouteImport } from './routes/share/collection.$token'
@@ -82,6 +84,16 @@ const VaultDcMcfarlaneRoute = VaultDcMcfarlaneRouteImport.update({
   path: '/vault/dc-mcfarlane',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VaultStarWarsRoute = VaultStarWarsRouteImport.update({
+  id: '/vault/star-wars',
+  path: '/vault/star-wars',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VaultGiJoeRoute = VaultGiJoeRouteImport.update({
+  id: '/vault/gi-joe',
+  path: '/vault/gi-joe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -124,6 +136,8 @@ export interface FileRoutesByFullPath {
   '/login/two-factor': typeof LoginTwoFactorRoute
   '/pay/success': typeof PaySuccessRoute
   '/vault/dc-mcfarlane': typeof VaultDcMcfarlaneRoute
+  '/vault/star-wars': typeof VaultStarWarsRoute
+  '/vault/gi-joe': typeof VaultGiJoeRoute
   '/account/': typeof AccountIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/stripe/webhook': typeof ApiStripeWebhookRoute
@@ -143,6 +157,8 @@ export interface FileRoutesByTo {
   '/login/two-factor': typeof LoginTwoFactorRoute
   '/pay/success': typeof PaySuccessRoute
   '/vault/dc-mcfarlane': typeof VaultDcMcfarlaneRoute
+  '/vault/star-wars': typeof VaultStarWarsRoute
+  '/vault/gi-joe': typeof VaultGiJoeRoute
   '/account': typeof AccountIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/stripe/webhook': typeof ApiStripeWebhookRoute
@@ -163,6 +179,8 @@ export interface FileRoutesById {
   '/login/two-factor': typeof LoginTwoFactorRoute
   '/pay/success': typeof PaySuccessRoute
   '/vault/dc-mcfarlane': typeof VaultDcMcfarlaneRoute
+  '/vault/star-wars': typeof VaultStarWarsRoute
+  '/vault/gi-joe': typeof VaultGiJoeRoute
   '/account/': typeof AccountIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/stripe/webhook': typeof ApiStripeWebhookRoute
@@ -184,6 +202,8 @@ export interface FileRouteTypes {
     | '/login/two-factor'
     | '/pay/success'
     | '/vault/dc-mcfarlane'
+    | '/vault/star-wars'
+    | '/vault/gi-joe'
     | '/account/'
     | '/api/auth/$'
     | '/api/stripe/webhook'
@@ -203,6 +223,8 @@ export interface FileRouteTypes {
     | '/login/two-factor'
     | '/pay/success'
     | '/vault/dc-mcfarlane'
+    | '/vault/star-wars'
+    | '/vault/gi-joe'
     | '/account'
     | '/api/auth/$'
     | '/api/stripe/webhook'
@@ -222,6 +244,8 @@ export interface FileRouteTypes {
     | '/login/two-factor'
     | '/pay/success'
     | '/vault/dc-mcfarlane'
+    | '/vault/star-wars'
+    | '/vault/gi-joe'
     | '/account/'
     | '/api/auth/$'
     | '/api/stripe/webhook'
@@ -240,6 +264,8 @@ export interface RootRouteChildren {
   AccountProfileRoute: typeof AccountProfileRoute
   AccountSecurityRoute: typeof AccountSecurityRoute
   VaultDcMcfarlaneRoute: typeof VaultDcMcfarlaneRoute
+  VaultStarWarsRoute: typeof VaultStarWarsRoute
+  VaultGiJoeRoute: typeof VaultGiJoeRoute
   AccountIndexRoute: typeof AccountIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiStripeWebhookRoute: typeof ApiStripeWebhookRoute
@@ -328,6 +354,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VaultDcMcfarlaneRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vault/star-wars': {
+      id: '/vault/star-wars'
+      path: '/vault/star-wars'
+      fullPath: '/vault/star-wars'
+      preLoaderRoute: typeof VaultStarWarsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vault/gi-joe': {
+      id: '/vault/gi-joe'
+      path: '/vault/gi-joe'
+      fullPath: '/vault/gi-joe'
+      preLoaderRoute: typeof VaultGiJoeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -402,6 +442,8 @@ const rootRouteChildren: RootRouteChildren = {
   AccountProfileRoute: AccountProfileRoute,
   AccountSecurityRoute: AccountSecurityRoute,
   VaultDcMcfarlaneRoute: VaultDcMcfarlaneRoute,
+  VaultStarWarsRoute: VaultStarWarsRoute,
+  VaultGiJoeRoute: VaultGiJoeRoute,
   AccountIndexRoute: AccountIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiStripeWebhookRoute: ApiStripeWebhookRoute,

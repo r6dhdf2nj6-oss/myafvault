@@ -1,21 +1,28 @@
 /**
  * Multi-franchise vault registry.
- * DC McFarlane is live; others are placeholders for future catalogues.
+ * DC, Star Wars, and GI Joe are live. Marvel / Fallout stay coming-soon
+ * (no invented Marvel catalog).
  */
+
+import type { FranchiseId } from "@/types";
 
 export type FranchiseStatus = "live" | "coming-soon";
 
+export type FranchiseVaultPath =
+  | "/vault/dc-mcfarlane"
+  | "/vault/star-wars"
+  | "/vault/gi-joe";
+
 export type FranchiseVault = {
   id: string;
+  /** Shared CatalogProduct franchise when this vault has a catalog. */
+  catalogId?: FranchiseId;
   name: string;
   shortLabel: string;
   tagline: string;
   status: FranchiseStatus;
-  /** In-app path when status is live */
-  path?: "/vault/dc-mcfarlane";
-  /** High-level product lines shown on marketing cards */
+  path?: FranchiseVaultPath;
   highlights: string[];
-  /** Approximate catalog scope for marketing (not a hard limit) */
   scopeNote: string;
 };
 
@@ -26,21 +33,57 @@ export const PRIMARY_VAULT_PATH = "/vault/dc-mcfarlane" as const;
 export const FRANCHISES: FranchiseVault[] = [
   {
     id: "dc-mcfarlane",
+    catalogId: "dc",
     name: "DC McFarlane Multiverse",
     shortLabel: "DC McFarlane",
     tagline:
-      "The living DC McFarlane catalogue — 7\" figures, Megafigs, statues, multipacks, vehicles, Super Powers, Super Friends, and chase Platinum editions.",
+      "The living DC McFarlane catalogue — 7\" figures, Megafigs, statues, vehicles, Gold Label, Page Punchers, and chase Platinum editions.",
     status: "live",
     path: PRIMARY_VAULT_PATH,
     highlights: [
-      '7" Figures',
-      "Megafigs",
-      "Statues",
-      "Multipacks",
+      "McFarlane 7-inch",
+      "Gold Label",
+      "Platinum Edition",
       "Vehicles",
-      "Platinum / Red Plat",
+      "Page Punchers",
     ],
     scopeNote: "1,000+ catalog entries",
+  },
+  {
+    id: "star-wars",
+    catalogId: "star-wars",
+    name: "Star Wars",
+    shortLabel: "Star Wars",
+    tagline:
+      "Kenner 3.75-inch from 1977 on, vehicles and playsets, modern 3.75-inch, and The Vintage Collection — tracked the same way as your DC vault.",
+    status: "live",
+    path: "/vault/star-wars",
+    highlights: [
+      "Kenner 3.75-inch",
+      "Kenner Vehicles",
+      "Kenner Playsets",
+      "Vintage Collection",
+      "Modern 3.75-inch",
+    ],
+    scopeNote: "Kenner / Hasbro 3.75-inch first seed",
+  },
+  {
+    id: "gi-joe",
+    catalogId: "gi-joe",
+    name: "G.I. Joe",
+    shortLabel: "GI Joe",
+    tagline:
+      "Classified Series and Retro Cardbacks first, then vintage 3.75-inch, vehicles, and HasLabs — same vault tools as DC and Star Wars.",
+    status: "live",
+    path: "/vault/gi-joe",
+    highlights: [
+      "Classified Series",
+      "Retro Cardbacks",
+      "Vintage 3.75-inch",
+      "Vehicles",
+      "HasLabs",
+    ],
+    scopeNote: "Classified + Retro + vintage first seed",
   },
   {
     id: "marvel",
@@ -50,16 +93,6 @@ export const FRANCHISES: FranchiseVault[] = [
       "Legends, Mega, and multi-packs — planned vault for Marvel-scale collecting.",
     status: "coming-soon",
     highlights: ["Legends", "Mega", "Multipacks"],
-    scopeNote: "Coming soon",
-  },
-  {
-    id: "star-wars",
-    name: "Star Wars",
-    shortLabel: "Star Wars",
-    tagline:
-      "Black Series, Vintage Collection, and more — tracked the same way as your DC vault.",
-    status: "coming-soon",
-    highlights: ["Black Series", "Vintage", "Vehicles"],
     scopeNote: "Coming soon",
   },
   {
@@ -82,6 +115,12 @@ export function getLiveFranchises(): FranchiseVault[] {
   return FRANCHISES.filter((f) => f.status === "live");
 }
 
+export function getVaultByCatalogId(
+  catalogId: FranchiseId,
+): FranchiseVault | undefined {
+  return FRANCHISES.find((f) => f.catalogId === catalogId);
+}
+
 /** Stripe product meta — wire Checkout Session later. */
 export const VAULT_ACCESS = {
   priceUsd: 3.99,
@@ -90,8 +129,7 @@ export const VAULT_ACCESS = {
   billing: "one-time" as const,
   productName: "MyAFVault Lifetime Access",
   description:
-    "One-time unlock for the full DC McFarlane vault — catalogue, In My Vault, wishlist, photos, collections, collector board, and cloud sync.",
+    "One-time unlock for the DC, Star Wars, and GI Joe vaults — catalogue, In My Vault, wishlist, photos, collections, collector board, and cloud sync.",
   /** Checkout is live when STRIPE_SECRET_KEY is set on the server */
   stripeReady: true,
 } as const;
-

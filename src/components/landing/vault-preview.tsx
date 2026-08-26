@@ -281,7 +281,7 @@ export function VaultPreview() {
                     feature={feature}
                     productName={product.name}
                     accessories={product.accessories ?? []}
-                    description={product.description}
+                    description={product.description ?? ""}
                   />
 
                   <div className="mt-auto pt-4 flex flex-col sm:flex-row gap-2">

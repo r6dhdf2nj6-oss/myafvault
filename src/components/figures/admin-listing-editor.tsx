@@ -13,7 +13,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import type { CatalogProduct, ProductCategory } from "@/lib/types";
-import { CATEGORIES, LINES } from "@/lib/types";
+import {
+  categoriesForFranchise,
+  LINES_BY_FRANCHISE,
+} from "@/lib/types";
 import type { CatalogOverridePatch } from "@/lib/catalog-overrides";
 
 const MONTHS = [
@@ -66,6 +69,11 @@ export function AdminListingEditor({
   const [open, setOpen] = useState(false);
   const [saving, setSaving] = useState(false);
   const [form, setForm] = useState(() => formFromProduct(product));
+  const franchise = product.franchise ?? "dc";
+  const categoryOptions = categoriesForFranchise(franchise).filter(
+    (c) => c.value !== "all",
+  );
+  const lineOptions = LINES_BY_FRANCHISE[franchise] ?? LINES_BY_FRANCHISE.dc;
 
   useEffect(() => {
     setForm({ ...formFromProduct(product), hidden });
@@ -174,11 +182,17 @@ export function AdminListingEditor({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {CATEGORIES.filter((c) => c.value !== "all").map((c) => (
+                  {categoryOptions.map((c) => (
                     <SelectItem key={c.value} value={c.value}>
                       {c.label}
                     </SelectItem>
                   ))}
+                  {form.category &&
+                    !categoryOptions.some((c) => c.value === form.category) && (
+                      <SelectItem value={form.category}>
+                        {form.category}
+                      </SelectItem>
+                    )}
                 </SelectContent>
               </Select>
             </div>
@@ -192,12 +206,12 @@ export function AdminListingEditor({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {LINES.filter((l) => l !== "Custom").map((l) => (
+                  {lineOptions.filter((l) => l !== "Custom").map((l) => (
                     <SelectItem key={l} value={l}>
                       {l}
                     </SelectItem>
                   ))}
-                  {form.line && !LINES.includes(form.line) && (
+                  {form.line && !lineOptions.includes(form.line) && (
                     <SelectItem value={form.line}>{form.line}</SelectItem>
                   )}
                 </SelectContent>

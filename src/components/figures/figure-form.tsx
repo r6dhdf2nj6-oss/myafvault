@@ -13,7 +13,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { ProductCategory, UserEntry } from "@/lib/types";
+import type { FranchiseId, ProductCategory, UserEntry } from "@/lib/types";
+import { categoriesForFranchise } from "@/lib/types";
 import { compressImage, figurePlaceholder } from "@/lib/image";
 import { cn } from "@/lib/utils";
 
@@ -30,26 +31,44 @@ export interface CustomFigureDraft {
   photo: string | null;
 }
 
-const empty: CustomFigureDraft = {
-  name: "",
-  character: "",
-  category: "7-inch",
-  line: "Custom",
-  scale: '7"',
-  releaseYear: new Date().getFullYear(),
-  description: "",
-  accessoriesText: "",
-  notes: "",
-  photo: null,
-};
+function emptyDraft(franchiseId: FranchiseId): CustomFigureDraft {
+  const cats = categoriesForFranchise(franchiseId).filter((c) => c.value !== "all");
+  return {
+    name: "",
+    character: "",
+    category: cats[0]?.value ?? "Other DC",
+    line: "Custom",
+    scale:
+      franchiseId === "gi-joe"
+        ? '6"'
+        : franchiseId === "star-wars"
+          ? '3.75"'
+          : '7"',
+    releaseYear: new Date().getFullYear(),
+    description: "",
+    accessoriesText: "",
+    notes: "",
+    photo: null,
+  };
+}
 
 interface FigureFormProps {
   onSubmit: (entry: UserEntry) => void;
   onCancel: () => void;
+  franchiseId?: FranchiseId;
 }
 
-export function FigureForm({ onSubmit, onCancel }: FigureFormProps) {
-  const [form, setForm] = useState<CustomFigureDraft>({ ...empty });
+export function FigureForm({
+  onSubmit,
+  onCancel,
+  franchiseId = "dc",
+}: FigureFormProps) {
+  const [form, setForm] = useState<CustomFigureDraft>(() =>
+    emptyDraft(franchiseId),
+  );
+  const categoryOptions = categoriesForFranchise(franchiseId).filter(
+    (c) => c.value !== "all",
+  );
   const [busy, setBusy] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -107,6 +126,7 @@ export function FigureForm({ onSubmit, onCancel }: FigureFormProps) {
       customProduct: {
         name: form.name.trim(),
         character: form.character.trim(),
+        franchise: franchiseId,
         category: form.category,
         line: form.line.trim() || "Custom",
         scale: form.scale.trim() || '7"',
@@ -202,11 +222,11 @@ export function FigureForm({ onSubmit, onCancel }: FigureFormProps) {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="7-inch">7" Figure</SelectItem>
-              <SelectItem value="megafig">Megafig</SelectItem>
-              <SelectItem value="statue">Statue</SelectItem>
-              <SelectItem value="multipack">2-Pack / Multipack</SelectItem>
-              <SelectItem value="vehicle">Vehicle</SelectItem>
+              {categoryOptions.map((c) => (
+                <SelectItem key={c.value} value={c.value}>
+                  {c.label}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>

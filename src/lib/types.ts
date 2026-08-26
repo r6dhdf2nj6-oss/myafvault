@@ -1,9 +1,21 @@
-export type ProductCategory =
-  | "7-inch"
-  | "megafig"
-  | "multipack"
-  | "vehicle"
-  | "statue";
+export type {
+  CatalogProduct,
+  Condition,
+  FranchiseId,
+  LegacyProductCategory,
+  ProductCategory,
+} from "@/types";
+
+import type { FranchiseId, ProductCategory } from "@/types";
+import { DC_CATEGORIES } from "@/franchises/dc/categories";
+import { STAR_WARS_CATEGORIES } from "@/franchises/star-wars/categories";
+import { GI_JOE_CATEGORIES } from "@/franchises/gi-joe/categories";
+
+const FRANCHISE_CATEGORY_MAP: Record<FranchiseId, readonly string[]> = {
+  dc: DC_CATEGORIES,
+  "star-wars": STAR_WARS_CATEGORIES,
+  "gi-joe": GI_JOE_CATEGORIES,
+};
 
 export type FigureCondition =
   | "mint"
@@ -13,31 +25,6 @@ export type FigureCondition =
   | "fair"
   | "opened"
   | "loose";
-
-export interface CatalogProduct {
-  id: string;
-  name: string;
-  character: string;
-  brand: string;
-  category: ProductCategory;
-  line: string;
-  scale: string;
-  productType: string;
-  genre: string;
-  series: string;
-  releaseYear: number | null;
-  /** 1–12 when known; derived from McFarlane product photo dates when the site has no street date */
-  releaseMonth?: number | null;
-
-  sku: string;
-  description: string;
-  features: string[];
-  accessories: string[];
-  imageUrl: string | null;
-  gallery: string[];
-  productUrl: string;
-  source: string;
-}
 
 /** User-owned / tracked entry for a catalog product (or custom figure). */
 export interface UserEntry {
@@ -63,10 +50,11 @@ export interface UserEntry {
   personalCoverIndex?: number;
   /** True if this is a user-created product not in master catalog */
   isCustom?: boolean;
-  customProduct?: Partial<CatalogProduct> & {
+  customProduct?: Partial<import("@/types").CatalogProduct> & {
     name: string;
     character: string;
     category: ProductCategory;
+    franchise?: FranchiseId;
   };
   updatedAt: string;
   createdAt: string;
@@ -101,17 +89,7 @@ export const CONDITIONS: { value: FigureCondition; label: string }[] = [
   { value: "loose", label: "Loose" },
 ];
 
-export const CATEGORIES: { value: ProductCategory | "all"; label: string }[] =
-  [
-    { value: "all", label: "All" },
-    { value: "7-inch", label: '7" Figures' },
-    { value: "megafig", label: "Megafigs" },
-    { value: "statue", label: "Statues" },
-    { value: "multipack", label: "2-Packs / Multipacks" },
-    { value: "vehicle", label: "Vehicles" },
-  ];
-
-export const LINES = [
+export const DC_LINES = [
   "DC Multiverse",
   "Gold Label",
   "Platinum Edition",
@@ -121,6 +99,45 @@ export const LINES = [
   "Super Friends",
   "Custom",
 ];
+
+/** @deprecated Use franchise-specific lines; kept as DC default. */
+export const LINES = DC_LINES;
+
+export function categoriesForFranchise(
+  franchise: FranchiseId = "dc",
+): { value: ProductCategory | "all"; label: string }[] {
+  return [
+    { value: "all", label: "All" },
+    ...FRANCHISE_CATEGORY_MAP[franchise].map((c) => ({
+      value: c,
+      label: c,
+    })),
+  ];
+}
+
+/** Default chip list (DC vault) so existing imports keep compiling. */
+export const CATEGORIES: { value: ProductCategory | "all"; label: string }[] =
+  categoriesForFranchise("dc");
+
+export const LINES_BY_FRANCHISE: Record<FranchiseId, string[]> = {
+  dc: DC_LINES,
+  "star-wars": [
+    "Kenner",
+    "Power of the Force",
+    "Power of the Force 2",
+    "The Vintage Collection",
+    "The Black Series",
+    "Modern 3.75-inch",
+    "Custom",
+  ],
+  "gi-joe": [
+    "Classified Series",
+    "Retro Cardback",
+    "A Real American Hero",
+    "HasLab",
+    "Custom",
+  ],
+};
 
 /** Suggested themes when creating a user collection / display. */
 export const COLLECTION_THEME_SUGGESTIONS = [

@@ -98,11 +98,11 @@ async function buildItems(
       items.push({
         id,
         name: catalog.name,
-        character: catalog.character,
+        character: catalog.character ?? "",
         imageUrl: covers[id] ?? catalog.imageUrl ?? null,
         category: catalog.category,
-        line: catalog.line,
-        scale: catalog.scale,
+        line: catalog.line ?? "",
+        scale: catalog.scale ?? "",
       });
       continue;
     }
