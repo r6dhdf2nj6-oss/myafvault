@@ -153,7 +153,7 @@ function LoginPage() {
               <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">
                 {mode === "signin"
                   ? "Welcome back to your vaults"
-                  : "Start your collection vaults"}
+                  : "Create Your Personalized Vault Collection"}
               </h1>
               <p className="text-sm text-muted leading-relaxed max-w-sm mx-auto">
                 {mode === "signin"

@@ -48,7 +48,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "MyAFVault is the collector vault for DC McFarlane, Star Wars 3.75-inch Kenner/Hasbro, GI Joe, and more franchises coming soon — catalogues, In My Vault, wishlist, photos, collections, and a collector board. Lifetime access $3.99.",
+          "MyAFVault is the collector vault for DC McFarlane, Star Wars, GI Joe, and more franchises coming soon — catalogues, In My Vault, wishlist, photos, collections, and a collector board. Lifetime access $3.99.",
 
       },
     ],
@@ -59,7 +59,7 @@ const FEATURES = [
   {
     icon: Search,
     title: "Live vaults for every line",
-    body: "DC McFarlane, Star Wars 3.75-inch Kenner/Hasbro, and GI Joe are live — official listings, pack shots, and accessories. Marvel, Fallout, and more franchises are coming soon.",
+    body: "DC McFarlane, Star Wars, and GI Joe are live — official listings, pack shots, and accessories. Marvel, Fallout, and more franchises are coming soon.",
   },
   {
     icon: Package,
@@ -251,10 +251,10 @@ function LandingPage() {
                   </span>
                 </h1>
                 <p className="text-base sm:text-lg text-muted max-w-xl leading-relaxed text-pretty">
-                  Live vaults for DC McFarlane, Star Wars 3.75-inch
-                  Kenner/Hasbro, and GI Joe — official figure pics, accessory
-                  lists, In My Vault, wishlist, your photos, collections, and
-                  a collector board. More franchises are on the way.
+                  Live vaults for DC McFarlane, Star Wars, and GI Joe —
+                  official figure pics, accessory lists, In My Vault,
+                  wishlist, your photos, collections, and a collector board.
+                  More franchises are on the way.
 
                 </p>
 
