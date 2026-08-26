@@ -174,12 +174,36 @@ function inferCharacter(name, fallback) {
   return cleaned && cleaned.length < 90 ? cleaned : fallback;
 }
 
-function classifyLine(name, category) {
-  const n = name.toLowerCase();
-  if (n.includes("retro collection")) return "Retro Collection";
-  if (n.includes("vintage collection")) return "The Vintage Collection";
+function classifyLine(name, category, url = "") {
+  const n = `${name} ${url}`.toLowerCase();
+  if (n.includes("retro collection") || n.includes("retro-collection")) {
+    return "Retro Collection";
+  }
+  if (n.includes("vintage collection") || n.includes("vintage-collection")) {
+    return "The Vintage Collection";
+  }
+  if (n.includes("black series") || n.includes("black-series")) {
+    return "The Black Series";
+  }
   if (category === "Retro Collection") return "Retro Collection";
+  if (category === "Black Series") return "The Black Series";
   return category === "Vintage Collection" ? "The Vintage Collection" : category;
+}
+
+/** Justin's rule: pre-1995 Kenner, 1995+ Hasbro. Category can stay Kenner-styled. */
+function manufacturerFromYear(year, category = "", line = "") {
+  const y = typeof year === "number" && year > 0 ? year : null;
+  if (y != null) return y < 1995 ? "Kenner" : "Hasbro";
+  const blob = `${category} ${line}`.toLowerCase();
+  if (
+    /potf2|power of the force 2|vintage collection|retro collection|black series|prequel|episode [i123]/.test(
+      blob,
+    )
+  ) {
+    return "Hasbro";
+  }
+  if (blob.includes("kenner")) return "Kenner";
+  return "Hasbro";
 }
 
 async function fetchPulse(spec) {
@@ -233,7 +257,7 @@ async function fetchPulse(spec) {
         : undefined;
   const canonical =
     (html.match(/rel="canonical" href="([^"]+)"/) || [])[1] || spec.url;
-  const line = classifyLine(name, spec.category);
+  const line = classifyLine(name, spec.category, spec.url);
   const vehicleOrPlayset =
     !!spec.vehicleOrPlayset ||
     /vehicle|playset|fighter|gunship|landspeeder|bantha|howler|ig-12|cantina|ghost/i.test(
@@ -357,7 +381,7 @@ for (const v of HISTORICAL_SW) {
       category: v.category,
       character: v.character,
       year: v.year,
-      manufacturer: v.manufacturer ?? (v.category.startsWith("Kenner") ? "Kenner" : "Kenner / Hasbro"),
+      manufacturer: manufacturerFromYear(v.year, v.category, v.line ?? v.series),
       series: v.series ?? "",
       line: v.line ?? (v.category.startsWith("Kenner") ? "Kenner" : v.category),
       description:
