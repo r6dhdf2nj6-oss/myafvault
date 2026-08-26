@@ -37,7 +37,6 @@ import { CollectionsPanel } from "@/components/figures/collections-panel";
 import { WishlistShareDialog } from "@/components/figures/wishlist-share-dialog";
 import { VaultShareDialog } from "@/components/figures/vault-share-dialog";
 import { Button } from "@/components/ui/button";
-import { OWNERSHIP } from "@/lib/ownership-copy";
 import { useSystemImages } from "@/lib/system-image-store";
 import { useCatalogOverrides } from "@/lib/catalog-override-store";
 import {
@@ -83,8 +82,13 @@ export function FranchiseCatalogue({
   const vaultPath = vault?.path ?? "/vault/dc-mcfarlane";
   const shortLabel = vault?.shortLabel ?? "Vault";
   const masterCatalog = catalogForFranchise(franchiseId);
-  const CATALOG_INDEX: Record<string, number> = Object.fromEntries(
-    masterCatalog.map((p, i) => [p.id, i]),
+  const catalogIndex = useMemo(
+    () =>
+      Object.fromEntries(masterCatalog.map((p, i) => [p.id, i])) as Record<
+        string,
+        number
+      >,
+    [masterCatalog],
   );
   const franchiseCategories = categoriesForFranchise(franchiseId);
   const franchiseLines = LINES_BY_FRANCHISE[franchiseId];
@@ -336,7 +340,7 @@ export function FranchiseCatalogue({
           const by = releaseSortValue(b, false);
           if (ay !== by) return ay - by;
           return (
-            (CATALOG_INDEX[b.id] ?? 99999) - (CATALOG_INDEX[a.id] ?? 99999) ||
+            (catalogIndex[b.id] ?? 99999) - (catalogIndex[a.id] ?? 99999) ||
             a.name.localeCompare(b.name)
           );
         }
@@ -345,7 +349,7 @@ export function FranchiseCatalogue({
           const by = releaseSortValue(b, true);
           if (ay !== by) return by - ay;
           return (
-            (CATALOG_INDEX[a.id] ?? 99999) - (CATALOG_INDEX[b.id] ?? 99999) ||
+            (catalogIndex[a.id] ?? 99999) - (catalogIndex[b.id] ?? 99999) ||
             a.name.localeCompare(b.name)
           );
         }
@@ -366,6 +370,7 @@ export function FranchiseCatalogue({
     lineFilters,
     scopeFilters,
     sort,
+    catalogIndex,
   ]);
 
   const visible = filtered.slice(0, visibleCount);
