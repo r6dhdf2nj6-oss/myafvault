@@ -7,7 +7,7 @@ import {
   createCheckoutSession,
   getAccessStatus,
 } from "@/lib/billing";
-import { VAULT_ACCESS, PRIMARY_VAULT_PATH } from "@/lib/franchises";
+import { VAULT_ACCESS, VAULT_PICKER_PATH } from "@/lib/franchises";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/pay")({
       {
         name: "description",
         content:
-          "One-time $3.99 payment unlocks the DC McFarlane vault, cloud sync, and your collection.",
+          "One-time $3.99 payment unlocks the DC McFarlane, Star Wars, and GI Joe vaults, cloud sync, and your collection.",
 
       },
     ],
@@ -93,7 +93,7 @@ function PayPage() {
 
 
   if (paid) {
-    return <Navigate to={PRIMARY_VAULT_PATH} />;
+    return <Navigate to={VAULT_PICKER_PATH} />;
   }
 
   return (
@@ -144,7 +144,7 @@ function PayPage() {
             </p>
             <ul className="space-y-2">
               {[
-                "Full DC McFarlane catalogue",
+                "DC McFarlane, Star Wars, and GI Joe catalogues",
                 "Cloud sync of vault, wishlist, and photos",
                 "Collections and sharing",
               ].map((item) => (

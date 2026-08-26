@@ -1,8 +1,8 @@
 {
   "name": "MyAFVault",
   "short_name": "AFVault",
-  "description": "Your DC McFarlane figure vault",
-  "start_url": "/vault/dc-mcfarlane",
+  "description": "Your DC, Star Wars, and GI Joe figure vaults",
+  "start_url": "/vaults",
   "scope": "/",
   "display": "standalone",
   "background_color": "#0a0b0e",

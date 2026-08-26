@@ -147,7 +147,7 @@ export function VaultPreview() {
         <div className="flex items-center justify-between gap-2 mb-3 px-1">
           <div>
             <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-primary">
-              Interactive preview · DC McFarlane
+              Interactive preview · sample from DC McFarlane
             </p>
             <p className="text-sm sm:text-base font-semibold">Tap a figure to explore features</p>
           </div>
@@ -387,7 +387,7 @@ function FeaturePanel({
           </li>
           <li className="flex gap-2">
             <Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
-            One account for your DC McFarlane vault
+            One account for DC, Star Wars, GI Joe, and more
           </li>
         </ul>
       )}

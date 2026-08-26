@@ -25,7 +25,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { oauthErrorMessage } from "@/lib/auth-errors";
-import { VAULT_ACCESS } from "@/lib/franchises";
+import { VAULT_ACCESS, VAULT_PICKER_PATH } from "@/lib/franchises";
 import { cn } from "@/lib/utils";
 
 
@@ -55,7 +55,7 @@ function LoginPage() {
   const [password, setPassword] = useState("");
 
   if (!isPending && user && !user.isDevFallback) {
-    return <Navigate to="/pay" />;
+    return <Navigate to={VAULT_PICKER_PATH} />;
   }
 
 
@@ -112,7 +112,7 @@ function LoginPage() {
           ? new URLSearchParams(window.location.search).get("next")
           : null;
       window.location.href =
-        next && next.startsWith("/") ? next : "/pay";
+        next && next.startsWith("/") ? next : VAULT_PICKER_PATH;
 
     } catch (err) {
       setError(err instanceof Error ? err.message : "Authentication failed");
@@ -152,13 +152,13 @@ function LoginPage() {
             <div className="space-y-1.5">
               <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">
                 {mode === "signin"
-                  ? "Welcome back to the vault"
-                  : "Start your McFarlane vault"}
+                  ? "Welcome back to your vaults"
+                  : "Start your collection vaults"}
               </h1>
               <p className="text-sm text-muted leading-relaxed max-w-sm mx-auto">
                 {mode === "signin"
-                  ? "Sign in to sync In My Vault, wishlist, photos, and collections on this device."
-                  : "Create an account, then unlock the full DC McFarlane catalogue for a one-time payment."}
+                  ? "Sign in to sync In My Vault, wishlist, photos, and collections across DC McFarlane, Star Wars, and GI Joe."
+                  : "Create an account, then unlock DC McFarlane, Star Wars, GI Joe, and more coming soon — one-time payment."}
               </p>
             </div>
           </div>
@@ -167,7 +167,7 @@ function LoginPage() {
             {[
               {
                 Icon: Package,
-                text: "1,000+ official DC McFarlane listings with accessories",
+                text: "Live vaults for DC McFarlane, Star Wars 3.75-inch, and GI Joe",
               },
               {
                 Icon: Heart,
@@ -329,7 +329,7 @@ function LoginPage() {
                   ) : mode === "signup" ? (
                     "Create account — then unlock"
                   ) : (
-                    "Sign in to your vault"
+                    "Sign in to your vaults"
                   )}
                 </Button>
               </form>

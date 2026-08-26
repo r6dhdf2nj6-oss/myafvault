@@ -23,11 +23,11 @@ export function AccountShell({
       <header className="border-b border-border/80">
         <div className="mx-auto flex max-w-2xl items-center justify-between gap-3 px-4 py-4">
           <Link
-            to="/vault/dc-mcfarlane"
+            to="/vaults"
             className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-fg"
           >
             <ArrowLeft className="h-4 w-4" />
-            Vault
+            Vaults
           </Link>
           <ThemeToggle />
         </div>

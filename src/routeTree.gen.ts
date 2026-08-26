@@ -19,6 +19,7 @@ import { Route as AccountProfileRouteImport } from './routes/account/profile'
 import { Route as AccountSecurityRouteImport } from './routes/account/security'
 import { Route as LoginTwoFactorRouteImport } from './routes/login/two-factor'
 import { Route as PaySuccessRouteImport } from './routes/pay.success'
+import { Route as VaultsRouteImport } from './routes/vaults'
 import { Route as VaultDcMcfarlaneRouteImport } from './routes/vault/dc-mcfarlane'
 import { Route as VaultStarWarsRouteImport } from './routes/vault/star-wars'
 import { Route as VaultGiJoeRouteImport } from './routes/vault/gi-joe'
@@ -79,6 +80,11 @@ const PaySuccessRoute = PaySuccessRouteImport.update({
   path: '/success',
   getParentRoute: () => PayRoute,
 } as any)
+const VaultsRoute = VaultsRouteImport.update({
+  id: '/vaults',
+  path: '/vaults',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VaultDcMcfarlaneRoute = VaultDcMcfarlaneRouteImport.update({
   id: '/vault/dc-mcfarlane',
   path: '/vault/dc-mcfarlane',
@@ -135,6 +141,7 @@ export interface FileRoutesByFullPath {
   '/account/security': typeof AccountSecurityRoute
   '/login/two-factor': typeof LoginTwoFactorRoute
   '/pay/success': typeof PaySuccessRoute
+  '/vaults': typeof VaultsRoute
   '/vault/dc-mcfarlane': typeof VaultDcMcfarlaneRoute
   '/vault/star-wars': typeof VaultStarWarsRoute
   '/vault/gi-joe': typeof VaultGiJoeRoute
@@ -156,6 +163,7 @@ export interface FileRoutesByTo {
   '/account/security': typeof AccountSecurityRoute
   '/login/two-factor': typeof LoginTwoFactorRoute
   '/pay/success': typeof PaySuccessRoute
+  '/vaults': typeof VaultsRoute
   '/vault/dc-mcfarlane': typeof VaultDcMcfarlaneRoute
   '/vault/star-wars': typeof VaultStarWarsRoute
   '/vault/gi-joe': typeof VaultGiJoeRoute
@@ -178,6 +186,7 @@ export interface FileRoutesById {
   '/account/security': typeof AccountSecurityRoute
   '/login/two-factor': typeof LoginTwoFactorRoute
   '/pay/success': typeof PaySuccessRoute
+  '/vaults': typeof VaultsRoute
   '/vault/dc-mcfarlane': typeof VaultDcMcfarlaneRoute
   '/vault/star-wars': typeof VaultStarWarsRoute
   '/vault/gi-joe': typeof VaultGiJoeRoute
@@ -201,6 +210,7 @@ export interface FileRouteTypes {
     | '/account/security'
     | '/login/two-factor'
     | '/pay/success'
+    | '/vaults'
     | '/vault/dc-mcfarlane'
     | '/vault/star-wars'
     | '/vault/gi-joe'
@@ -222,6 +232,7 @@ export interface FileRouteTypes {
     | '/account/security'
     | '/login/two-factor'
     | '/pay/success'
+    | '/vaults'
     | '/vault/dc-mcfarlane'
     | '/vault/star-wars'
     | '/vault/gi-joe'
@@ -243,6 +254,7 @@ export interface FileRouteTypes {
     | '/account/security'
     | '/login/two-factor'
     | '/pay/success'
+    | '/vaults'
     | '/vault/dc-mcfarlane'
     | '/vault/star-wars'
     | '/vault/gi-joe'
@@ -263,6 +275,7 @@ export interface RootRouteChildren {
   PayRoute: typeof PayRouteWithChildren
   AccountProfileRoute: typeof AccountProfileRoute
   AccountSecurityRoute: typeof AccountSecurityRoute
+  VaultsRoute: typeof VaultsRoute
   VaultDcMcfarlaneRoute: typeof VaultDcMcfarlaneRoute
   VaultStarWarsRoute: typeof VaultStarWarsRoute
   VaultGiJoeRoute: typeof VaultGiJoeRoute
@@ -346,6 +359,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/pay/success'
       preLoaderRoute: typeof PaySuccessRouteImport
       parentRoute: typeof PayRoute
+    }
+    '/vaults': {
+      id: '/vaults'
+      path: '/vaults'
+      fullPath: '/vaults'
+      preLoaderRoute: typeof VaultsRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/vault/dc-mcfarlane': {
       id: '/vault/dc-mcfarlane'
@@ -441,6 +461,7 @@ const rootRouteChildren: RootRouteChildren = {
   PayRoute: PayRouteWithChildren,
   AccountProfileRoute: AccountProfileRoute,
   AccountSecurityRoute: AccountSecurityRoute,
+  VaultsRoute: VaultsRoute,
   VaultDcMcfarlaneRoute: VaultDcMcfarlaneRoute,
   VaultStarWarsRoute: VaultStarWarsRoute,
   VaultGiJoeRoute: VaultGiJoeRoute,
