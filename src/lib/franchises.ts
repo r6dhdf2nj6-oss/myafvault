@@ -82,18 +82,18 @@ export const FRANCHISES: FranchiseVault[] = [
     name: "Star Wars",
     shortLabel: "Star Wars",
     tagline:
-      "Kenner 3.75-inch from 1977 on, vehicles and playsets, modern 3.75-inch, and The Vintage Collection — tracked the same way as your DC vault.",
+      "Kenner from 1977 on, vehicles and playsets, modern lines, and The Vintage Collection — tracked the same way as your DC vault.",
     status: "live",
     path: "/vault/star-wars",
     highlights: [
-      "Kenner 3.75-inch",
+      "Kenner",
       "Kenner Vehicles",
       "Kenner Playsets",
       "Vintage Collection",
       "Retro Collection",
       "POTF2",
     ],
-    scopeNote: "291 Kenner / Hasbro 3.75-inch listings",
+    scopeNote: "291 Kenner / Hasbro listings",
   },
   {
     id: "gi-joe",
@@ -101,13 +101,13 @@ export const FRANCHISES: FranchiseVault[] = [
     name: "G.I. Joe",
     shortLabel: "GI Joe",
     tagline:
-      "Classified Series and Retro Cardbacks first, then vintage 3.75-inch, vehicles, and HasLabs — same vault tools as DC and Star Wars.",
+      "Classified Series and Retro Cardbacks first, then vintage, vehicles, and HasLabs — same vault tools as DC and Star Wars.",
     status: "live",
     path: "/vault/gi-joe",
     highlights: [
       "Classified Series",
       "Retro Cardbacks",
-      "Vintage 3.75-inch",
+      "Vintage",
       "Vehicles",
       "HasLabs",
     ],
