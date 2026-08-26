@@ -127,6 +127,7 @@ export const LINES_BY_FRANCHISE: Record<FranchiseId, string[]> = {
     "Prequels 3.75-inch",
     "The Vintage Collection",
     "Retro Collection",
+    "The Black Series",
     "Custom",
   ],
   "gi-joe": [

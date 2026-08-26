@@ -294,6 +294,17 @@ function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
+const previousCatalog = (() => {
+  try {
+    return JSON.parse(readFileSync(catalogPath, "utf8"));
+  } catch {
+    return [];
+  }
+})();
+const existingBlackSeries = previousCatalog.filter(
+  (p) => p.category === "Black Series",
+);
+
 const products = [];
 const seenSku = new Set();
 const seenId = new Set();
@@ -357,6 +368,15 @@ for (const v of HISTORICAL_SW) {
       productType: v.productType ?? (v.vehicleOrPlayset ? (v.category.includes("Playset") ? "Playset" : "Vehicle") : "Action Figure"),
     }),
   );
+}
+
+for (const row of existingBlackSeries) {
+  const sku = row.sku || "";
+  if (sku && seenSku.has(sku)) continue;
+  if (seenId.has(row.id)) continue;
+  if (sku) seenSku.add(sku);
+  seenId.add(row.id);
+  products.push(row);
 }
 
 writeFileSync(catalogPath, JSON.stringify(products, null, 2) + "\n");

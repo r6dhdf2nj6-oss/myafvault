@@ -4,6 +4,7 @@ export const STAR_WARS_CATEGORIES = [
   "Kenner Playsets",
   "Vintage Collection",
   "Retro Collection",
+  "Black Series",
   "POTF2",
   "Prequels 3.75-inch",
 ] as const;
