@@ -1,6 +1,29 @@
-import type { CatalogProduct, ProductCategory, UserEntry } from "@/lib/types";
+import type {
+  CatalogProduct,
+  FranchiseId,
+  ProductCategory,
+  UserEntry,
+} from "@/lib/types";
 import { CATALOG_BY_ID } from "@/data/catalog";
 import { figurePlaceholder } from "@/lib/image";
+
+const LEGACY_DC_CATEGORY: Record<string, string> = {
+  "7-inch": "McFarlane 7-inch",
+  megafig: "McFarlane 7-inch",
+  vehicle: "McFarlane Vehicles",
+  statue: "McFarlane 12-inch",
+  multipack: "Other DC",
+};
+
+export function mapLegacyCategory(
+  category: string,
+  franchise: FranchiseId = "dc",
+): string {
+  if (franchise === "dc" && LEGACY_DC_CATEGORY[category]) {
+    return LEGACY_DC_CATEGORY[category];
+  }
+  return category;
+}
 
 export interface DisplayProduct extends CatalogProduct {
   entry: UserEntry | null;
@@ -14,18 +37,22 @@ export function resolveProduct(
 ): CatalogProduct | null {
   if (entry?.isCustom && entry.customProduct) {
     const c = entry.customProduct;
+    const franchise = c.franchise ?? "dc";
+    const releaseYear = c.releaseYear ?? c.year ?? null;
     return {
       id: productId,
+      franchise,
       name: c.name,
+      category: mapLegacyCategory(c.category, franchise),
+      year: typeof releaseYear === "number" ? releaseYear : undefined,
       character: c.character,
       brand: c.brand ?? "Custom",
-      category: c.category,
       line: c.line ?? "Custom",
       scale: c.scale ?? '7"',
       productType: c.productType ?? "Action Figure",
       genre: c.genre ?? "Comics",
       series: c.series ?? "",
-      releaseYear: c.releaseYear ?? null,
+      releaseYear,
       releaseMonth: c.releaseMonth ?? null,
       sku: c.sku ?? "",
       description: c.description ?? "",
@@ -35,6 +62,10 @@ export function resolveProduct(
       gallery: c.gallery ?? [],
       productUrl: c.productUrl ?? "",
       source: "user",
+      owned: entry.owned,
+      wishlist: entry.wishlist,
+      createdAt: entry.createdAt,
+      updatedAt: entry.updatedAt,
     };
   }
   return CATALOG_BY_ID[productId] ?? null;
@@ -75,9 +106,10 @@ export function officialImagesFor(
   product: CatalogProduct,
   systemCover?: string | null,
 ): string[] {
+  const gallery = product.gallery ?? [];
   const base =
-    product.gallery?.length > 0
-      ? [...product.gallery]
+    gallery.length > 0
+      ? [...gallery]
       : product.imageUrl
         ? [product.imageUrl]
         : [];
@@ -97,7 +129,7 @@ function clampIndex(index: number, length: number): number {
 
 export function formatAccessories(product: CatalogProduct): string[] {
   if (product.accessories?.length) return product.accessories;
-  return product.features.filter((f) => {
+  return (product.features ?? []).filter((f) => {
     const low = f.toLowerCase();
     return (
       low.includes("include") ||
@@ -143,9 +175,9 @@ const MONTHS = [
 ] as const;
 
 export function formatRelease(
-  product: Pick<CatalogProduct, "releaseYear" | "releaseMonth">,
+  product: Pick<CatalogProduct, "releaseYear" | "releaseMonth" | "year">,
 ): string {
-  const year = product.releaseYear;
+  const year = product.releaseYear ?? product.year;
   if (!year) return "";
   const month = product.releaseMonth;
   if (typeof month === "number" && month >= 1 && month <= 12) {
@@ -156,10 +188,10 @@ export function formatRelease(
 
 /** Higher = newer. Year * 12 + month; missing month sorts before January. */
 export function releaseSortValue(
-  product: Pick<CatalogProduct, "releaseYear" | "releaseMonth">,
+  product: Pick<CatalogProduct, "releaseYear" | "releaseMonth" | "year">,
   newestFirst = true,
 ): number {
-  const year = product.releaseYear;
+  const year = product.releaseYear ?? product.year;
   if (typeof year !== "number" || !Number.isFinite(year) || year <= 0) {
     return newestFirst ? -1 : 9999 * 12;
   }

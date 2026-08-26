@@ -496,19 +496,18 @@ export function FigureDetail({
                   </ul>
                 ) : (
                   <p className="text-sm text-muted">
-                    Accessory list not listed on the product page. Check the
-                    official McFarlane listing for packaging details.
+                    Accessory list not listed on the official product page.
                   </p>
                 )}
               </div>
 
-              {product.features.length > 0 && (
+              {(product.features ?? []).length > 0 && (
                 <details className="mb-4 group">
                   <summary className="cursor-pointer text-xs font-medium text-muted hover:text-fg">
-                    Full product features ({product.features.length})
+                    Full product features ({product.features?.length})
                   </summary>
                   <ul className="mt-2 space-y-1 pl-1">
-                    {product.features.map((f, i) => (
+                    {(product.features ?? []).map((f, i) => (
                       <li key={i} className="text-xs text-subtle leading-snug">
                         {f}
                       </li>

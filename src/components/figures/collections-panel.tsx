@@ -377,7 +377,7 @@ function CollectionDetail({
         const p = row.product;
         return (
           p.name.toLowerCase().includes(q) ||
-          p.character.toLowerCase().includes(q)
+          (p.character ?? "").toLowerCase().includes(q)
         );
       })
       .slice(0, 40);

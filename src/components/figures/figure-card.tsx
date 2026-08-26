@@ -221,9 +221,9 @@ export function FigureCard({
           </p>
         )}
 
-        {product.accessories.length > 0 && (
+        {(product.accessories ?? []).length > 0 && (
           <p className="mt-0.5 text-[11px] text-subtle line-clamp-2 leading-snug">
-            {product.accessories[0]}
+            {product.accessories?.[0]}
           </p>
         )}
       </div>
@@ -329,7 +329,7 @@ export function FigureListRow({
           )}
         </div>
       </div>
-      {product.accessories[0] && (
+      {product.accessories?.[0] && (
         <p className="hidden max-w-[240px] text-xs text-subtle line-clamp-2 lg:block">
           {product.accessories[0]}
         </p>

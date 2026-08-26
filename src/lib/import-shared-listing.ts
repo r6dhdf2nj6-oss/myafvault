@@ -1,18 +1,11 @@
 import type { ProductCategory, UserEntry } from "@/lib/types";
 import type { SharedItemPayload } from "@/lib/public-share";
-
-const CATEGORIES: ProductCategory[] = [
-  "7-inch",
-  "megafig",
-  "multipack",
-  "vehicle",
-  "statue",
-];
+import { mapLegacyCategory } from "@/lib/product";
 
 function asCategory(value: string | undefined): ProductCategory {
-  return CATEGORIES.includes(value as ProductCategory)
-    ? (value as ProductCategory)
-    : "7-inch";
+  const raw = value?.trim();
+  if (!raw) return "Other DC";
+  return mapLegacyCategory(raw);
 }
 
 /** Copy a shared custom listing into THIS user's vault only. */

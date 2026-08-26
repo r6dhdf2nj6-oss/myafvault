@@ -287,9 +287,9 @@ function LandingPage() {
                   </div>
                   <div className="rounded-[var(--radius-md)] border border-border bg-surface p-3">
                     <dt className="text-[11px] uppercase tracking-wide text-subtle">
-                      Categories
+                      Live vaults
                     </dt>
-                    <dd className="text-lg font-semibold tabular-nums">5</dd>
+                    <dd className="text-lg font-semibold tabular-nums">3</dd>
                   </div>
                   <div className="rounded-[var(--radius-md)] border border-border bg-surface p-3">
                     <dt className="text-[11px] uppercase tracking-wide text-subtle">
@@ -403,18 +403,18 @@ function LandingPage() {
                   The vault
                 </p>
                 <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
-                  DC McFarlane Multiverse
+                  DC, Star Wars, and GI Joe
                 </h2>
                 <p className="text-muted mt-2 text-sm sm:text-base">
-                  One dedicated database for McFarlane’s DC line — official
-                  listings, accessories, Platinum chases, your photos, and a
-                  board for other collectors.
+                  Three live vaults on a shared catalog — official listings,
+                  In My Vault tracking, wishlist, photos, and a board for
+                  other collectors.
 
                 </p>
               </div>
             </div>
-            <div className="grid gap-3 sm:grid-cols-1 max-w-xl">
-              {FRANCHISES.filter((f) => f.status === "live").map((f) => {
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {FRANCHISES.map((f) => {
                 const live = f.status === "live";
                 const CardInner = (
                   <>
@@ -513,9 +513,9 @@ function LandingPage() {
                 Lifetime vault access
               </h2>
               <p className="text-muted mt-2 text-sm sm:text-base">
-                Sign up, then pay once with Stripe. Unlock the full DC McFarlane
-                catalogue, In My Vault, wishlist, photos, collections, collector
-                board, and Home Screen install.
+                Sign up, then pay once with Stripe. Unlock the DC, Star Wars,
+                and GI Joe catalogues, In My Vault, wishlist, photos,
+                collections, collector board, and Home Screen install.
 
               </p>
             </div>
@@ -536,7 +536,7 @@ function LandingPage() {
                 </p>
                 <ul className="mt-5 space-y-2.5">
                   {[
-                    "Full DC McFarlane Multiverse catalogue",
+                    "DC, Star Wars, and GI Joe catalogues",
                     "In My Vault, Wishlist, notes, and price paid",
                     "Your photos plus official pack shots",
                     "Collections, custom listings, and share links",

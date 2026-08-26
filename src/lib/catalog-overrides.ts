@@ -4,6 +4,7 @@ import { getSql } from "@/lib/db";
 import { authMiddleware } from "@/lib/auth/middleware";
 import { isAdminEmail } from "@/lib/admin";
 import type { CatalogProduct, ProductCategory } from "@/lib/types";
+import { FRANCHISES } from "@/franchises";
 
 const CATEGORIES: ProductCategory[] = [
   "7-inch",
@@ -11,6 +12,7 @@ const CATEGORIES: ProductCategory[] = [
   "multipack",
   "vehicle",
   "statue",
+  ...Object.values(FRANCHISES).flatMap((f) => [...f.categories]),
 ];
 
 export type CatalogOverridePatch = {
@@ -97,7 +99,7 @@ function cleanPatch(raw: CatalogOverridePatch): CatalogOverridePatch {
     patch.releaseYear = null;
   } else if (typeof raw.releaseYear === "number" && Number.isFinite(raw.releaseYear)) {
     const y = Math.round(raw.releaseYear);
-    if (y < 1980 || y > 2035) throw new Error("Year must be between 1980 and 2035");
+    if (y < 1977 || y > 2035) throw new Error("Year must be between 1977 and 2035");
     patch.releaseYear = y;
   }
   if (raw.releaseMonth === null) {

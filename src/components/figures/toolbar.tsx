@@ -46,6 +46,8 @@ interface ToolbarProps {
   onAddCustom: () => void;
   onExport: () => void;
   onImport: () => void;
+  categories?: { value: ProductCategory | "all"; label: string }[];
+  lines?: string[];
 }
 
 const SCOPE_OPTIONS: { value: ScopeFilter; label: string }[] = [
@@ -78,11 +80,13 @@ export function Toolbar({
   onAddCustom,
   onExport,
   onImport,
+  categories = CATEGORIES,
+  lines = LINES,
 }: ToolbarProps) {
   return (
     <div className="flex flex-col gap-3.5 sm:gap-3">
       <div className="flex gap-2 overflow-x-auto pb-0.5 -mx-1 px-1 scrollbar-none touch-pan-x">
-        {CATEGORIES.map((c) => {
+        {categories.map((c) => {
           const count =
             c.value === "all"
               ? categoryCounts.all
@@ -175,7 +179,7 @@ export function Toolbar({
         <MultiSelect
           label="All lines"
           values={lineFilters}
-          options={LINES.map((l) => ({ value: l, label: l }))}
+          options={lines.map((l) => ({ value: l, label: l }))}
           onToggle={onToggleLine}
           onClear={onClearLines}
           className="w-full sm:w-[180px]"
