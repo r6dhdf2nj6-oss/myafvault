@@ -131,6 +131,7 @@ export const LINES_BY_FRANCHISE: Record<FranchiseId, string[]> = {
   ],
   "gi-joe": [
     "Classified Series",
+    "Classified Series Legacy",
     "Retro Cardback",
     "A Real American Hero",
     "HasLab",
