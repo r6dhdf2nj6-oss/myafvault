@@ -123,11 +123,10 @@ export const LINES_BY_FRANCHISE: Record<FranchiseId, string[]> = {
   dc: DC_LINES,
   "star-wars": [
     "Kenner",
-    "Power of the Force",
     "Power of the Force 2",
+    "Prequels 3.75-inch",
     "The Vintage Collection",
-    "The Black Series",
-    "Modern 3.75-inch",
+    "Retro Collection",
     "Custom",
   ],
   "gi-joe": [
