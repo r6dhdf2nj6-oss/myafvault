@@ -50985,5 +50985,55 @@
     "wishlist": false,
     "createdAt": "2024-01-01T00:00:00.000Z",
     "updatedAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "mcf-deathstroke-arkham-origins-2026",
+    "name": "Deathstroke (Arkham Origins) 7\" Figure",
+    "character": "Deathstroke",
+    "brand": "DC Multiverse",
+    "category": "McFarlane 7-inch",
+    "line": "DC Multiverse",
+    "scale": "7\"",
+    "productType": "Action Figure",
+    "genre": "Games",
+    "series": "",
+    "releaseYear": 2026,
+    "sku": "17989",
+    "description": "Deathstroke is the most feared and respected mercenary in the world. His elite military training and a genetically enhanced physique make him a very dangerous combatant, but his deadliest weapon is his mind. A master strategist and tactician, Deathstroke specializes in psychological warfare tactics that he uses to devastating effect.",
+    "features": [
+      "Incredibly detailed 7\" scale figures based off the DC Multiverse.",
+      "Designed with Ultra Articulation with up to 22 moving parts for full range of posing and play.",
+      "Includes 7 weapon accessories and base.",
+      "Includes collectible art card with character art on the front, and character biography on the back.",
+      "Collect all McFarlane Toys DC Multiverse figures."
+    ],
+    "accessories": [
+      "7 weapon accessories",
+      "base",
+      "collectible art card"
+    ],
+    "imageUrl": "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3723/36133/Deathstroke_Arkham_Origins__43845.1787610402.jpg?c=1",
+    "gallery": [
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3723/36133/Deathstroke_Arkham_Origins__43845.1787610402.jpg?c=1",
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3723/36134/17989_01_nl__00555.1787610403.jpg?c=1",
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3723/36140/17989_02_nl__32668.1787610404.jpg?c=1",
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3723/36137/17989_03_nl__26542.1787610403.jpg?c=1",
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3723/36136/17989_05_nl__94111.1787610403.jpg?c=1",
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3723/36135/17989_06_nl__25098.1787610403.jpg?c=1",
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3723/36141/17989_07_nl__88993.1787610404.jpg?c=1",
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3723/36138/17989_08_nl__82675.1787610404.jpg?c=1",
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3723/36139/17989_09_nl__23317.1787610404.jpg?c=1"
+    ],
+    "productUrl": "https://mcfarlanetoysstore.com/deathstroke-arkham-origins-7-figure/",
+    "source": "mcfarlanetoysstore.com",
+    "releaseMonth": 9,
+    "franchise": "dc",
+    "year": 2026,
+    "manufacturer": "McFarlane Toys",
+    "vehicleOrPlayset": false,
+    "owned": false,
+    "wishlist": false,
+    "createdAt": "2026-08-26T00:00:00.000Z",
+    "updatedAt": "2026-08-26T00:00:00.000Z"
   }
 ]
