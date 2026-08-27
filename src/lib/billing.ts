@@ -50,7 +50,7 @@ async function rowForUser(userId: string) {
 
 export async function grantVaultAccess(input: {
   userId: string;
-  source: "stripe" | "admin" | "grandfathered";
+  source: "stripe" | "admin" | "grandfathered" | "code";
   stripeSessionId?: string | null;
   stripeCustomerId?: string | null;
   stripePaymentIntent?: string | null;
@@ -187,4 +187,73 @@ export const confirmCheckoutSession = createServerFn({ method: "POST" })
       stripePaymentIntent: intent,
     });
     return { paid: true, source: "stripe", stripeReady: true };
+  });
+
+export const REDEEM_ERROR_STORAGE_KEY = "myafvault:redeem-error";
+
+const INVALID_ACCESS_CODE = "That code is not valid or was already used.";
+
+function normalizeAccessCode(code: string): string {
+  return code.trim().toUpperCase().replace(/\s+/g, "");
+}
+
+export const redeemAccessCode = createServerFn({ method: "POST" })
+  .middleware([authMiddleware])
+  .validator((data: { code?: string }) => ({
+    code: normalizeAccessCode(typeof data?.code === "string" ? data.code : ""),
+  }))
+  .handler(async ({ context, data }): Promise<AccessStatus> => {
+    if (!data.code) throw new Error("Enter an access code.");
+
+    const { getSessionUser } = await import("@/lib/auth/verify.server");
+    const user = await getSessionUser(context.bearerToken);
+
+    const existing = await rowForUser(context.userId);
+    if (existing) {
+      return {
+        paid: true,
+        source: existing.source,
+        stripeReady: stripeConfigured(),
+      };
+    }
+    if (isAdminEmail(user?.email)) {
+      return {
+        paid: true,
+        source: "admin",
+        stripeReady: stripeConfigured(),
+      };
+    }
+
+    const { createHash } = await import("node:crypto");
+    const codeHash = createHash("sha256").update(data.code, "utf8").digest("hex");
+    const sql = await getSql();
+
+    const alreadyRedeemed = await sql.query<{ code_hash: string }>(
+      `select code_hash from access_codes
+       where redeemed_by = $1
+       limit 1`,
+      [context.userId],
+    );
+    if (alreadyRedeemed[0]) {
+      await grantVaultAccess({ userId: context.userId, source: "code" });
+      return { paid: true, source: "code", stripeReady: stripeConfigured() };
+    }
+
+    const claimed = await sql.query<{ code_hash: string }>(
+      `update access_codes
+       set redeemed_by = $1, redeemed_at = now()
+       where code_hash = $2
+         and redeemed_at is null
+         and not exists (
+           select 1 from access_codes where redeemed_by = $1
+         )
+       returning code_hash`,
+      [context.userId, codeHash],
+    );
+    if (!claimed[0]) {
+      throw new Error(INVALID_ACCESS_CODE);
+    }
+
+    await grantVaultAccess({ userId: context.userId, source: "code" });
+    return { paid: true, source: "code", stripeReady: stripeConfigured() };
   });
