@@ -208,11 +208,18 @@ export const redeemAccessCode = createServerFn({ method: "POST" })
     const { getSessionUser } = await import("@/lib/auth/verify.server");
     const user = await getSessionUser(context.bearerToken);
 
-    if (await userHasVaultAccess(context.userId, user?.email)) {
-      const row = await rowForUser(context.userId);
+    const existing = await rowForUser(context.userId);
+    if (existing) {
       return {
         paid: true,
-        source: row?.source ?? (isAdminEmail(user?.email) ? "admin" : null),
+        source: existing.source,
+        stripeReady: stripeConfigured(),
+      };
+    }
+    if (isAdminEmail(user?.email)) {
+      return {
+        paid: true,
+        source: "admin",
         stripeReady: stripeConfigured(),
       };
     }
