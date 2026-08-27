@@ -60,5 +60,10 @@ export function normalizeCatalogProduct(
 }
 
 export function isFranchiseId(value: string): value is FranchiseId {
-  return value === "dc" || value === "star-wars" || value === "gi-joe";
+  return (
+    value === "dc" ||
+    value === "star-wars" ||
+    value === "gi-joe" ||
+    value === "lego"
+  );
 }

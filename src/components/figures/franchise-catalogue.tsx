@@ -678,7 +678,12 @@ export function FranchiseCatalogue({
               ))}
             </div>
           ) : filtered.length === 0 ? (
-            <EmptyState onAdd={() => setFormOpen(true)} />
+            <EmptyState
+              onAdd={() => setFormOpen(true)}
+              catalogEmpty={
+                masterCatalog.length === 0 && allProducts.length === 0
+              }
+            />
           ) : view === "grid" ? (
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
               {visible.map((p) => (
@@ -857,17 +862,37 @@ export function FranchiseCatalogue({
   );
 }
 
-function EmptyState({ onAdd }: { onAdd: () => void }) {
+function EmptyState({
+  onAdd,
+  catalogEmpty,
+}: {
+  onAdd: () => void;
+  catalogEmpty?: boolean;
+}) {
   return (
     <div className="flex flex-col items-center justify-center rounded-[var(--radius-xl)] border border-dashed border-border bg-surface px-6 py-16 text-center">
       <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-surface-2 text-primary">
         <PackageOpen className="h-6 w-6" />
       </div>
-      <h2 className="text-lg font-semibold tracking-tight">No matches</h2>
-      <p className="mt-1 max-w-sm text-sm text-muted">
-        Try another search or category. You can also add a custom figure with
-        your own photo and accessory list.
-      </p>
+      {catalogEmpty ? (
+        <>
+          <h2 className="text-lg font-semibold tracking-tight">
+            No sets in this vault yet
+          </h2>
+          <p className="mt-1 max-w-sm text-sm text-muted">
+            The catalogue is starting soon. You can still add a custom listing
+            with your own photo while official rows land.
+          </p>
+        </>
+      ) : (
+        <>
+          <h2 className="text-lg font-semibold tracking-tight">No matches</h2>
+          <p className="mt-1 max-w-sm text-sm text-muted">
+            Try another search or category. You can also add a custom figure with
+            your own photo and accessory list.
+          </p>
+        </>
+      )}
       <Button className="mt-5" onClick={onAdd}>
         Add custom figure
       </Button>

@@ -157,8 +157,8 @@ function LoginPage() {
               </h1>
               <p className="text-sm text-muted leading-relaxed max-w-sm mx-auto">
                 {mode === "signin"
-                  ? "Sign in to sync In My Vault, wishlist, photos, and collections across DC McFarlane, Star Wars, and GI Joe."
-                  : "Create an account, then unlock DC McFarlane, Star Wars, GI Joe, and more coming soon — one-time payment."}
+                  ? "Sign in to sync In My Vault, wishlist, photos, and collections across DC McFarlane, Star Wars, GI Joe, and LEGO."
+                  : "Create an account, then unlock DC McFarlane, Star Wars, GI Joe, LEGO, plus Marvel, Fallout, Disney, Pixar, and more coming soon — one-time payment."}
               </p>
             </div>
           </div>
@@ -167,7 +167,7 @@ function LoginPage() {
             {[
               {
                 Icon: Package,
-                text: "Live vaults for DC McFarlane, Star Wars 3.75-inch, and GI Joe",
+                text: "Live vaults for DC McFarlane, Star Wars, GI Joe, and LEGO",
               },
               {
                 Icon: Heart,

@@ -10,11 +10,13 @@ import type { FranchiseId, ProductCategory } from "@/types";
 import { DC_CATEGORIES } from "@/franchises/dc/categories";
 import { STAR_WARS_CATEGORIES } from "@/franchises/star-wars/categories";
 import { GI_JOE_CATEGORIES } from "@/franchises/gi-joe/categories";
+import { LEGO_CATEGORIES } from "@/franchises/lego/categories";
 
 const FRANCHISE_CATEGORY_MAP: Record<FranchiseId, readonly string[]> = {
   dc: DC_CATEGORIES,
   "star-wars": STAR_WARS_CATEGORIES,
   "gi-joe": GI_JOE_CATEGORIES,
+  lego: LEGO_CATEGORIES,
 };
 
 export type FigureCondition =
@@ -136,6 +138,20 @@ export const LINES_BY_FRANCHISE: Record<FranchiseId, string[]> = {
     "Retro Cardback",
     "A Real American Hero",
     "HasLab",
+    "Custom",
+  ],
+  lego: [
+    "Star Wars",
+    "Marvel",
+    "DC",
+    "Harry Potter",
+    "Indiana Jones",
+    "Lord of the Rings",
+    "Jurassic World",
+    "Disney",
+    "Super Mario",
+    "Minecraft",
+    "Other Licensed",
     "Custom",
   ],
 };

@@ -2,6 +2,7 @@ import type { CatalogProduct, FranchiseId } from "@/types";
 import {
   loadDcCatalog,
   loadGiJoeCatalog,
+  loadLegoCatalog,
   loadStarWarsCatalog,
 } from "@/franchises";
 
@@ -26,12 +27,14 @@ export const STAR_WARS_CATALOG: CatalogProduct[] = sortCatalog(
   loadStarWarsCatalog(),
 );
 export const GI_JOE_CATALOG: CatalogProduct[] = sortCatalog(loadGiJoeCatalog());
+export const LEGO_CATALOG: CatalogProduct[] = sortCatalog(loadLegoCatalog());
 
 /** Combined master list — filter with catalogForFranchise() in vault routes. */
 export const CATALOG: CatalogProduct[] = sortCatalog([
   ...DC_CATALOG,
   ...STAR_WARS_CATALOG,
   ...GI_JOE_CATALOG,
+  ...LEGO_CATALOG,
 ]);
 
 export const CATALOG_BY_ID: Record<string, CatalogProduct> = Object.fromEntries(
@@ -46,6 +49,8 @@ export function catalogForFranchise(id: FranchiseId): CatalogProduct[] {
       return STAR_WARS_CATALOG;
     case "gi-joe":
       return GI_JOE_CATALOG;
+    case "lego":
+      return LEGO_CATALOG;
   }
 }
 

@@ -387,7 +387,7 @@ function FeaturePanel({
           </li>
           <li className="flex gap-2">
             <Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
-            One account for DC, Star Wars, GI Joe, and more
+            One account for DC, Star Wars, GI Joe, LEGO, and more
           </li>
         </ul>
       )}
