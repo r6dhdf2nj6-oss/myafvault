@@ -40,23 +40,23 @@ function PayPage() {
   const [busy, setBusy] = useState(false);
   const [accessCode, setAccessCode] = useState("");
   const [redeemBusy, setRedeemBusy] = useState(false);
-  const [codeError, setCodeError] = useState<string | null>(null);
   const [unlocked, setUnlocked] = useState(false);
-  const canceled =
-    typeof window !== "undefined" &&
-    new URLSearchParams(window.location.search).get("canceled") === "1";
-
-  useEffect(() => {
-    try {
-      const stored = sessionStorage.getItem(REDEEM_ERROR_STORAGE_KEY);
-      if (stored) {
-        sessionStorage.removeItem(REDEEM_ERROR_STORAGE_KEY);
-        setCodeError(stored);
-      }
-    } catch {
-      /* ignore */
+  const search =
+    typeof window !== "undefined"
+      ? new URLSearchParams(window.location.search)
+      : null;
+  const canceled = search?.get("canceled") === "1";
+  const [codeError, setCodeError] = useState<string | null>(() => {
+    if (search?.get("redeemError") === "1") {
+      return "That code is not valid or was already used.";
     }
-  }, []);
+    if (typeof window === "undefined") return null;
+    try {
+      return sessionStorage.getItem(REDEEM_ERROR_STORAGE_KEY);
+    } catch {
+      return null;
+    }
+  });
 
   useEffect(() => {
     if (isPending) return;

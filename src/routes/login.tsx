@@ -127,7 +127,7 @@ function LoginPage() {
               /* ignore */
             }
             toast.error(message);
-            window.location.href = "/pay";
+            window.location.href = "/pay?redeemError=1";
             return;
           }
         }
