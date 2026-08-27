@@ -82,7 +82,7 @@ export const FRANCHISES: FranchiseVault[] = [
     name: "Star Wars",
     shortLabel: "Star Wars",
     tagline:
-      "Kenner from 1977 on, vehicles and playsets, modern lines, and The Vintage Collection — tracked the same way as your DC vault.",
+      "Kenner from 1977 on, vehicles and playsets, modern lines, The Vintage Collection, and The Black Series — tracked the same way as your DC vault.",
     status: "live",
     path: "/vault/star-wars",
     highlights: [
@@ -91,9 +91,10 @@ export const FRANCHISES: FranchiseVault[] = [
       "Kenner Playsets",
       "Vintage Collection",
       "Retro Collection",
+      "Black Series",
       "POTF2",
     ],
-    scopeNote: "291 Kenner / Hasbro listings",
+    scopeNote: "291 Kenner / Hasbro listings plus 169 Black Series",
   },
   {
     id: "gi-joe",
