@@ -120,7 +120,7 @@ export const FRANCHISES: FranchiseVault[] = [
     name: "LEGO",
     shortLabel: "LEGO",
     tagline:
-      "Licensed LEGO sets from 2000 on — Star Wars, Marvel, DC, Harry Potter, Indiana Jones, and more themes — tracked the same way as your figure vaults.",
+      "Licensed LEGO sets from 2000 on — Star Wars, Marvel, DC, Harry Potter, Indiana Jones, and the rest.",
     status: "live",
     path: "/vault/lego",
     highlights: [
@@ -129,9 +129,8 @@ export const FRANCHISES: FranchiseVault[] = [
       "DC",
       "Harry Potter",
       "Indiana Jones",
-      "Other Licensed",
     ],
-    scopeNote: "Catalog starting soon",
+    scopeNote: "Licensed themes, 2000–today first seed",
   },
   {
     id: "marvel",
