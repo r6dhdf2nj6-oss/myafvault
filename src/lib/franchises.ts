@@ -1,7 +1,7 @@
 /**
  * Multi-franchise vault registry.
- * DC, Star Wars, GI Joe, and LEGO are live. Marvel / Fallout stay coming-soon
- * (no invented Marvel catalog).
+ * DC, Star Wars, GI Joe, and LEGO are live. Marvel / Fallout / Disney / Pixar
+ * stay coming-soon (no invented catalogs).
  */
 
 import type { FranchiseId } from "@/types";
@@ -151,6 +151,26 @@ export const FRANCHISES: FranchiseVault[] = [
       "Wasteland figures and mega-scale builds in one vault when this franchise goes live.",
     status: "coming-soon",
     highlights: ["Figures", "Mega", "Sets"],
+    scopeNote: "Coming soon",
+  },
+  {
+    id: "disney",
+    name: "Disney",
+    shortLabel: "Disney",
+    tagline:
+      "Disney figures and sets in one vault when this franchise goes live.",
+    status: "coming-soon",
+    highlights: ["Figures", "Playsets", "Exclusives"],
+    scopeNote: "Coming soon",
+  },
+  {
+    id: "pixar",
+    name: "Pixar",
+    shortLabel: "Pixar",
+    tagline:
+      "Pixar figures and sets in one vault when this franchise goes live.",
+    status: "coming-soon",
+    highlights: ["Figures", "Playsets", "Exclusives"],
     scopeNote: "Coming soon",
   },
 ];

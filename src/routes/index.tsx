@@ -59,7 +59,7 @@ const FEATURES = [
   {
     icon: Search,
     title: "Live vaults for every line",
-    body: "DC McFarlane, Star Wars, GI Joe, and LEGO are live — official listings, pack shots, and accessories. Marvel, Fallout, and more franchises are coming soon.",
+    body: "DC McFarlane, Star Wars, GI Joe, and LEGO are live — official listings, pack shots, and accessories. Marvel, Fallout, Disney, Pixar, and more franchises are coming soon.",
   },
   {
     icon: Package,

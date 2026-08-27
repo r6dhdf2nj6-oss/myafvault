@@ -158,7 +158,7 @@ function LoginPage() {
               <p className="text-sm text-muted leading-relaxed max-w-sm mx-auto">
                 {mode === "signin"
                   ? "Sign in to sync In My Vault, wishlist, photos, and collections across DC McFarlane, Star Wars, GI Joe, and LEGO."
-                  : "Create an account, then unlock DC McFarlane, Star Wars, GI Joe, LEGO, and more coming soon — one-time payment."}
+                  : "Create an account, then unlock DC McFarlane, Star Wars, GI Joe, LEGO, plus Marvel, Fallout, Disney, Pixar, and more coming soon — one-time payment."}
               </p>
             </div>
           </div>

@@ -78,7 +78,7 @@ function VaultPickerPage() {
           </h1>
           <p className="text-muted mt-2 text-sm sm:text-base leading-relaxed">
             DC McFarlane, Star Wars, GI Joe, and LEGO are live.
-            Marvel, Fallout, and more lines are on the way.
+            Marvel, Fallout, Disney, Pixar, and more lines are on the way.
           </p>
         </div>
 
