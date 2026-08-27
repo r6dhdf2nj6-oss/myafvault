@@ -13,6 +13,7 @@ import {
   Mail,
   Package,
   Smartphone,
+  Ticket,
   User,
 } from "lucide-react";
 
@@ -25,6 +26,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { oauthErrorMessage } from "@/lib/auth-errors";
+import { REDEEM_ERROR_STORAGE_KEY, redeemAccessCode } from "@/lib/billing";
 import { VAULT_ACCESS, VAULT_PICKER_PATH } from "@/lib/franchises";
 import { cn } from "@/lib/utils";
 
@@ -53,8 +55,10 @@ function LoginPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [accessCode, setAccessCode] = useState("");
+  const [holdRedirect, setHoldRedirect] = useState(false);
 
-  if (!isPending && user && !user.isDevFallback) {
+  if (!isPending && user && !user.isDevFallback && !holdRedirect) {
     return <Navigate to={VAULT_PICKER_PATH} />;
   }
 
@@ -77,6 +81,7 @@ function LoginPage() {
       return;
     }
 
+    if (mode === "signup") setHoldRedirect(true);
     setEmailBusy(true);
     try {
       const result =
@@ -93,6 +98,7 @@ function LoginPage() {
             });
 
       if (!result.ok) {
+        setHoldRedirect(false);
         setError(result.message);
         return;
       }
@@ -101,11 +107,36 @@ function LoginPage() {
         setSessionBearer(result.token);
       }
 
-      toast.success(
-        mode === "signup"
-          ? "Account created — welcome to your vault"
-          : "Signed in — syncing your collection",
-      );
+      if (mode === "signup") {
+        const enteredCode = accessCode.trim();
+        if (enteredCode) {
+          try {
+            await redeemAccessCode({ data: { code: enteredCode } });
+            toast.success("Account created — access unlocked");
+            window.location.href = VAULT_PICKER_PATH;
+            return;
+          } catch (err) {
+            const message =
+              err instanceof Error
+                ? err.message
+                : "That code is not valid or was already used.";
+            setError(message);
+            try {
+              sessionStorage.setItem(REDEEM_ERROR_STORAGE_KEY, message);
+            } catch {
+              /* ignore */
+            }
+            toast.error(message);
+            window.location.href = "/pay";
+            return;
+          }
+        }
+        toast.success("Account created — welcome to your vault");
+        window.location.href = "/pay";
+        return;
+      }
+
+      toast.success("Signed in — syncing your collection");
 
       const next =
         typeof window !== "undefined"
@@ -115,6 +146,7 @@ function LoginPage() {
         next && next.startsWith("/") ? next : VAULT_PICKER_PATH;
 
     } catch (err) {
+      setHoldRedirect(false);
       setError(err instanceof Error ? err.message : "Authentication failed");
     } finally {
       setEmailBusy(false);
@@ -158,7 +190,7 @@ function LoginPage() {
               <p className="text-sm text-muted leading-relaxed max-w-sm mx-auto">
                 {mode === "signin"
                   ? "Sign in to sync In My Vault, wishlist, photos, and collections across DC McFarlane, Star Wars, GI Joe, and LEGO."
-                  : "Create an account, then unlock DC McFarlane, Star Wars, GI Joe, LEGO, plus Marvel, Fallout, Disney, Pixar, and more coming soon — one-time payment."}
+                  : `Create an account, then unlock DC McFarlane, Star Wars, GI Joe, LEGO, plus Marvel, Fallout, Disney, Pixar, and more coming soon — ${VAULT_ACCESS.priceLabel} one-time, or skip payment with an access code.`}
               </p>
             </div>
           </div>
@@ -183,7 +215,7 @@ function LoginPage() {
               },
               {
                 Icon: Cloud,
-                text: `${VAULT_ACCESS.priceLabel} one-time — cloud sync, no subscription`,
+                text: `${VAULT_ACCESS.priceLabel} one-time — cloud sync, no subscription. An access code skips payment.`,
               },
             ].map(({ Icon, text }) => (
               <li key={text} className="flex items-start gap-2 text-muted">
@@ -320,6 +352,29 @@ function LoginPage() {
                   </div>
                 </div>
 
+                {mode === "signup" && (
+                  <div className="grid gap-1.5">
+                    <Label htmlFor="access-code">Access code (optional)</Label>
+                    <div className="relative">
+                      <Ticket className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-subtle" />
+                      <Input
+                        id="access-code"
+                        autoComplete="off"
+                        spellCheck={false}
+                        value={accessCode}
+                        onChange={(e) => setAccessCode(e.target.value)}
+                        placeholder="MYAF-XXXX-XXXX"
+                        className="pl-9 uppercase"
+                        disabled={emailBusy}
+                      />
+                    </div>
+                    <p className="text-xs text-subtle">
+                      Have a code? It unlocks lifetime access and skips the{" "}
+                      {VAULT_ACCESS.priceLabel} payment.
+                    </p>
+                  </div>
+                )}
+
                 <Button type="submit" className="w-full h-11" disabled={emailBusy}>
                   {emailBusy ? (
                     <>
@@ -327,7 +382,9 @@ function LoginPage() {
                       {mode === "signup" ? "Creating account…" : "Signing in…"}
                     </>
                   ) : mode === "signup" ? (
-                    "Create account — then unlock"
+                    accessCode.trim()
+                      ? "Create account"
+                      : "Create account — then unlock"
                   ) : (
                     "Sign in to your vaults"
                   )}
@@ -338,7 +395,8 @@ function LoginPage() {
                 <Cloud className="h-3.5 w-3.5 mt-0.5 shrink-0 text-primary" />
                 <span>
                   After sign-in, pay {VAULT_ACCESS.priceLabel} once if you have
-                  not already. Optional 2FA lives under Security on your profile.
+                  not already, or redeem an access code to skip payment.
+                  Optional 2FA lives under Security on your profile.
                 </span>
               </p>
             </div>
