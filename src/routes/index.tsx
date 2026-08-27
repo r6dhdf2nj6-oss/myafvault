@@ -48,7 +48,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "MyAFVault is the collector vault for DC McFarlane, Star Wars, GI Joe, and more franchises coming soon — catalogues, In My Vault, wishlist, photos, collections, and a collector board. Lifetime access $3.99.",
+          "MyAFVault is the collector vault for DC McFarlane, Star Wars, GI Joe, LEGO, and more franchises coming soon — catalogues, In My Vault, wishlist, photos, collections, and a collector board. Lifetime access $3.99.",
 
       },
     ],
@@ -59,7 +59,7 @@ const FEATURES = [
   {
     icon: Search,
     title: "Live vaults for every line",
-    body: "DC McFarlane, Star Wars, and GI Joe are live — official listings, pack shots, and accessories. Marvel, Fallout, and more franchises are coming soon.",
+    body: "DC McFarlane, Star Wars, GI Joe, and LEGO are live — official listings, pack shots, and accessories. Marvel, Fallout, and more franchises are coming soon.",
   },
   {
     icon: Package,
@@ -138,7 +138,7 @@ const PREVIEW_STEPS = [
 ] as const;
 
 const WHY = [
-  "Stop guessing which figures exist — DC McFarlane, Star Wars, and GI Joe catalogues are already built, with more lines coming.",
+  "Stop guessing which figures exist — DC McFarlane, Star Wars, GI Joe, and LEGO vaults are live, with more lines coming.",
   "Know what you own vs. what you still need without mixing the two.",
   "Keep pack art and your own photos, including custom listings only you see.",
   "Show the shelf to friends without handing them your login.",
@@ -246,12 +246,12 @@ function LandingPage() {
                 <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-semibold tracking-tight leading-[1.12] text-balance">
                   One home for every line you collect.
                   <span className="block text-muted font-medium mt-2 text-2xl sm:text-3xl lg:text-[2rem]">
-                    DC McFarlane. Star Wars. GI Joe. More coming.
+                    DC McFarlane. Star Wars. GI Joe. LEGO. More coming.
 
                   </span>
                 </h1>
                 <p className="text-base sm:text-lg text-muted max-w-xl leading-relaxed text-pretty">
-                  Live vaults for DC McFarlane, Star Wars, and GI Joe —
+                  Live vaults for DC McFarlane, Star Wars, GI Joe, and LEGO —
                   official figure pics, accessory lists, In My Vault,
                   wishlist, your photos, collections, and a collector board.
                   More franchises are on the way.
@@ -424,10 +424,10 @@ function LandingPage() {
                   The vaults
                 </p>
                 <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
-                  DC, Star Wars, GI Joe — more coming
+                  DC, Star Wars, GI Joe, LEGO — more coming
                 </h2>
                 <p className="text-muted mt-2 text-sm sm:text-base">
-                  Three live vaults on a shared toolkit — official listings,
+                  Four live vaults on a shared toolkit — official listings,
                   In My Vault tracking, wishlist, photos, and a board for
                   other collectors. Coming-soon lines stay listed, not fake.
 
@@ -535,7 +535,7 @@ function LandingPage() {
               </h2>
               <p className="text-muted mt-2 text-sm sm:text-base">
                 Sign up, then pay once with Stripe. Unlock the DC, Star Wars,
-                and GI Joe catalogues, In My Vault, wishlist, photos,
+                GI Joe, and LEGO catalogues, In My Vault, wishlist, photos,
                 collections, collector board, and Home Screen install.
 
               </p>
@@ -557,7 +557,7 @@ function LandingPage() {
                 </p>
                 <ul className="mt-5 space-y-2.5">
                   {[
-                    "DC, Star Wars, and GI Joe catalogues",
+                    "DC, Star Wars, GI Joe, and LEGO catalogues",
                     "In My Vault, Wishlist, notes, and price paid",
                     "Your photos plus official pack shots",
                     "Collections, custom listings, and share links",
@@ -603,7 +603,7 @@ function LandingPage() {
                 <p className="text-sm text-muted leading-relaxed mb-5">
                   Create an account to enter the{" "}
                   <strong className="text-fg font-medium">
-                    DC McFarlane, Star Wars, and GI Joe
+                    DC McFarlane, Star Wars, GI Joe, and LEGO
                   </strong>{" "}
                   vaults — with more franchises coming soon. After sign-up, pay{" "}
                   {VAULT_ACCESS.priceLabel} once to unlock the catalogues, your
@@ -686,7 +686,7 @@ function LandingPage() {
           <div>
             <p className="text-sm font-semibold">MyAFVault</p>
             <p className="text-xs text-subtle mt-0.5">
-              DC McFarlane, Star Wars, GI Joe, and more vaults coming soon.
+              DC McFarlane, Star Wars, GI Joe, LEGO, and more vaults coming soon.
 
             </p>
           </div>

@@ -43,7 +43,9 @@ function emptyDraft(franchiseId: FranchiseId): CustomFigureDraft {
         ? '6"'
         : franchiseId === "star-wars"
           ? '3.75"'
-          : '7"',
+          : franchiseId === "lego"
+            ? "Standard"
+            : '7"',
     releaseYear: new Date().getFullYear(),
     description: "",
     accessoriesText: "",

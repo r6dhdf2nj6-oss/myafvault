@@ -1,6 +1,6 @@
 /**
  * Multi-franchise vault registry.
- * DC, Star Wars, and GI Joe are live. Marvel / Fallout stay coming-soon
+ * DC, Star Wars, GI Joe, and LEGO are live. Marvel / Fallout stay coming-soon
  * (no invented Marvel catalog).
  */
 
@@ -11,7 +11,8 @@ export type FranchiseStatus = "live" | "coming-soon";
 export type FranchiseVaultPath =
   | "/vault/dc-mcfarlane"
   | "/vault/star-wars"
-  | "/vault/gi-joe";
+  | "/vault/gi-joe"
+  | "/vault/lego";
 
 export type FranchiseVault = {
   id: string;
@@ -114,6 +115,25 @@ export const FRANCHISES: FranchiseVault[] = [
     scopeNote: "Classified + Retro + vintage first seed",
   },
   {
+    id: "lego",
+    catalogId: "lego",
+    name: "LEGO",
+    shortLabel: "LEGO",
+    tagline:
+      "Licensed LEGO sets from 2000 on — Star Wars, Marvel, DC, Harry Potter, Indiana Jones, and more themes — tracked the same way as your figure vaults.",
+    status: "live",
+    path: "/vault/lego",
+    highlights: [
+      "Star Wars",
+      "Marvel",
+      "DC",
+      "Harry Potter",
+      "Indiana Jones",
+      "Other Licensed",
+    ],
+    scopeNote: "Catalog starting soon",
+  },
+  {
     id: "marvel",
     name: "Marvel",
     shortLabel: "Marvel",
@@ -157,7 +177,7 @@ export const VAULT_ACCESS = {
   billing: "one-time" as const,
   productName: "MyAFVault Lifetime Access",
   description:
-    "One-time unlock for the DC, Star Wars, and GI Joe vaults — catalogue, In My Vault, wishlist, photos, collections, collector board, and cloud sync.",
+    "One-time unlock for the DC, Star Wars, GI Joe, and LEGO vaults — catalogue, In My Vault, wishlist, photos, collections, collector board, and cloud sync.",
   /** Checkout is live when STRIPE_SECRET_KEY is set on the server */
   stripeReady: true,
 } as const;
