@@ -16,6 +16,7 @@ import {
 import type { FranchiseId, ProductCategory, UserEntry } from "@/lib/types";
 import { categoriesForFranchise } from "@/lib/types";
 import { compressImage, figurePlaceholder } from "@/lib/image";
+import { normalizeAccessories } from "@/lib/accessories";
 import { cn } from "@/lib/utils";
 
 export interface CustomFigureDraft {
@@ -106,15 +107,17 @@ export function FigureForm({
       toast.error("Name and character are required");
       return;
     }
-    const accessories = form.accessoriesText
+    const accessoryNames = form.accessoriesText
       .split("\n")
       .map((l) => l.replace(/^[-•*]\s*/, "").trim())
       .filter(Boolean);
     const id = `custom-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+    const accessories = normalizeAccessories(accessoryNames, { id });
     const now = new Date().toISOString();
     const photo = form.photo ?? figurePlaceholder(form.name.trim());
     const entry: UserEntry = {
       productId: id,
+      status: "owned",
       owned: true,
       wishlist: false,
       condition: "mint",
@@ -135,7 +138,8 @@ export function FigureForm({
         releaseYear: form.releaseYear,
         description: form.description.trim(),
         accessories,
-        features: accessories,
+        accessoriesUnknown: accessories.length === 0,
+        features: accessoryNames,
         imageUrl: photo,
         gallery: [photo],
         brand: "Custom",

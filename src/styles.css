@@ -22,6 +22,9 @@
   --color-wishlist: #2b6fff;
   --color-wishlist-fg: #ffffff;
   --color-wishlist-hover: #1f58d6;
+  --color-incoming: #d6902a;
+  --color-incoming-fg: #141108;
+  --color-incoming-hover: #b87820;
   --color-accent: #d4d8e0;
   --color-accent-fg: #0a0b0e;
   --color-success: #3d9a6a;
@@ -43,6 +46,7 @@
   --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.35);
   --shadow-owned: 0 10px 32px rgba(196, 30, 58, 0.3);
   --shadow-wishlist: 0 10px 32px rgba(43, 111, 255, 0.28);
+  --shadow-incoming: 0 10px 32px rgba(214, 144, 42, 0.28);
   --border-width-ui: 1px;
   --focus-ring-width: 2px;
 }
@@ -64,6 +68,9 @@ html.light {
   --color-wishlist: #2563eb;
   --color-wishlist-fg: #ffffff;
   --color-wishlist-hover: #1d4ed8;
+  --color-incoming: #b87714;
+  --color-incoming-fg: #fff8eb;
+  --color-incoming-hover: #9a630f;
   --color-accent: #232833;
   --color-accent-fg: #f4f5f7;
   --color-success: #2f8a5c;
@@ -73,6 +80,7 @@ html.light {
   --shadow-card: 0 8px 24px rgba(18, 20, 26, 0.08);
   --shadow-owned: 0 10px 28px rgba(196, 30, 58, 0.18);
   --shadow-wishlist: 0 10px 28px rgba(37, 99, 235, 0.18);
+  --shadow-incoming: 0 10px 28px rgba(184, 119, 20, 0.16);
 }
 
 /* ── High contrast (dark) ───────────────────────────────────────── */
@@ -93,6 +101,9 @@ html.dark.contrast-more {
   --color-wishlist: #4d9fff;
   --color-wishlist-fg: #000000;
   --color-wishlist-hover: #7ab6ff;
+  --color-incoming: #ffc14d;
+  --color-incoming-fg: #000000;
+  --color-incoming-hover: #ffd27a;
   --color-accent: #ffffff;
   --color-accent-fg: #000000;
   --color-success: #3dff9a;
@@ -102,6 +113,7 @@ html.dark.contrast-more {
   --shadow-card: none;
   --shadow-owned: none;
   --shadow-wishlist: none;
+  --shadow-incoming: none;
   --border-width-ui: 2px;
   --focus-ring-width: 3px;
 }
@@ -124,6 +136,9 @@ html.light.contrast-more {
   --color-wishlist: #0047c7;
   --color-wishlist-fg: #ffffff;
   --color-wishlist-hover: #0039a0;
+  --color-incoming: #7a4d00;
+  --color-incoming-fg: #ffffff;
+  --color-incoming-hover: #5c3a00;
   --color-accent: #000000;
   --color-accent-fg: #ffffff;
   --color-success: #006b3f;
@@ -133,6 +148,7 @@ html.light.contrast-more {
   --shadow-card: none;
   --shadow-owned: none;
   --shadow-wishlist: none;
+  --shadow-incoming: none;
   --border-width-ui: 2px;
   --focus-ring-width: 3px;
 }
@@ -244,6 +260,13 @@ html.light.contrast-more {
     var(--shadow-wishlist);
 }
 
+.figure-card--incoming:hover {
+  border-color: var(--color-incoming);
+  box-shadow:
+    0 0 0 1px var(--color-incoming),
+    var(--shadow-incoming);
+}
+
 html.contrast-more .figure-card:hover {
   transform: none;
   box-shadow: none;
@@ -262,12 +285,23 @@ html.contrast-more .figure-card--wishlist {
 html.contrast-more .figure-card--wishlist:hover {
   box-shadow: none;
 }
+html.contrast-more .figure-card--incoming {
+  outline: 2px solid var(--color-incoming);
+  outline-offset: 0;
+}
+html.contrast-more .figure-card--incoming:hover {
+  box-shadow: none;
+}
 
 .owned-badge {
   letter-spacing: 0.04em;
 }
 
 .wishlist-badge {
+  letter-spacing: 0.04em;
+}
+
+.incoming-badge {
   letter-spacing: 0.04em;
 }
 
@@ -278,6 +312,11 @@ html.contrast-more .owned-badge {
 
 html.contrast-more .wishlist-badge {
   border: 2px solid var(--color-wishlist-fg);
+  font-weight: 700;
+}
+
+html.contrast-more .incoming-badge {
+  border: 2px solid var(--color-incoming-fg);
   font-weight: 700;
 }
 

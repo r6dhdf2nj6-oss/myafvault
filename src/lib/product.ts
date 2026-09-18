@@ -6,6 +6,10 @@ import type {
 } from "@/lib/types";
 import { CATALOG_BY_ID } from "@/data/catalog";
 import { figurePlaceholder } from "@/lib/image";
+import {
+  accessoryNames,
+  normalizeAccessories,
+} from "@/lib/accessories";
 
 const LEGACY_DC_CATEGORY: Record<string, string> = {
   "7-inch": "McFarlane 7-inch",
@@ -57,7 +61,14 @@ export function resolveProduct(
       sku: c.sku ?? "",
       description: c.description ?? "",
       features: c.features ?? [],
-      accessories: c.accessories ?? [],
+      accessories: normalizeAccessories(c.accessories, {
+        id: productId,
+        sku: c.sku,
+      }),
+      accessoriesUnknown:
+        c.accessoriesUnknown === true ||
+        !Array.isArray(c.accessories) ||
+        c.accessories.length === 0,
       imageUrl: c.imageUrl ?? null,
       gallery: c.gallery ?? [],
       productUrl: c.productUrl ?? "",
@@ -128,7 +139,9 @@ function clampIndex(index: number, length: number): number {
 }
 
 export function formatAccessories(product: CatalogProduct): string[] {
-  if (product.accessories?.length) return product.accessories;
+  const named = accessoryNames(product.accessories);
+  if (named.length) return named;
+  if (product.accessoriesUnknown) return [];
   return (product.features ?? []).filter((f) => {
     const low = f.toLowerCase();
     return (

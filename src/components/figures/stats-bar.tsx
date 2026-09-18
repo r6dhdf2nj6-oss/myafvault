@@ -1,12 +1,13 @@
 import type { ElementType } from "react";
 import { OWNERSHIP } from "@/lib/ownership-copy";
-import { Box, CheckCircle2, Heart, Image as ImageIcon } from "lucide-react";
+import { Box, CheckCircle2, Heart, Image as ImageIcon, Truck } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 
 interface StatsBarProps {
   catalogTotal: number;
   owned: number;
   wishlist: number;
+  incoming?: number;
   withPhotos: number;
   spent: number;
 }
@@ -64,6 +65,7 @@ export function StatsBar({
   catalogTotal,
   owned,
   wishlist,
+  incoming = 0,
   withPhotos,
   spent,
 }: StatsBarProps) {
@@ -91,6 +93,12 @@ export function StatsBar({
         />
         <Stat
           compact
+          icon={Truck}
+          label="Incoming"
+          value={String(incoming)}
+        />
+        <Stat
+          compact
           icon={ImageIcon}
           label="Photos"
           value={String(withPhotos)}
@@ -108,7 +116,7 @@ export function StatsBar({
       </div>
 
       {/* Tablet / desktop */}
-      <div className="hidden sm:grid grid-cols-2 gap-3 lg:grid-cols-5">
+      <div className="hidden sm:grid grid-cols-2 gap-3 lg:grid-cols-6">
         <Stat icon={Box} label="In catalog" value={String(catalogTotal)} />
         <Stat
           icon={CheckCircle2}
@@ -116,6 +124,7 @@ export function StatsBar({
           value={String(owned)}
         />
         <Stat icon={Heart} label="Wishlist" value={String(wishlist)} />
+        <Stat icon={Truck} label="Incoming" value={String(incoming)} />
         <Stat
           icon={ImageIcon}
           label="Your photos"

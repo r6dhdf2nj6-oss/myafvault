@@ -1,5 +1,8 @@
 import type { CatalogProduct } from "@/types";
-import { normalizeCatalogProduct } from "@/franchises/normalize";
+import {
+  normalizeCatalogProduct,
+  type RawCatalogProduct,
+} from "@/franchises/normalize";
 import raw from "../../../data/gi-joe/catalog.json";
 import { GI_JOE_CATEGORIES } from "./categories";
 
@@ -7,7 +10,7 @@ export { GI_JOE_CATEGORIES } from "./categories";
 export type { GiJoeCategory } from "./categories";
 
 export function loadGiJoeCatalog(): CatalogProduct[] {
-  return (raw as CatalogProduct[]).map((row) =>
+  return (raw as RawCatalogProduct[]).map((row) =>
     normalizeCatalogProduct({ ...row, franchise: "gi-joe" }),
   );
 }

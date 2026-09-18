@@ -28,11 +28,34 @@ export type FigureCondition =
   | "opened"
   | "loose";
 
+export type CollectionStatus = "none" | "owned" | "wishlist" | "incoming";
+
+export type ShipState = "ordered" | "shipped" | "arrived" | "cancelled";
+
+export interface AccessoryCheck {
+  accessoryId: string;
+  present: boolean;
+  quantity: number;
+}
+
+export interface IncomingDetails {
+  retailer: string;
+  orderNumber: string;
+  orderedAt: string | null;
+  eta: string | null;
+  shipState: ShipState;
+  trackingUrl: string;
+}
+
 /** User-owned / tracked entry for a catalog product (or custom figure). */
 export interface UserEntry {
   productId: string;
+  /** Preferred status. `owned` / `wishlist` stay in sync for older clients. */
+  status?: CollectionStatus;
   owned: boolean;
   wishlist: boolean;
+  incoming?: IncomingDetails;
+  accessoryChecks?: Record<string, AccessoryCheck>;
   condition: FigureCondition | null;
   purchasePrice: number | null;
   estimatedValue: number | null;

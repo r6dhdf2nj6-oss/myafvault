@@ -8,6 +8,28 @@ export type Condition =
   | "fair"
   | "poor";
 
+export type CatalogAccessoryKind =
+  | "head"
+  | "hand"
+  | "weapon"
+  | "effect"
+  | "stand"
+  | "card"
+  | "vehicle_part"
+  | "other"
+  | "baf";
+
+export interface CatalogAccessory {
+  id: string;
+  name: string;
+  kind: CatalogAccessoryKind;
+  image_url?: string;
+  is_baf_part?: boolean;
+}
+
+/** Catalog JSON and older custom listings may still store bare strings. */
+export type AccessoryInput = string | CatalogAccessory;
+
 /**
  * Shared master-catalog row.
  *
@@ -43,7 +65,9 @@ export interface CatalogProduct {
 
   /** Existing UI / McFarlane listing fields (optional extras). */
   sku?: string;
-  accessories?: string[];
+  accessories?: CatalogAccessory[];
+  /** Live SKU has no pack list — do not invent parts. */
+  accessoriesUnknown?: boolean;
   gallery?: string[];
   productUrl?: string;
   source?: string;

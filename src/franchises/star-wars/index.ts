@@ -1,5 +1,8 @@
 import type { CatalogProduct } from "@/types";
-import { normalizeCatalogProduct } from "@/franchises/normalize";
+import {
+  normalizeCatalogProduct,
+  type RawCatalogProduct,
+} from "@/franchises/normalize";
 import raw from "../../../data/star-wars/catalog.json";
 import { STAR_WARS_CATEGORIES } from "./categories";
 
@@ -7,7 +10,7 @@ export { STAR_WARS_CATEGORIES } from "./categories";
 export type { StarWarsCategory } from "./categories";
 
 export function loadStarWarsCatalog(): CatalogProduct[] {
-  return (raw as CatalogProduct[]).map((row) =>
+  return (raw as RawCatalogProduct[]).map((row) =>
     normalizeCatalogProduct({ ...row, franchise: "star-wars" }),
   );
 }

@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/dialog";
 import { CATALOG_BY_ID } from "@/data/catalog";
 import { categoryLabel } from "@/lib/product";
+import { accessoryNames } from "@/lib/accessories";
 import { cn } from "@/lib/utils";
 
 type DemoFeature =
@@ -280,7 +281,7 @@ export function VaultPreview() {
                   <FeaturePanel
                     feature={feature}
                     productName={product.name}
-                    accessories={product.accessories ?? []}
+                    accessories={accessoryNames(product.accessories)}
                     description={product.description ?? ""}
                   />
 

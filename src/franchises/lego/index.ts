@@ -1,5 +1,8 @@
 import type { CatalogProduct } from "@/types";
-import { normalizeCatalogProduct } from "@/franchises/normalize";
+import {
+  normalizeCatalogProduct,
+  type RawCatalogProduct,
+} from "@/franchises/normalize";
 import raw from "../../../data/lego/catalog.json";
 import { LEGO_CATEGORIES } from "./categories";
 
@@ -7,7 +10,7 @@ export { LEGO_CATEGORIES } from "./categories";
 export type { LegoCategory } from "./categories";
 
 export function loadLegoCatalog(): CatalogProduct[] {
-  return (raw as CatalogProduct[]).map((row) =>
+  return (raw as RawCatalogProduct[]).map((row) =>
     normalizeCatalogProduct({ ...row, franchise: "lego" }),
   );
 }
