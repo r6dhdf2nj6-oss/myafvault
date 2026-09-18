@@ -9,11 +9,17 @@ import {
   Shield,
   Star,
   Trash2,
-  X,
+  Truck,
   ZoomIn,
 } from "lucide-react";
 import { toast } from "sonner";
-import type { CatalogProduct, FigureCondition, UserEntry } from "@/lib/types";
+import type {
+  CatalogProduct,
+  CollectionStatus,
+  FigureCondition,
+  IncomingDetails,
+  UserEntry,
+} from "@/lib/types";
 import { CONDITIONS } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -54,8 +60,19 @@ import type { CatalogOverridePatch } from "@/lib/catalog-overrides";
 
 
 import { ImageLightbox } from "@/components/figures/image-lightbox";
+import { InTheBox } from "@/components/figures/in-the-box";
+import {
+  IncomingEmptyHint,
+  IncomingFields,
+} from "@/components/figures/incoming-panel";
 import { publishItemShare } from "@/lib/public-share";
 import { absoluteShareUrl, copyText } from "@/lib/share-utils";
+import {
+  collectionStatus,
+  emptyIncoming,
+  figureCompleteness,
+} from "@/lib/collection-status";
+import { cn } from "@/lib/utils";
 
 interface FigureDetailProps {
   product: CatalogProduct | null;
@@ -67,6 +84,10 @@ interface FigureDetailProps {
   onOpenChange: (open: boolean) => void;
   onMarkOwned: (owned: boolean) => void;
   onToggleWishlist: () => void;
+  onSetStatus?: (status: CollectionStatus) => void;
+  onMarkArrived?: () => void;
+  onToggleAccessory?: (accessoryId: string, present: boolean) => void;
+  onMarkAllPresent?: (accessoryIds: string[]) => void;
   onUpdate: (patch: Partial<UserEntry>) => void;
   onAddPhoto: (dataUrl: string) => void;
   onRemovePhoto: (index: number) => void;
@@ -93,6 +114,10 @@ export function FigureDetail({
   onOpenChange,
   onMarkOwned,
   onToggleWishlist,
+  onSetStatus,
+  onMarkArrived,
+  onToggleAccessory,
+  onMarkAllPresent,
   onUpdate,
   onAddPhoto,
   onRemovePhoto,
@@ -114,10 +139,16 @@ export function FigureDetail({
   const [shareBusy, setShareBusy] = useState(false);
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [dossierTab, setDossierTab] = useState<"box" | "listing" | "vault">(
+    "box",
+  );
 
   if (!product) return null;
 
   const accessories = formatAccessories(product);
+  const status = collectionStatus(entry);
+  const incomingOnly = status === "incoming";
+  const completeness = figureCompleteness(product, entry);
   const officialGallery = officialImagesFor(product, systemCover);
   const personal = entry?.personalPhotos ?? [];
   const cover = displayImageFor(product, entry, systemCover);
@@ -247,6 +278,7 @@ export function FigureDetail({
           if (!o) {
             setGalleryIndex(0);
             setLightboxOpen(false);
+            setDossierTab("box");
           }
         }}
       >
@@ -344,7 +376,7 @@ export function FigureDetail({
                           </span>
                         </span>
                       )}
-                      {entry?.wishlist && !entry?.owned && (
+                      {entry?.wishlist && !entry?.owned && !incomingOnly && (
                         <span
                           className="mt-1 inline-flex shrink-0 items-center gap-1.5"
                           title="On wishlist"
@@ -355,6 +387,20 @@ export function FigureDetail({
                           </span>
                           <span className="wishlist-badge inline-flex items-center rounded-full bg-wishlist px-2.5 py-0.5 text-[11px] font-semibold tracking-tight text-wishlist-fg">
                             Wishlist
+                          </span>
+                        </span>
+                      )}
+                      {incomingOnly && (
+                        <span
+                          className="mt-1 inline-flex shrink-0 items-center gap-1.5"
+                          title="Incoming"
+                          aria-label="Incoming"
+                        >
+                          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-incoming text-incoming-fg">
+                            <Truck className="h-3.5 w-3.5" aria-hidden />
+                          </span>
+                          <span className="incoming-badge inline-flex items-center rounded-full bg-incoming px-2.5 py-0.5 text-[11px] font-semibold tracking-tight text-incoming-fg">
+                            Incoming
                           </span>
                         </span>
                       )}
@@ -418,20 +464,47 @@ export function FigureDetail({
                   variant="outline"
                   onClick={onToggleWishlist}
                   className={
-                    entry?.wishlist
+                    entry?.wishlist && !incomingOnly
                       ? "border-wishlist bg-wishlist/10 text-wishlist hover:bg-wishlist/15 hover:text-wishlist"
                       : undefined
                   }
                 >
                   <Heart
                     className={
-                      entry?.wishlist
+                      entry?.wishlist && !incomingOnly
                         ? "h-4 w-4 fill-current text-wishlist"
                         : "h-4 w-4"
                     }
                   />
-                  {entry?.wishlist ? "On wishlist" : "Wishlist"}
+                  {entry?.wishlist && !incomingOnly ? "On wishlist" : "Wishlist"}
                 </Button>
+                {incomingOnly ? (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="border-incoming bg-incoming/10 text-incoming hover:bg-incoming/15 hover:text-incoming"
+                    onClick={() => {
+                      onMarkArrived?.();
+                      toast.success("Moved to In My Vault");
+                    }}
+                  >
+                    <Check className="h-4 w-4" />
+                    Arrived
+                  </Button>
+                ) : (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => {
+                      onSetStatus?.("incoming");
+                      toast.success("Marked incoming");
+                      setDossierTab("vault");
+                    }}
+                  >
+                    <Truck className="h-4 w-4" />
+                    Incoming
+                  </Button>
+                )}
                 <Button
                   size="sm"
                   variant="outline"
@@ -472,17 +545,62 @@ export function FigureDetail({
                 )}
               </div>
 
+              <div
+                role="tablist"
+                aria-label="Figure dossier"
+                className="mb-4 inline-flex w-full gap-1 rounded-[var(--radius-md)] border border-border bg-surface p-1"
+              >
+                {(
+                  [
+                    ["box", `In the box${completeness.unknown ? "" : ` · ${completeness.label}`}`],
+                    ["listing", "Listing"],
+                    ["vault", incomingOnly ? "Incoming" : "Vault"],
+                  ] as const
+                ).map(([id, label]) => (
+                  <button
+                    key={id}
+                    type="button"
+                    role="tab"
+                    aria-selected={dossierTab === id}
+                    onClick={() => setDossierTab(id)}
+                    className={cn(
+                      "flex-1 rounded-[var(--radius-sm)] px-2 py-1.5 text-xs font-medium sm:text-sm",
+                      dossierTab === id
+                        ? "bg-primary text-primary-fg"
+                        : "text-muted hover:text-fg",
+                    )}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+
+              {dossierTab === "box" && (
+                <div className="mb-4">
+                  <InTheBox
+                    product={product}
+                    entry={entry}
+                    onToggle={(accessoryId, present) => {
+                      onToggleAccessory?.(accessoryId, present);
+                    }}
+                    onMarkAllPresent={(ids) => onMarkAllPresent?.(ids)}
+                  />
+                </div>
+              )}
+
+              {dossierTab === "listing" && (
+                <>
               {product.description && (
                 <p className="text-sm text-muted leading-relaxed mb-4">
                   {product.description}
                 </p>
               )}
 
-              <div className="mb-4 rounded-[var(--radius-lg)] border border-border bg-surface-2/60 p-3.5">
-                <h4 className="text-[11px] font-medium uppercase tracking-wide text-subtle mb-2">
-                  Package contents & accessories
-                </h4>
-                {accessories.length > 0 ? (
+              {accessories.length > 0 && (
+                <div className="mb-4 rounded-[var(--radius-lg)] border border-border bg-surface-2/60 p-3.5">
+                  <h4 className="text-[11px] font-medium uppercase tracking-wide text-subtle mb-2">
+                    Pack list
+                  </h4>
                   <ul className="space-y-1.5">
                     {accessories.map((a, i) => (
                       <li
@@ -494,12 +612,8 @@ export function FigureDetail({
                       </li>
                     ))}
                   </ul>
-                ) : (
-                  <p className="text-sm text-muted">
-                    Accessory list not listed on the official product page.
-                  </p>
-                )}
-              </div>
+                </div>
+              )}
 
               {(product.features ?? []).length > 0 && (
                 <details className="mb-4 group">
@@ -735,7 +849,30 @@ export function FigureDetail({
                   )}
                 </div>
               )}
+                </>
+              )}
 
+              {dossierTab === "vault" && (
+                <>
+              {(incomingOnly || entry?.incoming) && (
+                <div className="mb-4 rounded-[var(--radius-lg)] border border-incoming/30 bg-incoming/[0.06] p-4 sm:p-5">
+                  <h4 className="mb-3 text-[11px] font-medium uppercase tracking-wide text-incoming">
+                    Incoming order
+                  </h4>
+                  <IncomingFields
+                    value={entry?.incoming ?? emptyIncoming()}
+                    onChange={(details: IncomingDetails) =>
+                      onUpdate({
+                        incoming: details,
+                        status: incomingOnly ? "incoming" : entry?.status,
+                      })
+                    }
+                  />
+                  <div className="mt-3">
+                    <IncomingEmptyHint />
+                  </div>
+                </div>
+              )}
 
               {entry?.owned && (
                 <div className="mt-2 rounded-[var(--radius-lg)] border border-border bg-surface-2/50 p-4 sm:p-5">
@@ -838,6 +975,14 @@ export function FigureDetail({
                   )}
                   </div>
                 </div>
+              )}
+              {!entry?.owned && !incomingOnly && (
+                <p className="text-sm text-muted">
+                  Add this figure to your vault or mark it Incoming to keep
+                  order details here.
+                </p>
+              )}
+                </>
               )}
               <SiteCredit className="pt-4" />
               </div>

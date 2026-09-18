@@ -4,9 +4,11 @@ Personal catalogue and collection tracker for **DC Multiverse McFarlane Toys** f
 
 ## Features
 
-- **Master catalogue** of DC McFarlane products (official names, scales, lines, package accessories)
+- **Master catalogue** of DC McFarlane products (official names, scales, lines, pack-accurate accessories)
+- **In the box** completeness checklist (present / catalog count) on DC first
+- **Incoming** status with retailer, order, ETA, and paste-only tracking
 - **Official product photos** from McFarlane product pages (full-size viewer)
-- **Personal collection overlay** — mark owned / wishlist, condition, purchase info, notes
+- **Personal collection overlay** — mark owned / wishlist / incoming, condition, purchase info, notes
 - **Add your own photos** per figure
 - **Cloud sync** — sign in (Google or X) to keep your vault across devices
 - Search, category filters, sort, grid/list views

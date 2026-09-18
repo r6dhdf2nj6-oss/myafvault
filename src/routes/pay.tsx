@@ -175,7 +175,8 @@ function PayPage() {
             </h1>
             <p className="text-sm text-muted leading-relaxed">
               One-time {VAULT_ACCESS.priceLabel} payment. No subscription.
-              Have an access code? Redeem it below to skip payment.
+              Lifetime includes current live vaults and these features as they
+              ship. Have an access code? Redeem it below to skip payment.
             </p>
           </div>
 

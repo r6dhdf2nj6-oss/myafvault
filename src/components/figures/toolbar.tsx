@@ -53,6 +53,10 @@ interface ToolbarProps {
 const SCOPE_OPTIONS: { value: ScopeFilter; label: string }[] = [
   { value: "owned", label: OWNERSHIP.filterOnly },
   { value: "wishlist", label: "Wishlist" },
+  { value: "incoming", label: "Incoming" },
+  { value: "complete", label: "Complete" },
+  { value: "incomplete", label: "Incomplete" },
+  { value: "sealed", label: "Sealed (MOC/MIB)" },
   { value: "custom", label: "My listings" },
   { value: "unowned", label: OWNERSHIP.filterNot },
 ];

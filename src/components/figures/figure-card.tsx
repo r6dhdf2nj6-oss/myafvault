@@ -7,12 +7,17 @@ import {
   formatRelease,
   platinumKind,
 } from "@/lib/product";
+import { firstAccessoryName } from "@/lib/accessories";
+import {
+  collectionStatus,
+  figureCompleteness,
+} from "@/lib/collection-status";
 
 import { ProductImage } from "@/components/figures/product-image";
 import { PlatinumMark } from "@/components/figures/platinum-mark";
 
 import { OWNERSHIP } from "@/lib/ownership-copy";
-import { Check, Square, SquareCheck } from "lucide-react";
+import { Check, Square, SquareCheck, Truck } from "lucide-react";
 
 interface FigureCardProps {
   product: CatalogProduct;
@@ -46,6 +51,51 @@ function VaultedMark({ className }: { className?: string }) {
       <span className="owned-badge inline-flex items-center rounded-full bg-primary px-2 py-0.5 text-[10px] font-semibold tracking-tight text-primary-fg">
         {OWNERSHIP.status}
       </span>
+    </span>
+  );
+}
+
+function IncomingMark({ className }: { className?: string }) {
+  return (
+    <span
+      className={cn(
+        "mt-0.5 inline-flex shrink-0 items-center gap-1.5",
+        className,
+      )}
+      title="Incoming"
+      aria-label="Incoming"
+    >
+      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-incoming text-incoming-fg">
+        <Truck className="h-3 w-3" aria-hidden />
+      </span>
+      <span className="incoming-badge inline-flex items-center rounded-full bg-incoming px-2 py-0.5 text-[10px] font-semibold tracking-tight text-incoming-fg">
+        Incoming
+      </span>
+    </span>
+  );
+}
+
+function CompletenessChip({
+  label,
+  unknown,
+  complete,
+}: {
+  label: string;
+  unknown: boolean;
+  complete: boolean;
+}) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold tabular-nums",
+        unknown
+          ? "bg-surface-3 text-subtle"
+          : complete
+            ? "bg-success/15 text-success"
+            : "bg-warning/15 text-warning",
+      )}
+    >
+      {label}
     </span>
   );
 }
@@ -84,10 +134,13 @@ export function FigureCard({
 }: FigureCardProps) {
 
   const src = displayImageFor(product, entry, systemCover);
-  const owned = entry?.owned;
-  const wishlist = entry?.wishlist;
-  const wishOnly = !!wishlist && !owned;
+  const status = collectionStatus(entry);
+  const owned = status === "owned";
+  const incomingOnly = status === "incoming";
+  const wishOnly = status === "wishlist";
   const platinum = platinumKind(product);
+  const completeness = figureCompleteness(product, entry);
+  const accessoryPreview = firstAccessoryName(product.accessories);
 
   return (
     <button
@@ -104,6 +157,8 @@ export function FigureCard({
         "figure-card group flex w-full flex-col overflow-hidden rounded-[var(--radius-xl)] border bg-surface text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg",
         owned && !selected
           ? "figure-card--owned border-primary shadow-[0_0_0_1px_var(--color-primary),0_8px_28px_rgba(196,30,58,0.22)]"
+          : incomingOnly && !selected
+            ? "figure-card--incoming border-incoming shadow-[0_0_0_1px_var(--color-incoming),0_8px_28px_rgba(214,144,42,0.22)]"
           : wishOnly && !selected
             ? "figure-card--wishlist border-wishlist shadow-[0_0_0_1px_var(--color-wishlist),0_8px_28px_rgba(43,111,255,0.22)]"
             : "border-border",
@@ -116,6 +171,7 @@ export function FigureCard({
         className={cn(
           "relative aspect-square w-full overflow-hidden bg-surface-2",
           owned && "ring-2 ring-inset ring-primary",
+          incomingOnly && "ring-2 ring-inset ring-incoming",
           wishOnly && "ring-2 ring-inset ring-wishlist",
           selected && "ring-2 ring-inset ring-primary",
         )}
@@ -195,12 +251,19 @@ export function FigureCard({
             aria-hidden
           />
         )}
+        {incomingOnly && (
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-1 bg-incoming"
+            aria-hidden
+          />
+        )}
       </div>
 
       <div
         className={cn(
           "flex flex-1 flex-col gap-1 p-3.5",
           owned && "bg-primary/[0.06]",
+          incomingOnly && "bg-incoming/[0.07]",
           wishOnly && "bg-wishlist/[0.07]",
           selected && "bg-primary/10",
         )}
@@ -210,6 +273,7 @@ export function FigureCard({
             {product.name}
           </h3>
           {owned && <VaultedMark />}
+          {incomingOnly && <IncomingMark />}
           {wishOnly && <WishlistMark />}
         </div>
         <p className="text-xs text-muted line-clamp-1">{product.character}</p>
@@ -221,11 +285,18 @@ export function FigureCard({
           </p>
         )}
 
-        {(product.accessories ?? []).length > 0 && (
-          <p className="mt-0.5 text-[11px] text-subtle line-clamp-2 leading-snug">
-            {product.accessories?.[0]}
-          </p>
-        )}
+        <div className="mt-0.5 flex flex-wrap items-center gap-1.5">
+          <CompletenessChip
+            label={completeness.label}
+            unknown={completeness.unknown}
+            complete={completeness.complete}
+          />
+          {accessoryPreview && (
+            <p className="min-w-0 flex-1 text-[11px] text-subtle line-clamp-1 leading-snug">
+              {accessoryPreview}
+            </p>
+          )}
+        </div>
       </div>
     </button>
   );
@@ -241,10 +312,13 @@ export function FigureListRow({
   onToggleSelect,
 }: FigureCardProps) {
   const src = displayImageFor(product, entry, systemCover);
-  const owned = entry?.owned;
-  const wishlist = entry?.wishlist;
-  const wishOnly = !!wishlist && !owned;
+  const status = collectionStatus(entry);
+  const owned = status === "owned";
+  const incomingOnly = status === "incoming";
+  const wishOnly = status === "wishlist";
   const platinum = platinumKind(product);
+  const completeness = figureCompleteness(product, entry);
+  const accessoryPreview = firstAccessoryName(product.accessories);
 
   return (
     <button
@@ -261,6 +335,8 @@ export function FigureListRow({
         "figure-list-row flex w-full items-center gap-3 rounded-[var(--radius-lg)] border bg-surface p-2.5 text-left transition-colors hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:gap-4 sm:p-3",
         owned
           ? "border-primary bg-primary/[0.06] shadow-[inset_3px_0_0_0_var(--color-primary)]"
+          : incomingOnly
+            ? "border-incoming bg-incoming/[0.07] shadow-[inset_3px_0_0_0_var(--color-incoming)]"
           : wishOnly
             ? "border-wishlist bg-wishlist/[0.07] shadow-[inset_3px_0_0_0_var(--color-wishlist)]"
             : "border-border hover:border-border-strong",
@@ -288,6 +364,7 @@ export function FigureListRow({
         className={cn(
           "relative shrink-0 overflow-hidden rounded-[var(--radius-sm)]",
           owned && "ring-2 ring-primary ring-offset-1 ring-offset-bg",
+          incomingOnly && "ring-2 ring-incoming ring-offset-1 ring-offset-bg",
           wishOnly && "ring-2 ring-wishlist ring-offset-1 ring-offset-bg",
         )}
       >
@@ -312,6 +389,7 @@ export function FigureListRow({
             {product.name}
           </h3>
           {owned && <VaultedMark className="mt-0.5" />}
+          {incomingOnly && <IncomingMark className="mt-0.5" />}
           {wishOnly && <WishlistMark className="mt-0.5" />}
         </div>
         <p className="text-xs text-muted truncate">
@@ -321,6 +399,11 @@ export function FigureListRow({
           <Badge variant="secondary" className="text-[10px]">
             {categoryLabel(product.category)}
           </Badge>
+          <CompletenessChip
+            label={completeness.label}
+            unknown={completeness.unknown}
+            complete={completeness.complete}
+          />
           {platinum && <PlatinumMark kind={platinum} size={16} />}
           {product.releaseYear && (
             <span className="text-xs text-subtle tabular-nums">
@@ -329,9 +412,9 @@ export function FigureListRow({
           )}
         </div>
       </div>
-      {product.accessories?.[0] && (
+      {accessoryPreview && (
         <p className="hidden max-w-[240px] text-xs text-subtle line-clamp-2 lg:block">
-          {product.accessories[0]}
+          {accessoryPreview}
         </p>
       )}
     </button>

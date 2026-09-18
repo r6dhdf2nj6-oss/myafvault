@@ -3,6 +3,7 @@ import { randomBytes } from "node:crypto";
 import { getSql } from "@/lib/db";
 import { authMiddleware } from "@/lib/auth/middleware";
 import { CATALOG_BY_ID } from "@/data/catalog";
+import { accessoryNames } from "@/lib/accessories";
 
 export type SharedFigureCard = {
   id: string;
@@ -81,7 +82,7 @@ function figureFromCatalog(
     line: p.line ?? "",
     scale: p.scale ?? "",
     description: p.description?.slice(0, 600) || undefined,
-    accessories: (p.accessories ?? []).slice(0, 12),
+    accessories: accessoryNames(p.accessories).slice(0, 12),
     productUrl: p.productUrl || undefined,
   };
 }
@@ -97,7 +98,7 @@ type ItemPublishInput = {
     line?: string;
     scale?: string;
     description?: string;
-    accessories?: string[];
+    accessories?: Array<string | { name?: string }>;
   };
 };
 
@@ -202,7 +203,7 @@ export const publishItemShare = createServerFn({ method: "POST" })
         line: c.line ?? "Custom",
         scale: c.scale ?? '7"',
         description: c.description?.slice(0, 600),
-        accessories: (c.accessories ?? []).slice(0, 12),
+        accessories: accessoryNames(c.accessories).slice(0, 12),
         isCustom: true,
       };
     }

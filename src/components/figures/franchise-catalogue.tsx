@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Layers, Loader2, MessagesSquare, PackageOpen } from "lucide-react";
+import { Layers, Loader2, MessagesSquare, PackageOpen, Truck } from "lucide-react";
 
 
 
@@ -41,6 +41,13 @@ import { BulkActionBar } from "@/components/figures/bulk-action-bar";
 import { CollectionsPanel } from "@/components/figures/collections-panel";
 import { WishlistShareDialog } from "@/components/figures/wishlist-share-dialog";
 import { VaultShareDialog } from "@/components/figures/vault-share-dialog";
+import { IncomingPanel } from "@/components/figures/incoming-panel";
+import {
+  collectionStatus,
+  figureCompleteness,
+  isSealedCondition,
+  searchAccessoryHaystack,
+} from "@/lib/collection-status";
 import { Button } from "@/components/ui/button";
 import { useSystemImages } from "@/lib/system-image-store";
 import { useCatalogOverrides } from "@/lib/catalog-override-store";
@@ -133,6 +140,12 @@ export function FranchiseCatalogue({
   const setSection = useCatalogue((s) => s.setSection);
   const markOwned = useCatalogue((s) => s.markOwned);
   const toggleWishlist = useCatalogue((s) => s.toggleWishlist);
+  const setCollectionStatus = useCatalogue((s) => s.setCollectionStatus);
+  const markArrived = useCatalogue((s) => s.markArrived);
+  const setAccessoryCheck = useCatalogue((s) => s.setAccessoryCheck);
+  const markAllAccessoriesPresent = useCatalogue(
+    (s) => s.markAllAccessoriesPresent,
+  );
   const bulkMarkOwned = useCatalogue((s) => s.bulkMarkOwned);
   const bulkSetWishlist = useCatalogue((s) => s.bulkSetWishlist);
   const updateEntry = useCatalogue((s) => s.updateEntry);
@@ -162,7 +175,11 @@ export function FranchiseCatalogue({
   useEffect(() => {
     if (authEnabled && authPending) return;
     let cancelled = false;
-    const userId = signedIn ? user?.id ?? null : null;
+    const userId = authEnabled
+      ? signedIn
+        ? user?.id ?? null
+        : null
+      : user?.id ?? "dev-user";
     void hydrateCatalogue(userId).then(() => {
       if (!cancelled) setReady(true);
     });
@@ -300,9 +317,20 @@ export function FranchiseCatalogue({
       if (scopeFilters.length > 0) {
         const matchesScope = scopeFilters.some((scope) => {
           if (scope === "owned") return !!entry?.owned;
-          if (scope === "wishlist") return !!entry?.wishlist;
+          if (scope === "wishlist") return !!entry?.wishlist && !entry?.owned;
+          if (scope === "incoming")
+            return collectionStatus(entry) === "incoming";
           if (scope === "unowned") return !entry?.owned;
           if (scope === "custom") return !!entry?.isCustom;
+          if (scope === "complete") {
+            const c = figureCompleteness(p, entry);
+            return !c.unknown && c.complete;
+          }
+          if (scope === "incomplete") {
+            const c = figureCompleteness(p, entry);
+            return !c.unknown && !c.complete;
+          }
+          if (scope === "sealed") return isSealedCondition(entry);
           return false;
         });
         if (!matchesScope) return false;
@@ -317,7 +345,7 @@ export function FranchiseCatalogue({
         p.sku,
         p.description,
         p.scale,
-        ...(p.accessories ?? []),
+        searchAccessoryHaystack(p),
         ...(p.features ?? []),
         entry?.notes ?? "",
       ]
@@ -546,6 +574,20 @@ export function FranchiseCatalogue({
               <Layers className="h-4 w-4 shrink-0" />
               Collections
             </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={section === "incoming"}
+              onClick={() => setSection("incoming")}
+              className={
+                section === "incoming"
+                  ? "flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 rounded-[var(--radius-sm)] bg-incoming px-2.5 py-2 text-sm font-medium text-incoming-fg"
+                  : "flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 rounded-[var(--radius-sm)] px-2.5 py-2 text-sm font-medium text-muted hover:text-fg"
+              }
+            >
+              <Truck className="h-4 w-4 shrink-0" />
+              Incoming
+            </button>
             <Link
               to="/forum"
               className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 rounded-[var(--radius-sm)] px-2.5 py-2 text-sm font-medium text-muted hover:text-fg"
@@ -557,12 +599,31 @@ export function FranchiseCatalogue({
 
           {section === "collections" ? (
             <CollectionsPanel />
+          ) : section === "incoming" ? (
+            <IncomingPanel
+              items={allProducts
+                .filter((p) => collectionStatus(entries[p.id]) === "incoming")
+                .map((p) => ({
+                  product: p,
+                  entry: entries[p.id]!,
+                  systemCover: systemOverrides[p.id] ?? null,
+                }))}
+              onOpen={setSelectedId}
+              onUpdateIncoming={(productId, details) =>
+                updateEntry(productId, {
+                  incoming: details,
+                  status: "incoming",
+                })
+              }
+              onMarkArrived={(productId) => markArrived(productId)}
+            />
           ) : (
             <>
           <StatsBar
             catalogTotal={masterStats.total}
             owned={ready ? collectionStats.owned : 0}
             wishlist={ready ? collectionStats.wishlist : 0}
+            incoming={ready ? collectionStats.incoming : 0}
             withPhotos={ready ? collectionStats.withPhotos : 0}
             spent={ready ? collectionStats.spent : 0}
           />
@@ -801,6 +862,18 @@ export function FranchiseCatalogue({
         }}
         onToggleWishlist={() => {
           if (selectedId) toggleWishlist(selectedId);
+        }}
+        onSetStatus={(status) => {
+          if (selectedId) setCollectionStatus(selectedId, status);
+        }}
+        onMarkArrived={() => {
+          if (selectedId) markArrived(selectedId);
+        }}
+        onToggleAccessory={(accessoryId, present) => {
+          if (selectedId) setAccessoryCheck(selectedId, accessoryId, present);
+        }}
+        onMarkAllPresent={(accessoryIds) => {
+          if (selectedId) markAllAccessoriesPresent(selectedId, accessoryIds);
         }}
         onUpdate={(patch) => {
           if (selectedId) updateEntry(selectedId, patch);

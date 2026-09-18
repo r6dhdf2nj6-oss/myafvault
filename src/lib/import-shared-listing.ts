@@ -1,6 +1,7 @@
 import type { ProductCategory, UserEntry } from "@/lib/types";
 import type { SharedItemPayload } from "@/lib/public-share";
 import { mapLegacyCategory } from "@/lib/product";
+import { normalizeAccessories } from "@/lib/accessories";
 
 function asCategory(value: string | undefined): ProductCategory {
   const raw = value?.trim();
@@ -15,8 +16,10 @@ export function listingFromSharedItem(item: SharedItemPayload): UserEntry {
   const imageUrl = item.imageUrl ?? null;
   const photos =
     imageUrl && imageUrl.startsWith("data:") ? [imageUrl] : [];
+  const accessories = normalizeAccessories(item.accessories, { id });
   return {
     productId: id,
+    status: "owned",
     owned: true,
     wishlist: false,
     condition: "mint",
@@ -34,7 +37,8 @@ export function listingFromSharedItem(item: SharedItemPayload): UserEntry {
       line: item.line || "Custom",
       scale: item.scale || '7"',
       description: item.description ?? "",
-      accessories: item.accessories ?? [],
+      accessories,
+      accessoriesUnknown: accessories.length === 0,
       features: item.accessories ?? [],
       imageUrl,
       gallery: imageUrl ? [imageUrl] : [],

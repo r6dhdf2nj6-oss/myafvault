@@ -18,6 +18,7 @@ import {
   LINES_BY_FRANCHISE,
 } from "@/lib/types";
 import type { CatalogOverridePatch } from "@/lib/catalog-overrides";
+import { accessoryNames } from "@/lib/accessories";
 
 const MONTHS = [
   { value: "none", label: "Unknown" },
@@ -47,7 +48,7 @@ function formFromProduct(product: CatalogProduct) {
     releaseMonth: product.releaseMonth ? String(product.releaseMonth) : "none",
 
     description: product.description ?? "",
-    accessories: (product.accessories ?? []).join("\n"),
+    accessories: accessoryNames(product.accessories).join("\n"),
     hidden: false,
   };
 }

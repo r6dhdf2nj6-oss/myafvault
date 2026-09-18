@@ -5,6 +5,7 @@ import { authMiddleware } from "@/lib/auth/middleware";
 import { isAdminEmail } from "@/lib/admin";
 import type { CatalogProduct, ProductCategory } from "@/lib/types";
 import { FRANCHISES } from "@/franchises";
+import { normalizeAccessories } from "@/lib/accessories";
 
 const CATEGORIES: ProductCategory[] = [
   "7-inch",
@@ -145,7 +146,15 @@ export function applyCatalogOverride(
     releaseMonth:
       p.releaseMonth === undefined ? product.releaseMonth : p.releaseMonth,
     description: p.description ?? product.description,
-    accessories: p.accessories ?? product.accessories,
+    accessories: p.accessories
+      ? normalizeAccessories(p.accessories, {
+          id: product.id,
+          sku: p.sku ?? product.sku,
+        })
+      : product.accessories,
+    accessoriesUnknown: p.accessories
+      ? p.accessories.length === 0
+      : product.accessoriesUnknown,
   };
 }
 

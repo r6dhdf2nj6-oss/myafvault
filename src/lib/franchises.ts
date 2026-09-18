@@ -197,7 +197,7 @@ export const VAULT_ACCESS = {
   billing: "one-time" as const,
   productName: "MyAFVault Lifetime Access",
   description:
-    "One-time unlock for the DC, Star Wars, GI Joe, and LEGO vaults — catalogue, In My Vault, wishlist, photos, collections, collector board, and cloud sync.",
+    "One-time unlock for the live DC, Star Wars, GI Joe, and LEGO vaults. Lifetime includes current live vaults and these features as they ship — no subscription.",
   /** Checkout is live when STRIPE_SECRET_KEY is set on the server */
   stripeReady: true,
 } as const;

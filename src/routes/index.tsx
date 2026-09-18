@@ -5,18 +5,13 @@ import {
   ArrowRight,
   Camera,
   Check,
-  Cloud,
-  Heart,
   Layers,
   Lock,
-  MessagesSquare,
   Package,
-  Search,
   Share2,
-  Shield,
-  Smartphone,
   Sparkles,
   Star,
+  Truck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -48,7 +43,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "MyAFVault is the collector vault for DC McFarlane, Star Wars, GI Joe, LEGO, and more franchises coming soon — catalogues, In My Vault, wishlist, photos, collections, and a collector board. Lifetime access $3.99.",
+          "Pack-accurate accessories. Chase labels. Your shelf. Not a spreadsheet and not a barcode dump. 4 live vaults, $3.99 once, no subscription.",
 
       },
     ],
@@ -57,60 +52,39 @@ export const Route = createFileRoute("/")({
 
 const FEATURES = [
   {
-    icon: Search,
-    title: "Live vaults for every line",
-    body: "DC McFarlane, Star Wars, GI Joe, and LEGO are live — official listings, pack shots, and accessories. Marvel, Fallout, Disney, Pixar, and more franchises are coming soon.",
-  },
-  {
     icon: Package,
-    title: "In My Vault",
-    body: "Mark what you own, set condition and price, add notes, and bulk-update a whole wave. See the collection grow without a spreadsheet.",
-  },
-  {
-    icon: Heart,
-    title: "Wishlist that stays separate",
-    body: "Park grails and gaps on a blue Wishlist. Share it. Keep it out of your owned count until they land on the shelf.",
-  },
-  {
-    icon: Star,
-    title: "Platinum & Red Platinum seals",
-
-    body: "Chase variants are labeled so you can tell a standard Platinum from a Red Platinum at a glance.",
-  },
-  {
-    icon: Camera,
-    title: "Your photos, your cover",
-    body: "Upload loose shots and shelf photos. Set the picture you see without changing what anyone else sees.",
+    title: "In the box",
+    body: "Pack-accurate accessory checklists on the figure dossier. Tick what is present, see 7/9 on the card, and never invent parts for an empty SKU.",
   },
   {
     icon: Layers,
-    title: "Displays & collections",
-    body: "Group a Justice League shelf, a Kenner vintage run, or a Joe Classified display. Custom listings stay private unless you share them.",
+    title: "Finish the wave",
+    body: "Filter complete, incomplete, or sealed (MOC/MIB). Bulk-mark a wave In My Vault and see what is still missing from the pack.",
+  },
+  {
+    icon: Camera,
+    title: "Shareable shelf",
+    body: "Your photos, collections, and share links — the shelf, not a barcode dump. Custom listings stay private unless you share them.",
+  },
+  {
+    icon: Truck,
+    title: "Incoming",
+    body: "A third status besides owned and wishlist. Track retailer, order number, ETA, and a paste-only tracking link until it arrives on the shelf.",
   },
   {
     icon: Share2,
-    title: "Share the shelf",
-    body: "Send a link to a figure, a collection, your wishlist, or your whole vault — no login required for the person you send it to.",
+    title: "Insurance-ready export",
+    body: "A collector-ready export of what you own, as that feature ships. No live market values — your notes and paid prices, not an eBay feed.",
   },
   {
-    icon: MessagesSquare,
-    title: "Collector board",
-    body: "Opt in to post photos, ask questions, like other collectors’ shots, and talk figures without mixing it into your private vault.",
+    icon: Star,
+    title: "Chase labeled",
+    body: "Platinum and Red Platinum seals so chase variants read at a glance on the card and in the dossier.",
   },
   {
-    icon: Smartphone,
-    title: "App on every device",
-    body: "Install to the Home Screen on iPhone, Android, Windows, or Mac. Cloud sync keeps ownership, notes, and photos with the account.",
-  },
-  {
-    icon: Cloud,
-    title: "Cloud sync",
-    body: "Sign in once. Notes, photos, and ownership follow you across phone, tablet, and desktop.",
-  },
-  {
-    icon: Shield,
-    title: "Locked down if you want",
-    body: "Email sign-in, optional 2FA, and a password-protected vault reset. Your collection is yours.",
+    icon: Lock,
+    title: "Pay once",
+    body: "$3.99 lifetime. No subscription. Lifetime includes current live vaults and these features as they ship.",
   },
 ] as const;
 
@@ -244,18 +218,20 @@ function LandingPage() {
             <div className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)] lg:items-center">
               <div className="space-y-6">
                 <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-semibold tracking-tight leading-[1.12] text-balance">
-                  One home for every line you collect.
+                  The index for the line.
                   <span className="block text-muted font-medium mt-2 text-2xl sm:text-3xl lg:text-[2rem]">
-                    DC McFarlane. Star Wars. GI Joe. LEGO. More coming.
-
+                    Pack-accurate accessories. Chase labels. Your shelf. Not a
+                    spreadsheet and not a barcode dump.
                   </span>
                 </h1>
                 <p className="text-base sm:text-lg text-muted max-w-xl leading-relaxed text-pretty">
-                  Live vaults for DC McFarlane, Star Wars, GI Joe, and LEGO —
-                  official figure pics, accessory lists, In My Vault,
-                  wishlist, your photos, collections, and a collector board.
-                  More franchises are on the way.
-
+                  Four live vaults — DC McFarlane, Star Wars, GI Joe, and LEGO.
+                  Marvel, Fallout, Disney, and Pixar stay coming soon. No live
+                  market values.
+                </p>
+                <p className="text-sm font-medium text-fg">
+                  {liveVaultCount} live vaults · {stats.total.toLocaleString()}{" "}
+                  listings · {VAULT_ACCESS.priceLabel} once · no subscription
                 </p>
 
 
@@ -290,8 +266,9 @@ function LandingPage() {
                 </div>
                 {!signedIn && (
                   <p className="text-xs text-subtle">
-                    Account required. Lifetime cloud access is {VAULT_ACCESS.priceLabel}{" "}
-                    one-time — catalogue, vault, board, and install included.
+                    Account required. Lifetime includes current live vaults and
+                    these features as they ship. {VAULT_ACCESS.priceLabel} once
+                    — no subscription.
 
                   </p>
                 )}
@@ -533,12 +510,10 @@ function LandingPage() {
               <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
                 Lifetime vault access
               </h2>
-              <p className="text-muted mt-2 text-sm sm:text-base">
-                Sign up, then pay once with Stripe. Unlock the DC, Star Wars,
-                GI Joe, and LEGO catalogues, In My Vault, wishlist, photos,
-                collections, collector board, and Home Screen install.
-
-              </p>
+                <p className="text-muted mt-2 text-sm sm:text-base">
+                  Sign up, then pay once with Stripe. Lifetime includes current
+                  live vaults and these features as they ship.
+                </p>
             </div>
 
             <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
@@ -557,13 +532,12 @@ function LandingPage() {
                 </p>
                 <ul className="mt-5 space-y-2.5">
                   {[
-                    "DC, Star Wars, GI Joe, and LEGO catalogues",
-                    "In My Vault, Wishlist, notes, and price paid",
-                    "Your photos plus official pack shots",
-                    "Collections, custom listings, and share links",
-                    "Collector board — photos, questions, likes",
-                    "Install as an app on phone or computer",
-                    "Cloud sync and optional two-factor security",
+                    "In the box checklists and chase labels",
+                    "Finish the wave — complete, incomplete, sealed",
+                    "Shareable shelf photos and collections",
+                    "Incoming orders until they hit the vault",
+                    "Insurance-ready export as it ships",
+                    "Current live vaults: DC, Star Wars, GI Joe, LEGO",
                     "No subscription — pay once",
                   ].map((item) => (
                     <li
@@ -592,7 +566,8 @@ function LandingPage() {
                 </div>
                 <p className="mt-3 text-xs text-subtle flex items-start gap-1.5">
                   <Sparkles className="h-3.5 w-3.5 shrink-0 mt-0.5" />
-                  Secure Stripe Checkout. Pay once — no subscription.
+                  Lifetime includes current live vaults and these features as
+                  they ship. Secure Stripe Checkout. No subscription.
                 </p>
               </div>
 

@@ -1,10 +1,14 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import type {
+  AccessoryCheck,
+  CollectionStatus,
+  IncomingDetails,
   ProductCategory,
   UserCollection,
   UserEntry,
 } from "@/lib/types";
+import { emptyIncoming, statusFlags } from "@/lib/collection-status";
 
 export type SortKey =
   | "name-asc"
@@ -15,10 +19,18 @@ export type SortKey =
   | "owned-first";
 
 export type ViewMode = "grid" | "list";
-export type ScopeFilter = "owned" | "wishlist" | "unowned" | "custom";
+export type ScopeFilter =
+  | "owned"
+  | "wishlist"
+  | "unowned"
+  | "custom"
+  | "incoming"
+  | "complete"
+  | "incomplete"
+  | "sealed";
 
 
-export type AppSection = "catalogue" | "collections";
+export type AppSection = "catalogue" | "collections" | "incoming";
 
 interface CatalogueState {
   entries: Record<string, UserEntry>;
@@ -45,6 +57,22 @@ interface CatalogueState {
 
   markOwned: (productId: string, owned?: boolean) => void;
   toggleWishlist: (productId: string) => void;
+  setCollectionStatus: (productId: string, status: CollectionStatus) => void;
+  markIncoming: (
+    productId: string,
+    details?: Partial<IncomingDetails>,
+  ) => void;
+  markArrived: (productId: string) => void;
+  setAccessoryCheck: (
+    productId: string,
+    accessoryId: string,
+    present: boolean,
+    quantity?: number,
+  ) => void;
+  markAllAccessoriesPresent: (
+    productId: string,
+    accessoryIds: string[],
+  ) => void;
   bulkMarkOwned: (productIds: string[], owned: boolean) => void;
   bulkSetWishlist: (productIds: string[], wishlist: boolean) => void;
   updateEntry: (productId: string, patch: Partial<UserEntry>) => void;
@@ -77,8 +105,10 @@ function emptyEntry(productId: string): UserEntry {
   const now = new Date().toISOString();
   return {
     productId,
+    status: "none",
     owned: false,
     wishlist: false,
+    accessoryChecks: {},
     condition: null,
     purchasePrice: null,
     estimatedValue: null,
@@ -180,12 +210,18 @@ export const useCatalogue = create<CatalogueState>()(
 
       markOwned: (productId, owned = true) => {
         const cur = get().entries[productId] ?? emptyEntry(productId);
+        const status: CollectionStatus = owned
+          ? "owned"
+          : cur.status === "incoming"
+            ? "incoming"
+            : cur.wishlist
+              ? "wishlist"
+              : "none";
         set({
           entries: {
             ...get().entries,
             [productId]: touch(cur, {
-              owned,
-              wishlist: owned ? false : cur.wishlist,
+              ...statusFlags(status),
             }),
           },
         });
@@ -193,13 +229,104 @@ export const useCatalogue = create<CatalogueState>()(
 
       toggleWishlist: (productId) => {
         const cur = get().entries[productId] ?? emptyEntry(productId);
+        const nextOn = !cur.wishlist;
+        set({
+          entries: {
+            ...get().entries,
+            [productId]: touch(
+              cur,
+              nextOn
+                ? statusFlags("wishlist")
+                : statusFlags(cur.owned ? "owned" : "none"),
+            ),
+          },
+        });
+      },
+
+      setCollectionStatus: (productId, status) => {
+        const cur = get().entries[productId] ?? emptyEntry(productId);
+        const incoming =
+          status === "incoming"
+            ? (cur.incoming ?? emptyIncoming())
+            : cur.incoming;
         set({
           entries: {
             ...get().entries,
             [productId]: touch(cur, {
-              wishlist: !cur.wishlist,
-              owned: !cur.wishlist ? false : cur.owned,
+              ...statusFlags(status),
+              incoming,
             }),
+          },
+        });
+      },
+
+      markIncoming: (productId, details) => {
+        const cur = get().entries[productId] ?? emptyEntry(productId);
+        set({
+          entries: {
+            ...get().entries,
+            [productId]: touch(cur, {
+              ...statusFlags("incoming"),
+              incoming: {
+                ...(cur.incoming ?? emptyIncoming()),
+                ...details,
+              },
+            }),
+          },
+        });
+      },
+
+      markArrived: (productId) => {
+        const cur = get().entries[productId] ?? emptyEntry(productId);
+        set({
+          entries: {
+            ...get().entries,
+            [productId]: touch(cur, {
+              ...statusFlags("owned"),
+              incoming: {
+                ...(cur.incoming ?? emptyIncoming()),
+                shipState: "arrived",
+              },
+            }),
+          },
+        });
+      },
+
+      setAccessoryCheck: (productId, accessoryId, present, quantity = 1) => {
+        const cur = get().entries[productId] ?? emptyEntry(productId);
+        const next: AccessoryCheck = {
+          accessoryId,
+          present,
+          quantity: Math.max(1, quantity),
+        };
+        set({
+          entries: {
+            ...get().entries,
+            [productId]: touch(cur, {
+              accessoryChecks: {
+                ...(cur.accessoryChecks ?? {}),
+                [accessoryId]: next,
+              },
+            }),
+          },
+        });
+      },
+
+      markAllAccessoriesPresent: (productId, accessoryIds) => {
+        if (accessoryIds.length === 0) return;
+        const cur = get().entries[productId] ?? emptyEntry(productId);
+        const accessoryChecks = { ...(cur.accessoryChecks ?? {}) };
+        for (const accessoryId of accessoryIds) {
+          accessoryChecks[accessoryId] = {
+            accessoryId,
+            present: true,
+            quantity: accessoryChecks[accessoryId]?.quantity ?? 1,
+          };
+        }
+        set({
+          entries: {
+            ...get().entries,
+            [productId]: touch(cur, { accessoryChecks }),
           },
         });
       },
@@ -212,8 +339,7 @@ export const useCatalogue = create<CatalogueState>()(
           const cur = next[id] ?? emptyEntry(id);
           next[id] = {
             ...cur,
-            owned,
-            wishlist: owned ? false : cur.wishlist,
+            ...statusFlags(owned ? "owned" : cur.wishlist ? "wishlist" : "none"),
             updatedAt: now,
           };
         }
@@ -228,8 +354,9 @@ export const useCatalogue = create<CatalogueState>()(
           const cur = next[id] ?? emptyEntry(id);
           next[id] = {
             ...cur,
-            wishlist,
-            owned: wishlist ? false : cur.owned,
+            ...statusFlags(
+              wishlist ? "wishlist" : cur.owned ? "owned" : "none",
+            ),
             updatedAt: now,
           };
         }
@@ -238,10 +365,18 @@ export const useCatalogue = create<CatalogueState>()(
 
       updateEntry: (productId, patch) => {
         const cur = get().entries[productId] ?? emptyEntry(productId);
+        let next = patch;
+        if (patch.status) {
+          next = { ...patch, ...statusFlags(patch.status) };
+        } else if (patch.owned === true) {
+          next = { ...patch, ...statusFlags("owned") };
+        } else if (patch.wishlist === true) {
+          next = { ...patch, ...statusFlags("wishlist") };
+        }
         set({
           entries: {
             ...get().entries,
-            [productId]: touch(cur, patch),
+            [productId]: touch(cur, next),
           },
         });
       },
@@ -257,7 +392,7 @@ export const useCatalogue = create<CatalogueState>()(
               personalPhotos: photos,
               usePersonalPhoto: true,
               personalCoverIndex: newIndex,
-              owned: true,
+              ...statusFlags("owned"),
             }),
           },
         });
@@ -471,7 +606,10 @@ export function unloadCatalogue(): void {
 export function selectCollectionStats(entries: Record<string, UserEntry>) {
   const list = Object.values(entries);
   const owned = list.filter((e) => e.owned);
-  const wishlist = list.filter((e) => e.wishlist);
+  const wishlist = list.filter((e) => e.wishlist && !e.owned);
+  const incoming = list.filter(
+    (e) => e.status === "incoming" && !e.owned,
+  );
   const spent = owned.reduce((s, e) => s + (e.purchasePrice ?? 0), 0);
   const estValue = owned.reduce((s, e) => s + (e.estimatedValue ?? 0), 0);
   const mint = owned.filter(
@@ -481,6 +619,7 @@ export function selectCollectionStats(entries: Record<string, UserEntry>) {
   return {
     owned: owned.length,
     wishlist: wishlist.length,
+    incoming: incoming.length,
     spent,
     estValue,
     mint,

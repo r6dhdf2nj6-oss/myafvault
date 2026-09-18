@@ -1,10 +1,18 @@
-import type { CatalogProduct, FranchiseId } from "@/types";
+import type { AccessoryInput, CatalogProduct, FranchiseId } from "@/types";
+import { normalizeAccessories } from "@/lib/accessories";
 
 const MASTER_STAMP = "2024-01-01T00:00:00.000Z";
 
+export type RawCatalogProduct = Omit<
+  Partial<CatalogProduct>,
+  "accessories"
+> &
+  Pick<CatalogProduct, "id" | "name" | "franchise" | "category"> & {
+    accessories?: AccessoryInput[];
+  };
+
 export function normalizeCatalogProduct(
-  raw: Partial<CatalogProduct> &
-    Pick<CatalogProduct, "id" | "name" | "franchise" | "category">,
+  raw: RawCatalogProduct,
 ): CatalogProduct {
   const releaseYear =
     typeof raw.releaseYear === "number" && raw.releaseYear > 0
@@ -44,7 +52,14 @@ export function normalizeCatalogProduct(
     createdAt: raw.createdAt ?? MASTER_STAMP,
     updatedAt: raw.updatedAt ?? MASTER_STAMP,
     sku: raw.sku ?? "",
-    accessories: raw.accessories ?? [],
+    accessories: normalizeAccessories(raw.accessories, {
+      id: raw.id,
+      sku: raw.sku,
+    }),
+    accessoriesUnknown:
+      raw.accessoriesUnknown === true ||
+      !Array.isArray(raw.accessories) ||
+      raw.accessories.length === 0,
     gallery: raw.gallery ?? [],
     productUrl: raw.productUrl ?? "",
     source: raw.source ?? "",
