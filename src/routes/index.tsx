@@ -43,7 +43,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Pack-accurate accessories. Chase labels. Your shelf. Not a spreadsheet and not a barcode dump. 4 live vaults, $3.99 once, no subscription.",
+          `Pack-accurate accessories. Chase labels. Your shelf. Not a spreadsheet and not a barcode dump. 4 live vaults, ${VAULT_ACCESS.priceLabel} once, no subscription.`,
 
       },
     ],
@@ -84,7 +84,7 @@ const FEATURES = [
   {
     icon: Lock,
     title: "Pay once",
-    body: "$3.99 lifetime. No subscription. Lifetime includes current live vaults and these features as they ship.",
+    body: `${VAULT_ACCESS.priceLabel} lifetime. No subscription. Lifetime includes current live vaults and these features as they ship.`,
   },
 ] as const;
 

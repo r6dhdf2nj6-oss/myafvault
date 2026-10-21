@@ -191,8 +191,8 @@ export function getVaultByCatalogId(
 
 /** Stripe product meta — wire Checkout Session later. */
 export const VAULT_ACCESS = {
-  priceUsd: 3.99,
-  priceLabel: "$3.99",
+  priceUsd: 9.99,
+  priceLabel: "$9.99",
 
   billing: "one-time" as const,
   productName: "MyAFVault Lifetime Access",
