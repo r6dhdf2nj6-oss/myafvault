@@ -1,4 +1,4 @@
-export type FranchiseId = "dc" | "star-wars" | "gi-joe" | "lego";
+export type FranchiseId = "dc" | "star-wars" | "gi-joe" | "lego" | "fallout";
 
 export type Condition =
   | "mint"

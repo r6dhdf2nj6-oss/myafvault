@@ -79,6 +79,7 @@ export function isFranchiseId(value: string): value is FranchiseId {
     value === "dc" ||
     value === "star-wars" ||
     value === "gi-joe" ||
-    value === "lego"
+    value === "lego" ||
+    value === "fallout"
   );
 }

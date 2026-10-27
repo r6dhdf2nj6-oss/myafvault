@@ -18,7 +18,7 @@ export const Route = createFileRoute("/vaults")({
       {
         name: "description",
         content:
-          "Open your DC McFarlane, Star Wars, GI Joe, or LEGO collection vault. More franchises coming soon.",
+          "Open your DC McFarlane, Star Wars, GI Joe, LEGO, or Fallout collection vault. More franchises coming soon.",
       },
     ],
   }),
@@ -77,8 +77,8 @@ function VaultPickerPage() {
             Which vault do you want to open?
           </h1>
           <p className="text-muted mt-2 text-sm sm:text-base leading-relaxed">
-            DC McFarlane, Star Wars, GI Joe, and LEGO are live.
-            Marvel, Fallout, Disney, Pixar, and more lines are on the way.
+            DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout are live.
+            Marvel, Disney, Pixar, and more lines are on the way.
           </p>
         </div>
 

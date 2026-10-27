@@ -11,12 +11,14 @@ import { DC_CATEGORIES } from "@/franchises/dc/categories";
 import { STAR_WARS_CATEGORIES } from "@/franchises/star-wars/categories";
 import { GI_JOE_CATEGORIES } from "@/franchises/gi-joe/categories";
 import { LEGO_CATEGORIES } from "@/franchises/lego/categories";
+import { FALLOUT_CATEGORIES } from "@/franchises/fallout/categories";
 
 const FRANCHISE_CATEGORY_MAP: Record<FranchiseId, readonly string[]> = {
   dc: DC_CATEGORIES,
   "star-wars": STAR_WARS_CATEGORIES,
   "gi-joe": GI_JOE_CATEGORIES,
   lego: LEGO_CATEGORIES,
+  fallout: FALLOUT_CATEGORIES,
 };
 
 export type FigureCondition =
@@ -175,6 +177,16 @@ export const LINES_BY_FRANCHISE: Record<FranchiseId, string[]> = {
     "Super Mario",
     "Minecraft",
     "Other Licensed",
+    "Custom",
+  ],
+  fallout: [
+    "Gaming Edition",
+    "TV Series",
+    "Deluxe",
+    "McFarlane Elite Edition",
+    "Posed Figure",
+    "Multipack",
+    "Mini Figures",
     "Custom",
   ],
 };

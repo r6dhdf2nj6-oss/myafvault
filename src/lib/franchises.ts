@@ -1,6 +1,6 @@
 /**
  * Multi-franchise vault registry.
- * DC, Star Wars, GI Joe, and LEGO are live. Marvel / Fallout / Disney / Pixar
+ * DC, Star Wars, GI Joe, LEGO, and Fallout are live. Marvel / Disney / Pixar
  * stay coming-soon (no invented catalogs).
  */
 
@@ -12,7 +12,8 @@ export type FranchiseVaultPath =
   | "/vault/dc-mcfarlane"
   | "/vault/star-wars"
   | "/vault/gi-joe"
-  | "/vault/lego";
+  | "/vault/lego"
+  | "/vault/fallout";
 
 export type FranchiseVault = {
   id: string;
@@ -134,6 +135,24 @@ export const FRANCHISES: FranchiseVault[] = [
     scopeNote: "Licensed themes, 2000–today first seed",
   },
   {
+    id: "fallout",
+    catalogId: "fallout",
+    name: "McFarlane Fallout",
+    shortLabel: "Fallout",
+    tagline:
+      "McFarlane's Fallout line — 7\" Gaming Edition and Deluxe figures, the TV series, Elite Edition, posed Vault Boy, and Series 1 minis.",
+    status: "live",
+    path: "/vault/fallout",
+    highlights: [
+      "Gaming Edition",
+      "TV Series",
+      "Elite Edition",
+      "Posed Figures",
+      "Mini Figures",
+    ],
+    scopeNote: "12 McFarlane listings",
+  },
+  {
     id: "marvel",
     name: "Marvel",
     shortLabel: "Marvel",
@@ -141,16 +160,6 @@ export const FRANCHISES: FranchiseVault[] = [
       "Legends, Mega, and multi-packs — planned vault for Marvel-scale collecting.",
     status: "coming-soon",
     highlights: ["Legends", "Mega", "Multipacks"],
-    scopeNote: "Coming soon",
-  },
-  {
-    id: "fallout",
-    name: "Fallout",
-    shortLabel: "Fallout",
-    tagline:
-      "Wasteland figures and mega-scale builds in one vault when this franchise goes live.",
-    status: "coming-soon",
-    highlights: ["Figures", "Mega", "Sets"],
     scopeNote: "Coming soon",
   },
   {
@@ -197,7 +206,7 @@ export const VAULT_ACCESS = {
   billing: "one-time" as const,
   productName: "MyAFVault Lifetime Access",
   description:
-    "One-time unlock for the live DC, Star Wars, GI Joe, and LEGO vaults. Lifetime includes current live vaults and these features as they ship — no subscription.",
+    "One-time unlock for the live DC, Star Wars, GI Joe, LEGO, and Fallout vaults. Lifetime includes current live vaults and these features as they ship — no subscription.",
   /** Checkout is live when STRIPE_SECRET_KEY is set on the server */
   stripeReady: true,
 } as const;

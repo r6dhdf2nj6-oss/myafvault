@@ -2,7 +2,7 @@
 
 **Positioning:** The index for the line — pack-accurate accessories, chase labels, shelf photos. Not a barcode dump.
 
-Price is **$9.99 lifetime**. No subscription. Lifetime includes current live vaults (DC McFarlane, Star Wars, GI Joe, LEGO) and listed features as they ship. Marvel, Fallout, Disney, and Pixar stay coming-soon until a real vault ships. Do not claim live market values.
+Price is **$9.99 lifetime**. No subscription. Lifetime includes current live vaults (DC McFarlane, Star Wars, GI Joe, LEGO, Fallout) and listed features as they ship. Marvel, Disney, and Pixar stay coming-soon until a real vault ships. Do not claim live market values.
 
 ## Principles
 
@@ -56,7 +56,7 @@ Stable accessory ids: `acc-{sku\|productId}-{slug}`. String accessories normaliz
 ## Marketing copy
 
 - **Hero sub:** Pack-accurate accessories. Chase labels. Your shelf. Not a spreadsheet and not a barcode dump.
-- **Proof line:** 4 live vaults · {listings} · $9.99 once · no subscription
+- **Proof line:** 5 live vaults · {listings} · $9.99 once · no subscription
 - **Feature order:** In the box → Finish the wave → Shareable shelf → Incoming → Insurance-ready export → Chase labeled → Pay once
 - **Pricing footnote:** Lifetime includes current live vaults and these features as they ship.
 

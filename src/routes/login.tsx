@@ -189,8 +189,8 @@ function LoginPage() {
               </h1>
               <p className="text-sm text-muted leading-relaxed max-w-sm mx-auto">
                 {mode === "signin"
-                  ? "Sign in to sync In My Vault, wishlist, photos, and collections across DC McFarlane, Star Wars, GI Joe, and LEGO."
-                  : `Create an account, then unlock DC McFarlane, Star Wars, GI Joe, LEGO, plus Marvel, Fallout, Disney, Pixar, and more coming soon — ${VAULT_ACCESS.priceLabel} one-time, or skip payment with an access code.`}
+                  ? "Sign in to sync In My Vault, wishlist, photos, and collections across DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout."
+                  : `Create an account, then unlock DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout, plus Marvel, Disney, Pixar, and more coming soon — ${VAULT_ACCESS.priceLabel} one-time, or skip payment with an access code.`}
               </p>
             </div>
           </div>
@@ -199,7 +199,7 @@ function LoginPage() {
             {[
               {
                 Icon: Package,
-                text: "Live vaults for DC McFarlane, Star Wars, GI Joe, and LEGO",
+                text: "Live vaults for DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout",
               },
               {
                 Icon: Heart,
