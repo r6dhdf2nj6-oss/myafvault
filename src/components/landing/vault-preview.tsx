@@ -122,7 +122,7 @@ const FEATURE_TABS: {
     label: "Cloud",
     icon: Cloud,
     title: "Cloud sync",
-    body: "After you sign up, ownership, notes, and photos sync across devices with optional 2FA.",
+    body: "Once you are signed in, ownership, notes, and photos sync across devices with optional 2FA.",
   },
 ];
 
@@ -287,8 +287,8 @@ export function VaultPreview() {
 
                   <div className="mt-auto pt-4 flex flex-col sm:flex-row gap-2">
                     <Button asChild className="flex-1">
-                      <a href="/login?mode=signup">
-                        Sign up for access
+                      <a href="/login">
+                        Sign in or sign up
                       </a>
                     </Button>
                     <Button

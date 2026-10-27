@@ -214,7 +214,7 @@ function PublicItemSharePage() {
                   ) : null}
                   {!canImport && (
                     <Button size="sm" asChild>
-                      <Link to="/login">Start your vault</Link>
+                      <Link to="/login">Sign in or start your vault</Link>
                     </Button>
                   )}
                 </div>
