@@ -494,12 +494,14 @@ export function FranchiseCatalogue({
     return (
       <div className="min-h-dvh grid place-items-center bg-bg p-6">
         <div className="max-w-sm text-center space-y-3">
-          <p className="text-sm text-muted">Vault access requires an account.</p>
+          <p className="text-sm text-muted">
+            Sign in again to open this vault, or sign up if you are new.
+          </p>
           <a
-            href={`/login?mode=signup&next=${encodeURIComponent(vaultPath)}`}
+            href={`/login?next=${encodeURIComponent(vaultPath)}`}
             className="inline-flex items-center justify-center rounded-[var(--radius-sm)] bg-primary px-4 py-2.5 text-sm font-medium text-primary-fg"
           >
-            Sign up for access
+            Sign in or sign up
           </a>
         </div>
       </div>

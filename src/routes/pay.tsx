@@ -138,7 +138,7 @@ function PayPage() {
 
   if (!signedIn) {
     if (typeof window !== "undefined") {
-      window.location.replace("/login?mode=signup&next=/pay");
+      window.location.replace("/login?next=/pay");
     }
     return null;
   }

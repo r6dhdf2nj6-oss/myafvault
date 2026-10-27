@@ -115,7 +115,7 @@ function PublicVaultPage() {
                 </p>
               </div>
               <Button variant="secondary" asChild>
-                <Link to="/login">Start your own vault</Link>
+                <Link to="/login">Sign in or start your vault</Link>
               </Button>
             </div>
 
