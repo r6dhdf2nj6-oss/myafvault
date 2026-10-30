@@ -193,8 +193,8 @@ function LandingPage() {
                   </a>
                 </Button>
                 <Button asChild size="sm">
-                  <a href="/login?mode=signup">
-                    Sign up for access
+                  <a href="/login">
+                    Sign in or sign up
                   </a>
                 </Button>
               </>
@@ -246,8 +246,8 @@ function LandingPage() {
                   ) : (
                     <>
                       <Button asChild size="lg" className="h-11 px-5">
-                        <a href="/login?mode=signup&next=/pay">
-                          Sign up for access
+                        <a href="/login">
+                          Sign in or sign up
                           <ArrowRight className="h-4 w-4" />
                         </a>
                       </Button>
@@ -266,9 +266,10 @@ function LandingPage() {
                 </div>
                 {!signedIn && (
                   <p className="text-xs text-subtle">
-                    Account required. Lifetime includes current live vaults and
-                    these features as they ship. {VAULT_ACCESS.priceLabel} once
-                    — no subscription.
+                    Sign in again if you already have a vault, or sign up for
+                    access. Lifetime includes current live vaults and these
+                    features as they ship. {VAULT_ACCESS.priceLabel} once — no
+                    subscription.
 
                   </p>
                 )}
@@ -446,7 +447,7 @@ function LandingPage() {
                       <span className="text-xs text-subtle">{f.scopeNote}</span>
                       {live ? (
                         <span className="inline-flex items-center gap-1 text-sm font-medium text-primary">
-                          {signedIn ? "Open vault" : "Sign up for access"}
+                          {signedIn ? "Open vault" : "Sign in or sign up"}
                           <ArrowRight className="h-3.5 w-3.5" />
                         </span>
                       ) : (
@@ -476,7 +477,7 @@ function LandingPage() {
                   return (
                     <a
                       key={f.id}
-                      href="/login?mode=signup"
+                      href={`/login?next=${encodeURIComponent(f.path)}`}
                       className={cn(
                         "block rounded-[var(--radius-xl)] border p-5 sm:p-6 transition-colors",
                         "border-primary/40 bg-primary/[0.06] hover:border-primary hover:bg-primary/10",
@@ -511,8 +512,9 @@ function LandingPage() {
                 Lifetime vault access
               </h2>
                 <p className="text-muted mt-2 text-sm sm:text-base">
-                  Sign up, then pay once with Stripe. Lifetime includes current
-                  live vaults and these features as they ship.
+                  Sign in or sign up, then pay once with Stripe if you have not
+                  already. Lifetime includes current live vaults and these
+                  features as they ship.
                 </p>
             </div>
 
@@ -551,15 +553,15 @@ function LandingPage() {
                 </ul>
                 <div className="mt-6 flex flex-col sm:flex-row gap-2">
                   <Button asChild size="lg" className="h-11">
-                    <a href={signedIn ? "/pay" : "/login?mode=signup&next=/pay"}>
+                    <a href={signedIn ? "/pay" : "/login?next=/pay"}>
                       <Lock className="h-4 w-4" />
                       Pay {VAULT_ACCESS.priceLabel} with Stripe
                     </a>
                   </Button>
                   {!signedIn && (
                     <Button asChild size="lg" variant="outline" className="h-11">
-                      <a href="/login?mode=signup&next=/pay">
-                        Sign up first
+                      <a href="/login?next=/pay">
+                        Sign in or sign up
                       </a>
                     </Button>
                   )}
@@ -573,14 +575,15 @@ function LandingPage() {
 
               <div className="rounded-[var(--radius-xl)] border border-border bg-surface-2/60 p-6 sm:p-8 flex flex-col justify-center">
                 <h3 className="font-semibold text-lg mb-2">
-                  Sign up for vault access
+                  Sign in or sign up
                 </h3>
                 <p className="text-sm text-muted leading-relaxed mb-5">
-                  Create an account to enter the{" "}
+                  Already collecting here? Sign in again and pick up your
+                  vaults. New here? Create an account to enter the{" "}
                   <strong className="text-fg font-medium">
                     DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout
                   </strong>{" "}
-                  vaults — with more franchises coming soon. After sign-up, pay{" "}
+                  vaults — with more franchises coming soon — then pay{" "}
                   {VAULT_ACCESS.priceLabel} once to unlock the catalogues, your
                   vaults, the collector board, and install-as-app.
 
@@ -596,8 +599,8 @@ function LandingPage() {
                   ) : (
                     <>
                       <Button asChild size="lg" className="h-11">
-                        <a href="/login?mode=signup&next=/pay">
-                          Sign up for access
+                        <a href="/login?next=/pay">
+                          Sign in or sign up
                         </a>
                       </Button>
                       <Button asChild size="lg" variant="outline" className="h-11">
@@ -610,7 +613,8 @@ function LandingPage() {
                 </div>
                 <p className="mt-4 text-xs text-subtle">
                   Use the interactive figure preview above to see how catalogue,
-                  ownership, accessories, and collections work before you join.
+                  ownership, accessories, and collections work before you sign
+                  in or sign up.
                 </p>
               </div>
             </div>
@@ -625,7 +629,7 @@ function LandingPage() {
 
             </h2>
             <p className="text-muted mt-2 max-w-lg mx-auto text-sm sm:text-base">
-              Create an account, then unlock lifetime access for{" "}
+              Sign in again, or sign up, then unlock lifetime access for{" "}
               {VAULT_ACCESS.priceLabel} with Stripe.
             </p>
             <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
@@ -639,8 +643,8 @@ function LandingPage() {
               ) : (
                 <>
                   <Button asChild size="lg" className="h-11 px-6">
-                    <a href="/login?mode=signup&next=/pay">
-                      Sign up for access
+                    <a href="/login">
+                      Sign in or sign up
                       <ArrowRight className="h-4 w-4" />
                     </a>
                   </Button>
@@ -671,8 +675,8 @@ function LandingPage() {
                 Your vaults
               </Link>
             ) : (
-              <a href="/login?mode=signup&next=/pay" className="hover:text-fg">
-                Sign up for access
+              <a href="/login" className="hover:text-fg">
+                Sign in or sign up
               </a>
             )}
             <a href="/install" className="hover:text-fg">
