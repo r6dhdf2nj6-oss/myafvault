@@ -1,11 +1,11 @@
 [
   {
-    "id": "mcf-fallout-11687",
+    "id": "fallout-11687",
     "name": "Desert Ranger Combat Armor | McFarlane Gaming Edition | Red Platinum",
     "character": "Desert Ranger Combat Armor",
     "brand": "Fallout",
-    "category": "Platinum Edition",
-    "line": "Red Platinum",
+    "category": "Gaming Edition",
+    "line": "Gaming Edition",
     "scale": "7\"",
     "productType": "Action Figure",
     "genre": "Video Games",
@@ -45,15 +45,15 @@
     "wishlist": false,
     "createdAt": "2026-10-23T15:34:18.586Z",
     "updatedAt": "2026-10-23T15:34:18.586Z",
-    "notes": "Red Platinum Gaming Edition. Official feature bullets name the firearm only as a weapon."
+    "notes": "Red Platinum Gaming Edition. Official feature bullets name the firearm only as a weapon. Platinum Edition (Red Platinum)."
   },
   {
-    "id": "mcf-fallout-11671",
+    "id": "fallout-11671",
     "name": "Joshua Graham | Fallout New Vegas | McFarlane Gaming Edition",
     "character": "Joshua Graham",
     "brand": "Fallout",
-    "category": "McFarlane 7-inch",
-    "line": "McFarlane Gaming Edition",
+    "category": "Gaming Edition",
+    "line": "Gaming Edition",
     "scale": "7\"",
     "productType": "Action Figure",
     "genre": "Video Games",
@@ -101,12 +101,12 @@
     "notes": "Description product-type line says 7\" Scale Mini Figure. Feature bullets say a 7\" articulated figure. Scale follows the feature bullets."
   },
   {
-    "id": "mcf-fallout-11688",
+    "id": "fallout-11688",
     "name": "NCR Salvaged Power Armor | McFarlane Gaming Edition",
     "character": "NCR Salvaged Power Armor",
     "brand": "Fallout",
-    "category": "McFarlane 7-inch",
-    "line": "McFarlane Gaming Edition",
+    "category": "Gaming Edition",
+    "line": "Gaming Edition",
     "scale": "7\"",
     "productType": "Action Figure",
     "genre": "Video Games",
@@ -141,7 +141,7 @@
     ],
     "productUrl": "https://www.mcfarlane.com/toys/ncr-salvaged-power-armor-%7C-mcfarlane-gaming-edition",
     "source": "mcfarlane.com",
-    "releaseMonth": null,
+    "releaseMonth": 11,
     "franchise": "fallout",
     "year": 2026,
     "manufacturer": "McFarlane Toys",
@@ -153,12 +153,12 @@
     "notes": "Official feature bullets name the firearm only as a weapon."
   },
   {
-    "id": "mcf-fallout-11674",
+    "id": "fallout-11674",
     "name": "Nick Valentine | McFarlane Gaming Edition",
     "character": "Nick Valentine",
     "brand": "Fallout",
-    "category": "McFarlane 7-inch",
-    "line": "McFarlane Gaming Edition",
+    "category": "Gaming Edition",
+    "line": "Gaming Edition",
     "scale": "7\"",
     "productType": "Action Figure",
     "genre": "Video Games",
@@ -194,7 +194,7 @@
     ],
     "productUrl": "https://www.mcfarlane.com/toys/nick-valentine-%7C-mcfarlane-gaming-edition",
     "source": "mcfarlane.com",
-    "releaseMonth": null,
+    "releaseMonth": 11,
     "franchise": "fallout",
     "year": 2026,
     "manufacturer": "McFarlane Toys",
@@ -206,11 +206,11 @@
     "notes": "Official feature bullets name the firearm only as a weapon."
   },
   {
-    "id": "mcf-fallout-11608",
+    "id": "fallout-11608",
     "name": "Nuka Cola T-60 | McFarlane Elite Edition #8 | Gold Label",
     "character": "Nuka Cola T-60",
     "brand": "Fallout",
-    "category": "Gold Label",
+    "category": "Elite Edition",
     "line": "McFarlane Elite Edition",
     "scale": "7\"",
     "productType": "Action Figure",
@@ -261,15 +261,16 @@
     "owned": false,
     "wishlist": false,
     "createdAt": "2026-10-21T13:40:48.195Z",
-    "updatedAt": "2026-10-21T13:40:48.195Z"
+    "updatedAt": "2026-10-21T13:40:48.195Z",
+    "notes": "Gold Label (McFarlane Elite Edition)."
   },
   {
-    "id": "mcf-fallout-11673",
+    "id": "fallout-11673",
     "name": "Paladin Danse | Fallout 4 | McFarlane Gaming Edition",
     "character": "Paladin Danse",
     "brand": "Fallout",
-    "category": "McFarlane 7-inch",
-    "line": "McFarlane Gaming Edition",
+    "category": "Gaming Edition",
+    "line": "Gaming Edition",
     "scale": "7\"",
     "productType": "Action Figure",
     "genre": "Video Games",
@@ -317,12 +318,12 @@
     "notes": "Description product-type line says 2.5\" Scale Mini Figure. Feature bullets say a 7\" figure with extra hands, helmet, and base. Scale follows the feature bullets."
   },
   {
-    "id": "mcf-fallout-11686",
+    "id": "fallout-11686",
     "name": "Scorched Sierra Power Armor | McFarlane Gaming Edition",
     "character": "Scorched Sierra Power Armor",
     "brand": "Fallout",
-    "category": "McFarlane 7-inch",
-    "line": "McFarlane Gaming Edition",
+    "category": "Gaming Edition",
+    "line": "Gaming Edition",
     "scale": "7\"",
     "productType": "Action Figure",
     "genre": "Video Games",
@@ -356,7 +357,7 @@
     ],
     "productUrl": "https://www.mcfarlane.com/toys/scorched-sierra-power-armor-%7C-mcfarlane-gaming-edition",
     "source": "mcfarlane.com",
-    "releaseMonth": null,
+    "releaseMonth": 11,
     "franchise": "fallout",
     "year": 2026,
     "manufacturer": "McFarlane Toys",
@@ -368,12 +369,12 @@
     "notes": "Official feature bullets name the firearm only as a weapon."
   },
   {
-    "id": "mcf-fallout-11672",
+    "id": "fallout-11672",
     "name": "T-45 Military Armor | Fallout 76 | McFarlane Gaming Edition | Red Platinum Edition",
     "character": "T-45 Military Armor",
     "brand": "Fallout",
-    "category": "Platinum Edition",
-    "line": "Red Platinum",
+    "category": "Gaming Edition",
+    "line": "Gaming Edition",
     "scale": "7\"",
     "productType": "Action Figure",
     "genre": "Video Games",
@@ -418,14 +419,14 @@
     "wishlist": false,
     "createdAt": "2026-10-21T13:40:48.195Z",
     "updatedAt": "2026-10-21T13:40:48.195Z",
-    "notes": "Description product-type line says 7\" Scale Mini Figure. Feature bullets say a 7\" articulated figure. Scale follows the feature bullets."
+    "notes": "Description product-type line says 7\" Scale Mini Figure. Feature bullets say a 7\" articulated figure. Scale follows the feature bullets. Platinum Edition (Red Platinum)."
   },
   {
-    "id": "mcf-fallout-11627",
+    "id": "fallout-11627",
     "name": "T-45B Nuka Cola | McFarlane Elite Edition",
     "character": "T-45B Nuka Cola",
     "brand": "Fallout",
-    "category": "McFarlane 7-inch",
+    "category": "Elite Edition",
     "line": "McFarlane Elite Edition",
     "scale": "7\"",
     "productType": "Action Figure",
@@ -474,11 +475,11 @@
     "notes": "mcfarlane.com feature bullets list extra hands, a gun, a base, and an art card. The McFarlane Toys Store PDP for MPN 11627 lists a longer set (4 alternate hands, 4 weapons, sword, Mini Nuke, Dynamite, display base, Elite Points card). Accessories follow the mcfarlane.com bullets until those lists match."
   },
   {
-    "id": "mcf-fallout-11682",
+    "id": "fallout-11682",
     "name": "Vault Boy (Demolition Expert)",
     "character": "Vault Boy (Demolition Expert)",
     "brand": "Fallout",
-    "category": "Posed Figure",
+    "category": "Posed Figures",
     "line": "Posed Figure",
     "scale": "5\"",
     "productType": "Posed Figure",
@@ -522,11 +523,11 @@
     "notes": "Description brand line says Fallout TV Series. Feature bullets say the figure is based on the Fallout video game."
   },
   {
-    "id": "mcf-fallout-11676",
+    "id": "fallout-11676",
     "name": "Vault Boy (Endurance)",
     "character": "Vault Boy (Endurance)",
     "brand": "Fallout",
-    "category": "Posed Figure",
+    "category": "Posed Figures",
     "line": "Posed Figure",
     "scale": "5\"",
     "productType": "Posed Figure",
@@ -570,11 +571,11 @@
     "notes": "mcfarlane.com copy says a 5\" posed figure. The McFarlane Toys Store listing title says 6\" posed figure."
   },
   {
-    "id": "mcf-fallout-11681",
+    "id": "fallout-11681",
     "name": "Vault Boy (Sneak)",
     "character": "Vault Boy (Sneak)",
     "brand": "Fallout",
-    "category": "Posed Figure",
+    "category": "Posed Figures",
     "line": "Posed Figure",
     "scale": "5\"",
     "productType": "Posed Figure",
@@ -606,7 +607,7 @@
     ],
     "productUrl": "https://www.mcfarlane.com/toys/vault-boy-sneak",
     "source": "mcfarlane.com",
-    "releaseMonth": null,
+    "releaseMonth": 11,
     "franchise": "fallout",
     "year": 2026,
     "manufacturer": "McFarlane Toys",
@@ -614,15 +615,16 @@
     "owned": false,
     "wishlist": false,
     "createdAt": "2026-10-23T16:45:15.171Z",
-    "updatedAt": "2026-10-23T16:45:15.171Z"
+    "updatedAt": "2026-10-23T16:45:15.171Z",
+    "notes": "McFarlane Toys Store pre-order. The product page estimates ship in November; the year is 2026 because that pre-order was still open on 2026-10-27. Store SKU Fallout-Vault-Boy-Sneak-5in-72."
   },
   {
-    "id": "mcf-fallout-11624",
+    "id": "fallout-11624",
     "name": "Cooper Howard | Fallout (S2) | Red Platinum Edition",
     "character": "Cooper Howard",
     "brand": "Fallout",
-    "category": "Platinum Edition",
-    "line": "Red Platinum",
+    "category": "TV Series",
+    "line": "TV Series",
     "scale": "7\"",
     "productType": "Action Figure",
     "genre": "Movies & TV",
@@ -667,14 +669,15 @@
     "owned": false,
     "wishlist": false,
     "createdAt": "2026-10-21T13:40:44.688Z",
-    "updatedAt": "2026-10-21T13:40:44.688Z"
+    "updatedAt": "2026-10-21T13:40:44.688Z",
+    "notes": "Platinum Edition (Red Platinum)."
   },
   {
-    "id": "mcf-fallout-14124",
+    "id": "fallout-14124",
     "name": "Deathclaw | Fallout (S2)",
     "character": "Deathclaw",
     "brand": "Fallout",
-    "category": "Posed Figure",
+    "category": "Posed Figures",
     "line": "Posed Figure",
     "scale": "6\"",
     "productType": "Posed Figure",
@@ -714,12 +717,12 @@
     "notes": "PDP gallery mixes in Maximus photos (item 14127). Catalog gallery keeps the Deathclaw main image and the 14124 photo only. The secret bonus item is listed and not named."
   },
   {
-    "id": "mcf-fallout-11612",
+    "id": "fallout-11612",
     "name": "Hank MacLean | Fallout (S2)",
     "character": "Hank MacLean",
     "brand": "Fallout",
-    "category": "McFarlane 7-inch",
-    "line": "Fallout TV",
+    "category": "TV Series",
+    "line": "TV Series",
     "scale": "7\"",
     "productType": "Action Figure",
     "genre": "Movies & TV",
@@ -763,15 +766,16 @@
     "owned": false,
     "wishlist": false,
     "createdAt": "2026-10-21T13:40:37.817Z",
-    "updatedAt": "2026-10-21T13:40:37.817Z"
+    "updatedAt": "2026-10-21T13:40:37.817Z",
+    "notes": "Store SKU Fallout-TV-Hank-MacLean-Deluxe-7in-54. No release month is printed on the store listing."
   },
   {
-    "id": "mcf-fallout-14134",
+    "id": "fallout-14134",
     "name": "Hank Maclean | Fallout (S2) | Red Platinum Edition",
     "character": "Hank MacLean",
     "brand": "Fallout",
-    "category": "Platinum Edition",
-    "line": "Red Platinum",
+    "category": "TV Series",
+    "line": "TV Series",
     "scale": "6\"",
     "productType": "Posed Figure",
     "genre": "Movies & TV",
@@ -815,14 +819,14 @@
     "wishlist": false,
     "createdAt": "2026-10-21T13:40:45.692Z",
     "updatedAt": "2026-10-21T13:40:45.692Z",
-    "notes": "Official title spells the name Hank Maclean. The secret bonus item is listed on the PDP and is not named."
+    "notes": "Official title spells the name Hank Maclean. The secret bonus item is listed on the PDP and is not named. Platinum Edition (Red Platinum)."
   },
   {
-    "id": "mcf-fallout-14128",
+    "id": "fallout-14128",
     "name": "Lucy | Fallout (S2)",
     "character": "Lucy",
     "brand": "Fallout",
-    "category": "Posed Figure",
+    "category": "Posed Figures",
     "line": "Posed Figure",
     "scale": "6\"",
     "productType": "Posed Figure",
@@ -870,11 +874,11 @@
     "notes": "The secret bonus item is listed on the PDP and is not named."
   },
   {
-    "id": "mcf-fallout-11609",
+    "id": "fallout-11609",
     "name": "Lucy | Fallout TV Series | McFarlane Elite Edition",
     "character": "Lucy",
     "brand": "Fallout",
-    "category": "McFarlane 7-inch",
+    "category": "Elite Edition",
     "line": "McFarlane Elite Edition",
     "scale": "7\"",
     "productType": "Action Figure",
@@ -931,12 +935,12 @@
     "notes": "mcfarlane.com item slug is malformed, but the live page title is this Lucy Elite Edition figure. PDP writes the dog as Cx404 (Dogmeat)."
   },
   {
-    "id": "mcf-fallout-11611",
+    "id": "fallout-11611",
     "name": "Maximus | Fallout (S2)",
     "character": "Maximus",
     "brand": "Fallout",
-    "category": "McFarlane 7-inch",
-    "line": "Fallout TV",
+    "category": "TV Series",
+    "line": "TV Series",
     "scale": "7\"",
     "productType": "Action Figure",
     "genre": "Movies & TV",
@@ -984,11 +988,11 @@
     "updatedAt": "2026-10-21T13:40:48.195Z"
   },
   {
-    "id": "mcf-fallout-14127",
+    "id": "fallout-14127",
     "name": "Maximus | Fallout (S2)",
     "character": "Maximus",
     "brand": "Fallout",
-    "category": "Posed Figure",
+    "category": "Posed Figures",
     "line": "Posed Figure",
     "scale": "6\"",
     "productType": "Posed Figure",
@@ -1036,11 +1040,11 @@
     "notes": "The secret bonus item is listed on the PDP and is not named."
   },
   {
-    "id": "mcf-fallout-11626",
+    "id": "fallout-11626",
     "name": "NCR Ranger | Fallout New Vegas | McFarlane Elite Edition #4",
     "character": "NCR Ranger",
     "brand": "Fallout",
-    "category": "McFarlane 7-inch",
+    "category": "Elite Edition",
     "line": "McFarlane Elite Edition",
     "scale": "7\"",
     "productType": "Action Figure",
@@ -1101,11 +1105,11 @@
     "updatedAt": "2026-10-21T13:40:36.423Z"
   },
   {
-    "id": "mcf-fallout-11647",
+    "id": "fallout-11647",
     "name": "Riot Ranger Armor and Benny | Fallout New Vegas | 2 Pack",
     "character": "Riot Ranger Armor & Benny",
     "brand": "Fallout",
-    "category": "Multipack",
+    "category": "Multipacks",
     "line": "Multipack",
     "scale": "7\"",
     "productType": "2-Pack",
@@ -1152,11 +1156,11 @@
     "notes": "Retail 2-pack (MPN 11647), not a store BND bundle. Feature bullets do not name weapons beyond the two figures, two art cards, and two display bases."
   },
   {
-    "id": "mcf-fallout-14129",
+    "id": "fallout-14129",
     "name": "Securitron | Fallout (S2)",
     "character": "Securitron",
     "brand": "Fallout",
-    "category": "Posed Figure",
+    "category": "Posed Figures",
     "line": "Posed Figure",
     "scale": "6\"",
     "productType": "Posed Figure",
@@ -1204,12 +1208,12 @@
     "notes": "PDP genre is blank. Genre is Movies & TV from the feature line (Amazon MGM Studios series). The secret bonus item is listed and not named."
   },
   {
-    "id": "mcf-fallout-11614",
+    "id": "fallout-11614",
     "name": "Steph Harper | Fallout (S2)",
     "character": "Steph Harper",
     "brand": "Fallout",
-    "category": "McFarlane 7-inch",
-    "line": "Fallout TV",
+    "category": "TV Series",
+    "line": "TV Series",
     "scale": "7\"",
     "productType": "Action Figure",
     "genre": "Movies & TV",
@@ -1258,11 +1262,11 @@
     "notes": "Official feature bullets do not name the two weapons."
   },
   {
-    "id": "mcf-fallout-11649",
+    "id": "fallout-11649",
     "name": "T-60 Vault Tec and Sole Survivor | Fallout New Vegas | 2 Pack",
     "character": "T-60 Vault Tec & Sole Survivor",
     "brand": "Fallout",
-    "category": "Multipack",
+    "category": "Multipacks",
     "line": "Multipack",
     "scale": "7\"",
     "productType": "2-Pack",
@@ -1309,11 +1313,11 @@
     "notes": "Retail 2-pack (MPN 11649), not a store BND bundle. Official title says Fallout New Vegas; the description brand line and feature bullets say Fallout 76. Series follows the feature bullets."
   },
   {
-    "id": "mcf-fallout-11607",
+    "id": "fallout-11607",
     "name": "T-60 | Fallout 76 | McFarlane Elite Edition #3",
     "character": "T-60",
     "brand": "Fallout",
-    "category": "McFarlane 7-inch",
+    "category": "Elite Edition",
     "line": "McFarlane Elite Edition",
     "scale": "7\"",
     "productType": "Action Figure",
@@ -1372,12 +1376,12 @@
     "updatedAt": "2026-10-21T13:40:45.692Z"
   },
   {
-    "id": "mcf-fallout-11613",
+    "id": "fallout-11613",
     "name": "The Ghoul | Fallout (S2)",
     "character": "The Ghoul",
     "brand": "Fallout",
-    "category": "McFarlane 7-inch",
-    "line": "Fallout TV",
+    "category": "TV Series",
+    "line": "TV Series",
     "scale": "7\"",
     "productType": "Action Figure",
     "genre": "Movies & TV",
@@ -1425,11 +1429,11 @@
     "notes": "Official feature bullets do not name the two weapons."
   },
   {
-    "id": "mcf-fallout-14126",
+    "id": "fallout-14126",
     "name": "The Ghoul | Fallout (S2)",
     "character": "The Ghoul",
     "brand": "Fallout",
-    "category": "Posed Figure",
+    "category": "Posed Figures",
     "line": "Posed Figure",
     "scale": "6\"",
     "productType": "Posed Figure",
@@ -1477,12 +1481,12 @@
     "notes": "The mcfarlane.com characterBio on this PDP is the Deathclaw blurb, so it is not used as the description. The secret bonus item is listed and not named."
   },
   {
-    "id": "mcf-fallout-14108",
+    "id": "fallout-14108",
     "name": "Vault Boy (Glow In The Dark Edition) | Gold Label",
     "character": "Vault Boy",
     "brand": "Fallout",
-    "category": "Gold Label",
-    "line": "Movie Maniacs",
+    "category": "Posed Figures",
+    "line": "Posed Figure",
     "scale": "5\"",
     "productType": "Posed Figure",
     "genre": "Movies & TV",
@@ -1523,14 +1527,14 @@
     "wishlist": false,
     "createdAt": "2026-10-21T13:40:42.423Z",
     "updatedAt": "2026-10-21T13:40:42.423Z",
-    "notes": "Feature bullets say a 5\" posed figure and call the line Movie Maniacs. The description product-type line says 6\" Scale Posed Figure. Scale follows the feature bullets. The secret bonus item is listed on the PDP and is not named."
+    "notes": "Feature bullets say a 5\" posed figure and call the line Movie Maniacs. The description product-type line says 6\" Scale Posed Figure. Scale follows the feature bullets. The secret bonus item is listed on the PDP and is not named. Gold Label (Movie Maniacs)."
   },
   {
-    "id": "mcf-fallout-14131",
+    "id": "fallout-14131",
     "name": "Vault Boy (Version 1)",
     "character": "Vault Boy (Version 1)",
     "brand": "Fallout",
-    "category": "Posed Figure",
+    "category": "Posed Figures",
     "line": "Posed Figure",
     "scale": "5\"",
     "productType": "Posed Figure",
@@ -1578,11 +1582,11 @@
     "notes": "The secret bonus item is listed on the PDP and is not named."
   },
   {
-    "id": "mcf-fallout-14132",
+    "id": "fallout-14132",
     "name": "Vault Boy (Version 2)",
     "character": "Vault Boy (Version 2)",
     "brand": "Fallout",
-    "category": "Posed Figure",
+    "category": "Posed Figures",
     "line": "Posed Figure",
     "scale": "5\"",
     "productType": "Posed Figure",
@@ -1630,11 +1634,11 @@
     "notes": "The secret bonus item is listed on the PDP and is not named."
   },
   {
-    "id": "mcf-fallout-14133",
+    "id": "fallout-14133",
     "name": "Vault Boy (Version 3)",
     "character": "Vault Boy (Version 3)",
     "brand": "Fallout",
-    "category": "Posed Figure",
+    "category": "Posed Figures",
     "line": "Posed Figure",
     "scale": "5\"",
     "productType": "Posed Figure",
@@ -1671,5 +1675,50 @@
     "createdAt": "2026-10-21T13:40:37.817Z",
     "updatedAt": "2026-10-21T13:40:37.817Z",
     "notes": "PDP gallery files are item 14113, not 14133. Catalog uses the main product image only. The secret bonus item is listed and not named."
+  },
+  {
+    "id": "fallout-11660",
+    "franchise": "fallout",
+    "owned": false,
+    "wishlist": false,
+    "createdAt": "2026-10-27T00:00:00.000Z",
+    "updatedAt": "2026-10-27T00:00:00.000Z",
+    "gallery": [
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3336/33224/11660_01_NL__05738.1778886434.jpg?c=1",
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3336/33221/11660_02_NL__41110.1778886433.jpg?c=1",
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3336/33220/11660_03_NL__92695.1778886433.jpg?c=1",
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3336/33225/11660_07_NL__84089.1778886434.jpg?c=1",
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3336/33228/11660_09_NL__97265.1778886434.jpg?c=1",
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3336/33227/11660_04_NL__02951.1778886434.jpg?c=1",
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3336/33223/11660_05_NL__99674.1778886433.jpg?c=1",
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3336/33226/11660_06_NL__41432.1778886434.jpg?c=1",
+      "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3336/33222/11660_10_NL__26433.1778886433.JPG?c=1"
+    ],
+    "imageUrl": "https://cdn11.bigcommerce.com/s-hlbgbzrg7y/images/stencil/1280x1280/products/3336/33224/11660_01_NL__05738.1778886434.jpg?c=1",
+    "productUrl": "https://mcfarlanetoysstore.com/fallout-show-2-5-mini-figure-blind-bag-series-1-pre-order-ships-may/",
+    "source": "mcfarlanetoysstore.com",
+    "manufacturer": "McFarlane Toys",
+    "brand": "Fallout",
+    "description": "Introducing the Fallout Prime Video Show Mini Figures, the ultimate collectible for every vault dwelling fan! These 2.5-inch scale figures are based on the iconic Amazon MGM Studios series, bringing your favorite characters to life in an all new compact format. Each figure is expertly sculpted with show accurate details, from rugged armor and weathered gear to the unmistakable personalities that roam the wasteland.",
+    "vehicleOrPlayset": false,
+    "name": "Fallout (Show) 2.5\" Mini Figure Blind Bag — Series 1",
+    "category": "Mini Figures",
+    "scale": "2.5\"",
+    "series": "Series 1",
+    "character": "Series 1 blind bag",
+    "sku": "11660",
+    "accessories": [
+      "Base"
+    ],
+    "features": [
+      "2.5-inch mini figure based on the Amazon MGM Studios Fallout series",
+      "Series 1 features 7 different characters plus 3 mystery figures",
+      "Blind bag is randomly selected; the character received is not guaranteed",
+      "Figure includes a base for standing"
+    ],
+    "line": "Mini Figures",
+    "productType": "Blind Bag",
+    "genre": "TV",
+    "notes": "Store SKU Fallout-TV-Show-Mini-Figure-Blind-Bag-S1. Character names are not listed on the McFarlane Toys Store page, so this row is the blind bag rather than invented singles. The store UPC field was an 11-digit value and was not copied."
   }
 ]

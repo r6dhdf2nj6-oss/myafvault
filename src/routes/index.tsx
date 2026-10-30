@@ -43,7 +43,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          `Pack-accurate accessories. Chase labels. Your shelf. Not a spreadsheet and not a barcode dump. 4 live vaults, ${VAULT_ACCESS.priceLabel} once, no subscription.`,
+          `Pack-accurate accessories. Chase labels. Your shelf. Not a spreadsheet and not a barcode dump. ${getLiveFranchises().length} live vaults, ${VAULT_ACCESS.priceLabel} once, no subscription.`,
 
       },
     ],
@@ -112,7 +112,7 @@ const PREVIEW_STEPS = [
 ] as const;
 
 const WHY = [
-  "Stop guessing which figures exist — DC McFarlane, Star Wars, GI Joe, and LEGO vaults are live, with more lines coming.",
+  "Stop guessing which figures exist — DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout vaults are live, with more lines coming.",
   "Know what you own vs. what you still need without mixing the two.",
   "Keep pack art and your own photos, including custom listings only you see.",
   "Show the shelf to friends without handing them your login.",
@@ -225,8 +225,8 @@ function LandingPage() {
                   </span>
                 </h1>
                 <p className="text-base sm:text-lg text-muted max-w-xl leading-relaxed text-pretty">
-                  Four live vaults — DC McFarlane, Star Wars, GI Joe, and LEGO.
-                  Marvel, Fallout, Disney, and Pixar stay coming soon. No live
+                  Five live vaults — DC McFarlane, Star Wars, GI Joe, LEGO, and
+                  Fallout. Marvel, Disney, and Pixar stay coming soon. No live
                   market values.
                 </p>
                 <p className="text-sm font-medium text-fg">
@@ -402,10 +402,10 @@ function LandingPage() {
                   The vaults
                 </p>
                 <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
-                  DC, Star Wars, GI Joe, LEGO — more coming
+                  DC, Star Wars, GI Joe, LEGO, Fallout — more coming
                 </h2>
                 <p className="text-muted mt-2 text-sm sm:text-base">
-                  Four live vaults on a shared toolkit — official listings,
+                  Five live vaults on a shared toolkit — official listings,
                   In My Vault tracking, wishlist, photos, and a board for
                   other collectors. Coming-soon lines stay listed, not fake.
 
@@ -539,7 +539,7 @@ function LandingPage() {
                     "Shareable shelf photos and collections",
                     "Incoming orders until they hit the vault",
                     "Insurance-ready export as it ships",
-                    "Current live vaults: DC, Star Wars, GI Joe, LEGO",
+                    "Current live vaults: DC, Star Wars, GI Joe, LEGO, Fallout",
                     "No subscription — pay once",
                   ].map((item) => (
                     <li
@@ -581,7 +581,7 @@ function LandingPage() {
                   Already collecting here? Sign in again and pick up your
                   vaults. New here? Create an account to enter the{" "}
                   <strong className="text-fg font-medium">
-                    DC McFarlane, Star Wars, GI Joe, and LEGO
+                    DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout
                   </strong>{" "}
                   vaults — with more franchises coming soon — then pay{" "}
                   {VAULT_ACCESS.priceLabel} once to unlock the catalogues, your
@@ -665,7 +665,7 @@ function LandingPage() {
           <div>
             <p className="text-sm font-semibold">MyAFVault</p>
             <p className="text-xs text-subtle mt-0.5">
-              DC McFarlane, Star Wars, GI Joe, LEGO, and more vaults coming soon.
+              DC McFarlane, Star Wars, GI Joe, LEGO, Fallout, and more vaults coming soon.
 
             </p>
           </div>

@@ -24,7 +24,7 @@ export const Route = createFileRoute("/pay")({
       {
         name: "description",
         content:
-          `One-time ${VAULT_ACCESS.priceLabel} payment unlocks the DC McFarlane, Star Wars, GI Joe, and LEGO vaults, cloud sync, and your collection.`,
+          `One-time ${VAULT_ACCESS.priceLabel} payment unlocks the DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout vaults, cloud sync, and your collection.`,
 
       },
     ],
@@ -198,7 +198,7 @@ function PayPage() {
             </p>
             <ul className="space-y-2">
               {[
-                "DC McFarlane, Star Wars, GI Joe, and LEGO catalogues",
+                "DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout catalogues",
                 "Cloud sync of vault, wishlist, and photos",
                 "Collections and sharing",
               ].map((item) => (

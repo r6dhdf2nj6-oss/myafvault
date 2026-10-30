@@ -3,6 +3,7 @@ import { DC_CATEGORIES } from "./dc";
 import { STAR_WARS_CATEGORIES } from "./star-wars";
 import { GI_JOE_CATEGORIES } from "./gi-joe";
 import { LEGO_CATEGORIES } from "./lego";
+import { FALLOUT_CATEGORIES } from "./fallout";
 
 export type { FranchiseId } from "@/types";
 
@@ -10,10 +11,12 @@ export { DC_CATEGORIES } from "./dc";
 export { STAR_WARS_CATEGORIES } from "./star-wars";
 export { GI_JOE_CATEGORIES } from "./gi-joe";
 export { LEGO_CATEGORIES } from "./lego";
+export { FALLOUT_CATEGORIES } from "./fallout";
 export { loadDcCatalog } from "./dc";
 export { loadStarWarsCatalog } from "./star-wars";
 export { loadGiJoeCatalog } from "./gi-joe";
 export { loadLegoCatalog } from "./lego";
+export { loadFalloutCatalog } from "./fallout";
 
 export interface FranchiseDef {
   id: FranchiseId;
@@ -41,6 +44,11 @@ export const FRANCHISES: Record<FranchiseId, FranchiseDef> = {
     id: "lego",
     name: "LEGO",
     categories: LEGO_CATEGORIES,
+  },
+  fallout: {
+    id: "fallout",
+    name: "Fallout",
+    categories: FALLOUT_CATEGORIES,
   },
 };
 

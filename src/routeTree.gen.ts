@@ -21,6 +21,7 @@ import { Route as AccountSecurityRouteImport } from './routes/account/security'
 import { Route as LoginTwoFactorRouteImport } from './routes/login/two-factor'
 import { Route as PaySuccessRouteImport } from './routes/pay.success'
 import { Route as VaultDcMcfarlaneRouteImport } from './routes/vault/dc-mcfarlane'
+import { Route as VaultFalloutRouteImport } from './routes/vault/fallout'
 import { Route as VaultGiJoeRouteImport } from './routes/vault/gi-joe'
 import { Route as VaultLegoRouteImport } from './routes/vault/lego'
 import { Route as VaultStarWarsRouteImport } from './routes/vault/star-wars'
@@ -91,6 +92,11 @@ const VaultDcMcfarlaneRoute = VaultDcMcfarlaneRouteImport.update({
   path: '/vault/dc-mcfarlane',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VaultFalloutRoute = VaultFalloutRouteImport.update({
+  id: '/vault/fallout',
+  path: '/vault/fallout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VaultGiJoeRoute = VaultGiJoeRouteImport.update({
   id: '/vault/gi-joe',
   path: '/vault/gi-joe',
@@ -149,6 +155,7 @@ export interface FileRoutesByFullPath {
   '/login/two-factor': typeof LoginTwoFactorRoute
   '/pay/success': typeof PaySuccessRoute
   '/vault/dc-mcfarlane': typeof VaultDcMcfarlaneRoute
+  '/vault/fallout': typeof VaultFalloutRoute
   '/vault/gi-joe': typeof VaultGiJoeRoute
   '/vault/lego': typeof VaultLegoRoute
   '/vault/star-wars': typeof VaultStarWarsRoute
@@ -172,6 +179,7 @@ export interface FileRoutesByTo {
   '/login/two-factor': typeof LoginTwoFactorRoute
   '/pay/success': typeof PaySuccessRoute
   '/vault/dc-mcfarlane': typeof VaultDcMcfarlaneRoute
+  '/vault/fallout': typeof VaultFalloutRoute
   '/vault/gi-joe': typeof VaultGiJoeRoute
   '/vault/lego': typeof VaultLegoRoute
   '/vault/star-wars': typeof VaultStarWarsRoute
@@ -196,6 +204,7 @@ export interface FileRoutesById {
   '/login/two-factor': typeof LoginTwoFactorRoute
   '/pay/success': typeof PaySuccessRoute
   '/vault/dc-mcfarlane': typeof VaultDcMcfarlaneRoute
+  '/vault/fallout': typeof VaultFalloutRoute
   '/vault/gi-joe': typeof VaultGiJoeRoute
   '/vault/lego': typeof VaultLegoRoute
   '/vault/star-wars': typeof VaultStarWarsRoute
@@ -221,6 +230,7 @@ export interface FileRouteTypes {
     | '/login/two-factor'
     | '/pay/success'
     | '/vault/dc-mcfarlane'
+    | '/vault/fallout'
     | '/vault/gi-joe'
     | '/vault/lego'
     | '/vault/star-wars'
@@ -244,6 +254,7 @@ export interface FileRouteTypes {
     | '/login/two-factor'
     | '/pay/success'
     | '/vault/dc-mcfarlane'
+    | '/vault/fallout'
     | '/vault/gi-joe'
     | '/vault/lego'
     | '/vault/star-wars'
@@ -267,6 +278,7 @@ export interface FileRouteTypes {
     | '/login/two-factor'
     | '/pay/success'
     | '/vault/dc-mcfarlane'
+    | '/vault/fallout'
     | '/vault/gi-joe'
     | '/vault/lego'
     | '/vault/star-wars'
@@ -289,6 +301,7 @@ export interface RootRouteChildren {
   AccountProfileRoute: typeof AccountProfileRoute
   AccountSecurityRoute: typeof AccountSecurityRoute
   VaultDcMcfarlaneRoute: typeof VaultDcMcfarlaneRoute
+  VaultFalloutRoute: typeof VaultFalloutRoute
   VaultGiJoeRoute: typeof VaultGiJoeRoute
   VaultLegoRoute: typeof VaultLegoRoute
   VaultStarWarsRoute: typeof VaultStarWarsRoute
@@ -387,6 +400,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VaultDcMcfarlaneRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vault/fallout': {
+      id: '/vault/fallout'
+      path: '/vault/fallout'
+      fullPath: '/vault/fallout'
+      preLoaderRoute: typeof VaultFalloutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/vault/gi-joe': {
       id: '/vault/gi-joe'
       path: '/vault/gi-joe'
@@ -483,6 +503,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccountProfileRoute: AccountProfileRoute,
   AccountSecurityRoute: AccountSecurityRoute,
   VaultDcMcfarlaneRoute: VaultDcMcfarlaneRoute,
+  VaultFalloutRoute: VaultFalloutRoute,
   VaultGiJoeRoute: VaultGiJoeRoute,
   VaultLegoRoute: VaultLegoRoute,
   VaultStarWarsRoute: VaultStarWarsRoute,
