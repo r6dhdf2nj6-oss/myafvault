@@ -21499,5 +21499,160 @@
     "genre": "Movies & TV",
     "releaseYear": 2026,
     "releaseMonth": null
+  },
+  {
+    "id": "sw-g45315x00",
+    "franchise": "star-wars",
+    "name": "STAR WARS Black Series Luke Skywalker, 50th Anniversary",
+    "category": "Black Series",
+    "subcategory": "Figure",
+    "year": 2027,
+    "scale": "6\"",
+    "manufacturer": "Hasbro",
+    "series": "The Black Series 50th Anniversary",
+    "character": "Luke Skywalker",
+    "vehicleOrPlayset": false,
+    "imageUrl": "https://cdn.media.amplience.net/i/hasbropulse/G4531_PROD_SW_BL_6IN_77_1_230_tif_2000px_300DPI?%24large%24",
+    "owned": false,
+    "wishlist": false,
+    "createdAt": "2026-11-19T18:30:00.000Z",
+    "updatedAt": "2026-11-19T18:30:00.000Z",
+    "sku": "G45315X00",
+    "accessories": [
+      "blaster",
+      "grappler hook",
+      "comlink"
+    ],
+    "gallery": [
+      "https://cdn.media.amplience.net/i/hasbropulse/G4531_PROD_SW_BL_6IN_77_1_230_tif_2000px_300DPI?%24large%24"
+    ],
+    "productUrl": "https://www.hasbropulse.com/product/star-wars-black-series-luke-skywalker-50th-anniversary/G45315X00",
+    "source": "hasbropulse.com",
+    "features": [
+      "Premium 6-inch scale action figure with gold cardback packaging.",
+      "Comes with blaster, grappler hook, and comlink accessories."
+    ],
+    "description": "Luke improvised a solution for a severed bridge hindering his and Leia\u2019s departure from the Death Star. Official Hasbro Pulse listing $29.99; preorder, estimated 2027.",
+    "brand": "Star Wars",
+    "line": "The Black Series",
+    "productType": "Action Figure",
+    "genre": "Movies & TV",
+    "releaseYear": 2027,
+    "releaseMonth": 2
+  },
+  {
+    "id": "sw-g45325x00",
+    "franchise": "star-wars",
+    "name": "STAR WARS Black Series Princess Leia Organa, 50th Anniversary",
+    "category": "Black Series",
+    "subcategory": "Figure",
+    "year": 2027,
+    "scale": "6\"",
+    "manufacturer": "Hasbro",
+    "series": "The Black Series 50th Anniversary",
+    "character": "Princess Leia Organa",
+    "vehicleOrPlayset": false,
+    "imageUrl": "https://cdn.media.amplience.net/i/hasbropulse/G4532_PROD_SW_BL_6IN_77_2_085_tif_2000px_300DPI?%24large%24",
+    "owned": false,
+    "wishlist": false,
+    "createdAt": "2026-11-19T18:30:00.000Z",
+    "updatedAt": "2026-11-19T18:30:00.000Z",
+    "sku": "G45325X00",
+    "accessories": [
+      "2 blasters",
+      "removable hood"
+    ],
+    "gallery": [
+      "https://cdn.media.amplience.net/i/hasbropulse/G4532_PROD_SW_BL_6IN_77_2_085_tif_2000px_300DPI?%24large%24"
+    ],
+    "productUrl": "https://www.hasbropulse.com/product/star-wars-black-series-princess-leia-organa-50th-anniversary/G45325X00",
+    "source": "hasbropulse.com",
+    "features": [
+      "Premium 6-inch scale action figure with gold cardback packaging.",
+      "Comes with 2 blasters and removable hood accessories."
+    ],
+    "description": "Joining the ragtag group that came to her aid, Leia fought off an army of stormtroopers as she and Luke Skywalker traversed the maze of the Death Star. Official Hasbro Pulse listing $29.99; preorder, estimated 2027.",
+    "brand": "Star Wars",
+    "line": "The Black Series",
+    "productType": "Action Figure",
+    "genre": "Movies & TV",
+    "releaseYear": 2027,
+    "releaseMonth": 2
+  },
+  {
+    "id": "sw-g45335x00",
+    "franchise": "star-wars",
+    "name": "STAR WARS Black Series Artoo-Detoo (R2-D2), 50th Anniversary",
+    "category": "Black Series",
+    "subcategory": "Figure",
+    "year": 2027,
+    "scale": "6\"",
+    "manufacturer": "Hasbro",
+    "series": "The Black Series 50th Anniversary",
+    "character": "R2-D2",
+    "vehicleOrPlayset": false,
+    "imageUrl": "https://cdn.media.amplience.net/i/hasbropulse/G4533_PROD_SW_BL_6IN_77_3_236_tif_2000px_300DPI?%24large%24",
+    "owned": false,
+    "wishlist": false,
+    "createdAt": "2026-11-19T18:30:00.000Z",
+    "updatedAt": "2026-11-19T18:30:00.000Z",
+    "sku": "G45335X00",
+    "accessories": [
+      "6 tool accessories"
+    ],
+    "gallery": [
+      "https://cdn.media.amplience.net/i/hasbropulse/G4533_PROD_SW_BL_6IN_77_3_236_tif_2000px_300DPI?%24large%24"
+    ],
+    "productUrl": "https://www.hasbropulse.com/product/star-wars-black-series-artoodetoo-r2d2-50th-anniversary/G45335X00",
+    "source": "hasbropulse.com",
+    "features": [
+      "Premium 6-inch scale action figure with gold cardback packaging.",
+      "Comes with 6 tool accessories."
+    ],
+    "description": "A reliable and versatile astromech droid, R2-D2 showed great bravery in rescuing his masters and their friends from many perils. Official Hasbro Pulse listing $29.99; preorder, estimated 2027.",
+    "brand": "Star Wars",
+    "line": "The Black Series",
+    "productType": "Action Figure",
+    "genre": "Movies & TV",
+    "releaseYear": 2027,
+    "releaseMonth": 2
+  },
+  {
+    "id": "sw-g45345x00",
+    "franchise": "star-wars",
+    "name": "STAR WARS Black Series Stormtrooper, 50th Anniversary",
+    "category": "Black Series",
+    "subcategory": "Figure",
+    "year": 2027,
+    "scale": "6\"",
+    "manufacturer": "Hasbro",
+    "series": "The Black Series 50th Anniversary",
+    "character": "Stormtrooper",
+    "vehicleOrPlayset": false,
+    "imageUrl": "https://cdn.media.amplience.net/i/hasbropulse/G4534_PROD_SW_BL_6IN_77_4_196_tif_2000px_300DPI?%24large%24",
+    "owned": false,
+    "wishlist": false,
+    "createdAt": "2026-11-19T18:30:00.000Z",
+    "updatedAt": "2026-11-19T18:30:00.000Z",
+    "sku": "G45345X00",
+    "accessories": [
+      "blaster"
+    ],
+    "gallery": [
+      "https://cdn.media.amplience.net/i/hasbropulse/G4534_PROD_SW_BL_6IN_77_4_196_tif_2000px_300DPI?%24large%24"
+    ],
+    "productUrl": "https://www.hasbropulse.com/product/star-wars-black-series-stormtrooper-50th-anniversary/G45345X00",
+    "source": "hasbropulse.com",
+    "features": [
+      "Premium 6-inch scale action figure with gold cardback packaging.",
+      "Comes with blaster accessory."
+    ],
+    "description": "Loyal to the Empire, stormtroopers wear imposing white armor that offers a wide range of survival equipment to enforce the Imperial cause. Official Hasbro Pulse listing $29.99; preorder, estimated 2027.",
+    "brand": "Star Wars",
+    "line": "The Black Series",
+    "productType": "Action Figure",
+    "genre": "Movies & TV",
+    "releaseYear": 2027,
+    "releaseMonth": 2
   }
 ]
