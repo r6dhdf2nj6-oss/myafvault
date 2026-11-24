@@ -19,12 +19,12 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1, viewport-fit=cover",
       },
       {
-        title: "MyAFVault — collector vaults for DC, Star Wars, GI Joe, LEGO, Fallout, and more",
+        title: "MyAFVault — catalogs and collection tracking for DC, Star Wars, GI Joe, LEGO, and Fallout",
       },
       {
         name: "description",
         content:
-          "MyAFVault catalogues and tracks action figure collections across DC McFarlane, Star Wars, GI Joe, LEGO, Fallout, and more franchises coming soon.",
+          "MyAFVault is a catalog of action figures and LEGO sets you can browse, plus a way to track what you own across DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout.",
       },
       { name: "theme-color", content: "#0a0b0e" },
       { name: "color-scheme", content: "dark light" },
