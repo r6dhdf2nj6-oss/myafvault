@@ -1,6 +1,6 @@
 # MyAFVault product backlog
 
-**Positioning:** Browse the catalog. Track your collection. A catalog of action figures and LEGO sets you can browse, plus a way to track what you own, the accessories that came with them, and your own photos.
+**Positioning:** Browse the catalog. Track your collection, and you can add your own photos. A catalog of action figures and LEGO sets you can browse, plus a way to track what you own and the accessories that came with them.
 
 Price is **$9.99 lifetime**. No subscription. Lifetime includes current live vaults (DC McFarlane, Star Wars, GI Joe, LEGO, Fallout) and listed features as they ship. Do not claim live market values. Do not advertise planned lines (including Marvel, Disney, or Pixar figure vaults) on the site until a real catalog ships.
 
@@ -55,8 +55,8 @@ Stable accessory ids: `acc-{sku\|productId}-{slug}`. String accessories normaliz
 
 ## Marketing copy
 
-- **Hero:** Browse the catalog. Track your collection.
-- **Hero sub:** Action figures and LEGO sets you can browse, plus a way to track what you own, the accessories that came with them, and your own photos.
+- **Hero:** Browse the catalog. Track your collection, and you can add your own photos.
+- **Hero sub:** Action figures and LEGO sets you can browse, plus a way to track what you own and the accessories that came with them.
 - **Proof line:** 5 live vaults · {listings} · $9.99 once · no subscription
 - **Feature order:** In the box → Finish the wave → Shareable shelf → Incoming → Insurance-ready export → Chase labeled → Pay once
 - **Pricing footnote:** Lifetime includes current live vaults and these features as they ship.

@@ -29,6 +29,11 @@ import { cn } from "@/lib/utils";
 import { VaultPreview } from "@/components/landing/vault-preview";
 import { FeedbackButton } from "@/components/feedback-button";
 import { SiteCredit } from "@/components/site-credit";
+import {
+  VaultAddRequestButton,
+  VaultAddRequestCard,
+  VaultAddRequestLink,
+} from "@/components/vault-add-request";
 
 
 
@@ -37,12 +42,12 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "MyAFVault — Browse the catalog. Track your collection.",
+        title: "MyAFVault — Browse the catalog. Track your collection, and you can add your own photos.",
       },
       {
         name: "description",
         content:
-          `A catalog of action figures and LEGO sets you can browse, plus a way to track what you own, the accessories that came with them, and your own photos. ${getLiveFranchises().length} live vaults, ${VAULT_ACCESS.priceLabel} once, no subscription.`,
+          `A catalog of action figures and LEGO sets you can browse, plus a way to track what you own and the accessories that came with them — and you can add your own photos. ${getLiveFranchises().length} live vaults, ${VAULT_ACCESS.priceLabel} once, no subscription.`,
 
       },
     ],
@@ -168,6 +173,7 @@ function LandingPage() {
           </Link>
           <nav className="flex items-center gap-1.5 sm:gap-2">
             <ThemeToggle className="hidden sm:flex" />
+            <VaultAddRequestButton className="hidden sm:inline-flex" />
             <Button asChild size="sm" variant="ghost" className="hidden sm:inline-flex">
               <a href="#features">Features</a>
             </Button>
@@ -217,11 +223,11 @@ function LandingPage() {
             <div className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)] lg:items-center">
               <div className="space-y-6">
                 <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-semibold tracking-tight leading-[1.12] text-balance">
-                  Browse the catalog. Track your collection.
+                  Browse the catalog. Track your collection, and you can add
+                  your own photos.
                   <span className="block text-muted font-medium mt-2 text-2xl sm:text-3xl lg:text-[2rem]">
                     Action figures and LEGO sets you can browse, plus a way to
-                    track what you own, the accessories that came with them,
-                    and your own photos.
+                    track what you own and the accessories that came with them.
                   </span>
                 </h1>
                 <p className="text-base sm:text-lg text-muted max-w-xl leading-relaxed text-pretty">
@@ -262,6 +268,11 @@ function LandingPage() {
                       {VAULT_ACCESS.priceLabel} lifetime access
                     </a>
                   </Button>
+                  <VaultAddRequestButton
+                    size="lg"
+                    variant="outline"
+                    className="h-11 px-5 sm:hidden"
+                  />
                 </div>
                 {!signedIn && (
                   <p className="text-xs text-subtle">
@@ -272,6 +283,7 @@ function LandingPage() {
 
                   </p>
                 )}
+                <VaultAddRequestCard id="request" />
                 <dl className="grid grid-cols-3 gap-3 max-w-md pt-2">
                   <div className="rounded-[var(--radius-md)] border border-border bg-surface p-3">
                     <dt className="text-[11px] uppercase tracking-wide text-subtle">
@@ -664,6 +676,7 @@ function LandingPage() {
               Install app
             </a>
             <FeedbackButton />
+            <VaultAddRequestLink />
             <a href="#pricing" className="hover:text-fg">
               Pricing
             </a>

@@ -7,6 +7,7 @@ import { getLiveFranchises, rememberSessionVault } from "@/lib/franchises";
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { FeedbackButton } from "@/components/feedback-button";
+import { VaultAddRequestCard, VaultAddRequestLink } from "@/components/vault-add-request";
 import { SiteCredit } from "@/components/site-credit";
 import { cn } from "@/lib/utils";
 
@@ -136,11 +137,17 @@ function VaultPickerPage() {
             );
           })}
         </div>
+        <div className="mt-6">
+          <VaultAddRequestCard />
+        </div>
       </main>
 
       <footer className="border-t border-border">
         <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 flex flex-wrap items-center justify-between gap-3">
-          <FeedbackButton />
+          <div className="flex flex-wrap items-center gap-4">
+            <FeedbackButton />
+            <VaultAddRequestLink />
+          </div>
           <SiteCredit />
         </div>
       </footer>
