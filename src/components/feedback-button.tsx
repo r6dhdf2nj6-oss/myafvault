@@ -11,9 +11,8 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { CONTACT_EMAIL } from "@/lib/contact";
 import { cn } from "@/lib/utils";
-
-const INBOX = "myafvault@crediblenerds.com";
 
 const TOPICS = [
   { id: "question", label: "Question", subject: "Question about MyAFVault" },
@@ -42,7 +41,7 @@ export function FeedbackButton({
       toast.error("Write a short note first");
       return;
     }
-    const href = `mailto:${INBOX}?subject=${encodeURIComponent(picked.subject)}&body=${encodeURIComponent(body)}`;
+    const href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(picked.subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = href;
     setOpen(false);
     setMessage("");

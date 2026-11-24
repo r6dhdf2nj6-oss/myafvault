@@ -3,10 +3,11 @@ import { ArrowRight, Loader2, Package } from "lucide-react";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { authEnabled } from "@/lib/auth/client";
 import { UserButton } from "@/lib/auth/gates";
-import { FRANCHISES, rememberSessionVault } from "@/lib/franchises";
+import { getLiveFranchises, rememberSessionVault } from "@/lib/franchises";
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { FeedbackButton } from "@/components/feedback-button";
+import { VaultAddRequestCard, VaultAddRequestLink } from "@/components/vault-add-request";
 import { SiteCredit } from "@/components/site-credit";
 import { cn } from "@/lib/utils";
 
@@ -18,7 +19,7 @@ export const Route = createFileRoute("/vaults")({
       {
         name: "description",
         content:
-          "Open your DC McFarlane, Star Wars, GI Joe, LEGO, or Fallout collection vault. More franchises coming soon.",
+          "Open your DC McFarlane, Star Wars, GI Joe, LEGO, or Fallout collection vault.",
       },
     ],
   }),
@@ -78,27 +79,25 @@ function VaultPickerPage() {
           </h1>
           <p className="text-muted mt-2 text-sm sm:text-base leading-relaxed">
             DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout are live.
-            Marvel, Disney, Pixar, and more lines are on the way.
           </p>
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {FRANCHISES.map((f) => {
-            const live = f.status === "live" && !!f.path;
+          {getLiveFranchises().map((f) => {
+            if (!f.path) return null;
+            const path = f.path;
             const CardInner = (
               <>
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div>
                     <p className="text-[11px] font-medium uppercase tracking-wide text-subtle">
-                      {live ? "Available now" : "Planned vault"}
+                      Available now
                     </p>
                     <h2 className="text-lg font-semibold tracking-tight mt-0.5">
                       {f.name}
                     </h2>
                   </div>
-                  <Badge variant={live ? "default" : "secondary"}>
-                    {live ? "Live" : "Coming soon"}
-                  </Badge>
+                  <Badge variant="default">Live</Badge>
                 </div>
                 <p className="text-sm text-muted leading-relaxed mb-4">
                   {f.tagline}
@@ -115,52 +114,40 @@ function VaultPickerPage() {
                 </div>
                 <div className="flex items-center justify-between gap-2 pt-1 border-t border-border">
                   <span className="text-xs text-subtle">{f.scopeNote}</span>
-                  {live ? (
-                    <span className="inline-flex items-center gap-1 text-sm font-medium text-primary">
-                      Open vault
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </span>
-                  ) : (
-                    <span className="text-xs font-medium text-subtle">
-                      Coming soon
-                    </span>
-                  )}
+                  <span className="inline-flex items-center gap-1 text-sm font-medium text-primary">
+                    Open vault
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
                 </div>
               </>
             );
 
-            if (live && f.path) {
-              const path = f.path;
-              return (
-                <Link
-                  key={f.id}
-                  to={path}
-                  onClick={() => rememberSessionVault(path)}
-                  className={cn(
-                    "block rounded-[var(--radius-xl)] border p-5 sm:p-6 transition-colors",
-                    "border-primary/40 bg-primary/[0.06] hover:border-primary hover:bg-primary/10",
-                  )}
-                >
-                  {CardInner}
-                </Link>
-              );
-            }
-
             return (
-              <div
+              <Link
                 key={f.id}
-                className="rounded-[var(--radius-xl)] border border-border bg-surface p-5 sm:p-6 opacity-70"
+                to={path}
+                onClick={() => rememberSessionVault(path)}
+                className={cn(
+                  "block rounded-[var(--radius-xl)] border p-5 sm:p-6 transition-colors",
+                  "border-primary/40 bg-primary/[0.06] hover:border-primary hover:bg-primary/10",
+                )}
               >
                 {CardInner}
-              </div>
+              </Link>
             );
           })}
+        </div>
+        <div className="mt-6">
+          <VaultAddRequestCard />
         </div>
       </main>
 
       <footer className="border-t border-border">
         <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 flex flex-wrap items-center justify-between gap-3">
-          <FeedbackButton />
+          <div className="flex flex-wrap items-center gap-4">
+            <FeedbackButton />
+            <VaultAddRequestLink />
+          </div>
           <SiteCredit />
         </div>
       </footer>

@@ -18,7 +18,6 @@ import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import {
-  FRANCHISES,
   VAULT_ACCESS,
   VAULT_PICKER_PATH,
   getLiveFranchises,
@@ -30,6 +29,11 @@ import { cn } from "@/lib/utils";
 import { VaultPreview } from "@/components/landing/vault-preview";
 import { FeedbackButton } from "@/components/feedback-button";
 import { SiteCredit } from "@/components/site-credit";
+import {
+  VaultAddRequestButton,
+  VaultAddRequestCard,
+  VaultAddRequestLink,
+} from "@/components/vault-add-request";
 
 
 
@@ -38,12 +42,12 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "MyAFVault — Collect. Index. Display. Every line, one home.",
+        title: "MyAFVault — Browse the catalog. Track your collection, and you can add your own photos.",
       },
       {
         name: "description",
         content:
-          `Pack-accurate accessories. Chase labels. Your shelf. Not a spreadsheet and not a barcode dump. ${getLiveFranchises().length} live vaults, ${VAULT_ACCESS.priceLabel} once, no subscription.`,
+          `A catalog of action figures and LEGO sets you can browse, plus a way to track what you own and the accessories that came with them — and you can add your own photos. ${getLiveFranchises().length} live vaults, ${VAULT_ACCESS.priceLabel} once, no subscription.`,
 
       },
     ],
@@ -112,7 +116,7 @@ const PREVIEW_STEPS = [
 ] as const;
 
 const WHY = [
-  "Stop guessing which figures exist — DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout vaults are live, with more lines coming.",
+  "Stop guessing which figures exist — DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout vaults are live.",
   "Know what you own vs. what you still need without mixing the two.",
   "Keep pack art and your own photos, including custom listings only you see.",
   "Show the shelf to friends without handing them your login.",
@@ -169,6 +173,7 @@ function LandingPage() {
           </Link>
           <nav className="flex items-center gap-1.5 sm:gap-2">
             <ThemeToggle className="hidden sm:flex" />
+            <VaultAddRequestButton className="hidden sm:inline-flex" />
             <Button asChild size="sm" variant="ghost" className="hidden sm:inline-flex">
               <a href="#features">Features</a>
             </Button>
@@ -218,16 +223,16 @@ function LandingPage() {
             <div className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)] lg:items-center">
               <div className="space-y-6">
                 <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-semibold tracking-tight leading-[1.12] text-balance">
-                  The index for the line.
+                  Browse the catalog. Track your collection, and you can add
+                  your own photos.
                   <span className="block text-muted font-medium mt-2 text-2xl sm:text-3xl lg:text-[2rem]">
-                    Pack-accurate accessories. Chase labels. Your shelf. Not a
-                    spreadsheet and not a barcode dump.
+                    Action figures and LEGO sets you can browse, plus a way to
+                    track what you own and the accessories that came with them.
                   </span>
                 </h1>
                 <p className="text-base sm:text-lg text-muted max-w-xl leading-relaxed text-pretty">
                   Five live vaults — DC McFarlane, Star Wars, GI Joe, LEGO, and
-                  Fallout. Marvel, Disney, and Pixar stay coming soon. No live
-                  market values.
+                  Fallout. No live market values.
                 </p>
                 <p className="text-sm font-medium text-fg">
                   {liveVaultCount} live vaults · {stats.total.toLocaleString()}{" "}
@@ -263,6 +268,11 @@ function LandingPage() {
                       {VAULT_ACCESS.priceLabel} lifetime access
                     </a>
                   </Button>
+                  <VaultAddRequestButton
+                    size="lg"
+                    variant="outline"
+                    className="h-11 px-5 sm:hidden"
+                  />
                 </div>
                 {!signedIn && (
                   <p className="text-xs text-subtle">
@@ -273,6 +283,7 @@ function LandingPage() {
 
                   </p>
                 )}
+                <VaultAddRequestCard id="request" />
                 <dl className="grid grid-cols-3 gap-3 max-w-md pt-2">
                   <div className="rounded-[var(--radius-md)] border border-border bg-surface p-3">
                     <dt className="text-[11px] uppercase tracking-wide text-subtle">
@@ -402,33 +413,32 @@ function LandingPage() {
                   The vaults
                 </p>
                 <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
-                  DC, Star Wars, GI Joe, LEGO, Fallout — more coming
+                  DC, Star Wars, GI Joe, LEGO, and Fallout
                 </h2>
                 <p className="text-muted mt-2 text-sm sm:text-base">
                   Five live vaults on a shared toolkit — official listings,
                   In My Vault tracking, wishlist, photos, and a board for
-                  other collectors. Coming-soon lines stay listed, not fake.
+                  other collectors.
 
                 </p>
               </div>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {FRANCHISES.map((f) => {
-                const live = f.status === "live";
+              {getLiveFranchises().map((f) => {
+                if (!f.path) return null;
+                const path = f.path;
                 const CardInner = (
                   <>
                     <div className="flex items-start justify-between gap-3 mb-3">
                       <div>
                         <p className="text-[11px] font-medium uppercase tracking-wide text-subtle">
-                          {live ? "Available now" : "Planned vault"}
+                          Available now
                         </p>
                         <h3 className="text-lg font-semibold tracking-tight mt-0.5">
                           {f.name}
                         </h3>
                       </div>
-                      <Badge variant={live ? "default" : "secondary"}>
-                        {live ? "Live" : "Coming soon"}
-                      </Badge>
+                      <Badge variant="default">Live</Badge>
                     </div>
                     <p className="text-sm text-muted leading-relaxed mb-4">
                       {f.tagline}
@@ -445,56 +455,39 @@ function LandingPage() {
                     </div>
                     <div className="flex items-center justify-between gap-2 pt-1 border-t border-border">
                       <span className="text-xs text-subtle">{f.scopeNote}</span>
-                      {live ? (
-                        <span className="inline-flex items-center gap-1 text-sm font-medium text-primary">
-                          {signedIn ? "Open vault" : "Sign in or sign up"}
-                          <ArrowRight className="h-3.5 w-3.5" />
-                        </span>
-                      ) : (
-                        <span className="text-xs font-medium text-subtle">
-                          Not yet available
-                        </span>
-                      )}
+                      <span className="inline-flex items-center gap-1 text-sm font-medium text-primary">
+                        {signedIn ? "Open vault" : "Sign in or sign up"}
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
                     </div>
                   </>
                 );
 
-                if (live && f.path) {
-                  if (signedIn) {
-                    return (
-                      <Link
-                        key={f.id}
-                        to={f.path}
-                        className={cn(
-                          "block rounded-[var(--radius-xl)] border p-5 sm:p-6 transition-colors",
-                          "border-primary/40 bg-primary/[0.06] hover:border-primary hover:bg-primary/10",
-                        )}
-                      >
-                        {CardInner}
-                      </Link>
-                    );
-                  }
+                if (signedIn) {
                   return (
-                    <a
+                    <Link
                       key={f.id}
-                      href={`/login?next=${encodeURIComponent(f.path)}`}
+                      to={path}
                       className={cn(
                         "block rounded-[var(--radius-xl)] border p-5 sm:p-6 transition-colors",
                         "border-primary/40 bg-primary/[0.06] hover:border-primary hover:bg-primary/10",
                       )}
                     >
                       {CardInner}
-                    </a>
+                    </Link>
                   );
                 }
-
                 return (
-                  <div
+                  <a
                     key={f.id}
-                    className="rounded-[var(--radius-xl)] border border-border bg-surface p-5 sm:p-6 opacity-90"
+                    href={`/login?next=${encodeURIComponent(path)}`}
+                    className={cn(
+                      "block rounded-[var(--radius-xl)] border p-5 sm:p-6 transition-colors",
+                      "border-primary/40 bg-primary/[0.06] hover:border-primary hover:bg-primary/10",
+                    )}
                   >
                     {CardInner}
-                  </div>
+                  </a>
                 );
               })}
             </div>
@@ -583,7 +576,7 @@ function LandingPage() {
                   <strong className="text-fg font-medium">
                     DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout
                   </strong>{" "}
-                  vaults — with more franchises coming soon — then pay{" "}
+                  vaults, then pay{" "}
                   {VAULT_ACCESS.priceLabel} once to unlock the catalogues, your
                   vaults, the collector board, and install-as-app.
 
@@ -665,7 +658,7 @@ function LandingPage() {
           <div>
             <p className="text-sm font-semibold">MyAFVault</p>
             <p className="text-xs text-subtle mt-0.5">
-              DC McFarlane, Star Wars, GI Joe, LEGO, Fallout, and more vaults coming soon.
+              DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout.
 
             </p>
           </div>
@@ -683,6 +676,7 @@ function LandingPage() {
               Install app
             </a>
             <FeedbackButton />
+            <VaultAddRequestLink />
             <a href="#pricing" className="hover:text-fg">
               Pricing
             </a>

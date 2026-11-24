@@ -190,7 +190,7 @@ function LoginPage() {
               <p className="text-sm text-muted leading-relaxed max-w-sm mx-auto">
                 {mode === "signin"
                   ? "Sign in again to sync In My Vault, wishlist, photos, and collections across DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout."
-                  : `Create an account, then unlock DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout, plus Marvel, Disney, Pixar, and more coming soon — ${VAULT_ACCESS.priceLabel} one-time, or skip payment with an access code.`}
+                  : `Create an account, then unlock DC McFarlane, Star Wars, GI Joe, LEGO, and Fallout — ${VAULT_ACCESS.priceLabel} one-time, or skip payment with an access code.`}
               </p>
               <p className="text-xs text-subtle leading-relaxed max-w-sm mx-auto">
                 Already have a vault? Sign in again. New here? Sign up for

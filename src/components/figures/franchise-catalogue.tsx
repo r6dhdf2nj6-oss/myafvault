@@ -61,6 +61,11 @@ import {
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { InstallPrompt } from "@/components/install/install-prompt";
 import { FeedbackButton } from "@/components/feedback-button";
+import {
+  VaultAddRequestCard,
+  VaultAddRequestLink,
+  VaultAddRequestTab,
+} from "@/components/vault-add-request";
 
 
 import {
@@ -503,6 +508,9 @@ export function FranchiseCatalogue({
           >
             Sign in or sign up
           </a>
+          <div className="pt-2 text-left">
+            <VaultAddRequestCard />
+          </div>
         </div>
       </div>
     );
@@ -598,6 +606,7 @@ export function FranchiseCatalogue({
               Board
             </Link>
           </div>
+          <VaultAddRequestTab />
 
           {section === "collections" ? (
             <CollectionsPanel />
@@ -795,6 +804,7 @@ export function FranchiseCatalogue({
               </Button>
             </div>
           )}
+          {ready && filtered.length > 0 && <VaultAddRequestCard />}
             </>
           )}
         </div>
@@ -812,8 +822,9 @@ export function FranchiseCatalogue({
           <p className="text-center text-xs text-subtle">
             Sign in for cloud sync. Export JSON anytime as a backup.
           </p>
-          <div className="flex justify-center pt-1">
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-1">
             <FeedbackButton />
+            <VaultAddRequestLink />
           </div>
 
         </div>
@@ -971,6 +982,9 @@ function EmptyState({
       <Button className="mt-5" onClick={onAdd}>
         Add custom figure
       </Button>
+      <div className="mt-6 w-full max-w-lg text-left">
+        <VaultAddRequestCard />
+      </div>
     </div>
   );
 }
